@@ -9,7 +9,7 @@ class TopTenPageClass extends React.Component {
         <div
           style={{
             minWidth: 750,
-            width: 1200,
+            width: "80%",
             margin: "auto",
           }}
         >

@@ -15,9 +15,11 @@ import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
-import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
+import { styled } from "@mui/material/styles";
+
+import PetRating from "./PetRating";
 
 function createData(rank, pic, name, rate) {
   return {
@@ -142,6 +144,10 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
+const ImageTableCell = styled(TableCell)`
+  padding-left: 16px;
+`;
+
 export default function EnhancedTable() {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("rank");
@@ -199,17 +205,15 @@ export default function EnhancedTable() {
                   return (
                     <TableRow role="checkbox" tabIndex={-1} key={row.name}>
                       <TableCell>{row.rank}</TableCell>
-                      <TableCell
-                        component="th"
-                        id={labelId}
-                        scope="row"
-                        padding="none"
-                      >
-                        {/* TODO: Make a placeholde if row.pic not exist */}
+                      <ImageTableCell id={labelId} scope="row" padding="none">
+                        {/* TODO: Make a placeholder if row.pic not exist */}
                         <img src={row.pic} alt={row.name} height="200" />
-                      </TableCell>
+                      </ImageTableCell>
                       <TableCell align="center">{row.name}</TableCell>
-                      <TableCell align="center">{row.rate}</TableCell>
+                      <TableCell align="center">
+                        {row.rate}
+                        <PetRating value={row.rate} />
+                      </TableCell>
                     </TableRow>
                   );
                 })}
