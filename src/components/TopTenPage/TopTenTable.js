@@ -107,6 +107,7 @@ const headCells = [
 function EnhancedTableHead(props) {
   const { order, orderBy, numSelected, rowCount, onRequestSort } = props;
   const createSortHandler = (property) => (event) => {
+    // TODO pic sorting need to be disabled
     onRequestSort(event, property);
   };
 
@@ -192,6 +193,7 @@ export default function EnhancedTable() {
               order={order}
               orderBy={orderBy}
               rowCount={rows.length}
+              onRequestSort={handleRequestSort}
             />
             <TableBody>
               {/* if you don't need to support IE11, you can replace the `stableSort` call with:
