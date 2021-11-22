@@ -10,12 +10,9 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
-import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
-import Checkbox from "@mui/material/Checkbox";
 import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -32,19 +29,16 @@ function createData(rank, pic, name, rate) {
 }
 
 const rows = [
-  createData(1, "Cupcake", 305, 3.7),
-  createData(2, "Donut", 452, 25.0),
-  createData(3, "Eclair", 262, 16.0),
-  createData(4, "Frozen yoghurt", 159, 6.0),
-  createData(5, "Gingerbread", 356, 16.0),
-  createData(6, "Honeycomb", 408, 3.2),
-  createData(7, "Ice cream sandwich", 237, 9.0),
-  createData(8, "Jelly Bean", 375, 0.0),
-  createData(9, "KitKat", 518, 26.0),
-  createData(10, "Lollipop", 392, 0.2),
-  createData(11, "Marshmallow", 318, 0),
-  createData(12, "Nougat", 360, 19.0),
-  createData(13, "Oreo", 437, 18.0),
+  createData(1, "https://placekitten.com/g/200/200", "Cupcake", 1),
+  createData(2, "https://placekitten.com/g/200/200", "Donut", 2),
+  createData(3, "https://placekitten.com/g/200/200", "Eclair", 5),
+  createData(4, "https://placekitten.com/g/200/200", "Frozen yoghurt", 5),
+  createData(5, "https://placekitten.com/g/200/200", "Gingerbread", 2.5),
+  createData(6, "https://placekitten.com/g/200/200", "Honeycomb", 4.4),
+  createData(7, "https://placekitten.com/g/200/200", "Ice cream sandwich", 2),
+  createData(8, "https://placekitten.com/g/200/200", "Jelly Bean", 3.3),
+  createData(9, "https://placekitten.com/g/200/200", "KitKat", 5.5),
+  createData(10, "https://placekitten.com/g/200/200", "Lollipop", 6.5),
 ];
 
 function descendingComparator(a, b, orderBy) {
@@ -107,7 +101,6 @@ const headCells = [
 function EnhancedTableHead(props) {
   const { order, orderBy, numSelected, rowCount, onRequestSort } = props;
   const createSortHandler = (property) => (event) => {
-    // TODO pic sorting need to be disabled
     onRequestSort(event, property);
   };
 
@@ -152,7 +145,6 @@ EnhancedTableHead.propTypes = {
 export default function EnhancedTable() {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("rank");
-
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -182,7 +174,7 @@ export default function EnhancedTable() {
 
   return (
     <Box sx={{ width: "100%" }}>
-      <Paper sx={{ width: "100%", mb: 2 }}>
+      <Paper sx={{ width: "100%", mb: 2, rounded: true }}>
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
@@ -206,17 +198,18 @@ export default function EnhancedTable() {
 
                   return (
                     <TableRow role="checkbox" tabIndex={-1} key={row.name}>
-                      <TableCell padding="checkbox">{row.rank}</TableCell>
+                      <TableCell>{row.rank}</TableCell>
                       <TableCell
                         component="th"
                         id={labelId}
                         scope="row"
                         padding="none"
                       >
-                        {row.pic}
+                        {/* TODO: Make a placeholde if row.pic not exist */}
+                        <img src={row.pic} alt={row.name} height="200" />
                       </TableCell>
-                      <TableCell align="right">{row.name}</TableCell>
-                      <TableCell align="right">{row.rate}</TableCell>
+                      <TableCell align="center">{row.name}</TableCell>
+                      <TableCell align="center">{row.rate}</TableCell>
                     </TableRow>
                   );
                 })}

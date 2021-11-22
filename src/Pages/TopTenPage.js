@@ -5,8 +5,14 @@ class TopTenPageClass extends React.Component {
   render() {
     return (
       <div className="container">
-        <h1>Top Ten!</h1>
-        <div>
+        <h1 style={{ textAlign: "center" }}>Top Ten!</h1>
+        <div
+          style={{
+            minWidth: 750,
+            width: 1200,
+            margin: "auto",
+          }}
+        >
           <EnhancedTable />
         </div>
       </div>
