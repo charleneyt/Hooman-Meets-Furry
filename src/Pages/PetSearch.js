@@ -3,6 +3,8 @@ import { makeStyles } from "@mui/styles";
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
 import InputAdornment from "@mui/material/InputAdornment";
+import PetSearchEngine from "../components/PetSearchPage/PetSearchEngine";
+import PetSearchBar from "../components/PetSearchPage/PetSearchBar";
 
 const useStyles = makeStyles({
   root: {
@@ -28,9 +30,12 @@ export default function PetSearchPage() {
   };
 
   return (
-    <div className={styles.root}>
-      <div className={styles.searchItem}>
-        <TextField
+    <div>
+      <PetSearchBar />
+      <div className={styles.root}>
+        <div className={styles.searchItem}>
+          <PetSearchEngine />
+          {/* <TextField
           label="Enter Your Search Query"
           value={value}
           onChange={handleChange}
@@ -43,7 +48,8 @@ export default function PetSearchPage() {
             ),
           }}
           variant="standard"
-        />
+        /> */}
+        </div>
       </div>
     </div>
   );
