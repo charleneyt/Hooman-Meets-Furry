@@ -235,7 +235,7 @@ export default function PetSearchEngine() {
 
   return (
     <div>
-      <Stack sx={{ width: 500 }}>
+      <Stack sx={{ width: 280 }}>
         {petBreedSelect}
         {petAgeSelect}
         {petColorSelect}

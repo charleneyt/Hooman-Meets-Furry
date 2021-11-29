@@ -10,6 +10,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import Divider from "@mui/material/Divider";
 import { MdOutlineExpandMore } from "react-icons/md";
+import { CollectionsOutlined } from "@mui/icons-material";
 
 // Search bar theme
 const Search = styled("div")(({ theme }) => ({
@@ -56,10 +57,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function PetSearchBar() {
+export default function PetSearchBar(props) {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" style={{ background: "#FFF" }}>
+      {console.log(props)}
+      <AppBar position="relative" style={{ background: "#FFF" }}>
         <Toolbar>
           <IconButton size="large" edge="start" sx={{ mr: 1 }}>
             <FaCat />
