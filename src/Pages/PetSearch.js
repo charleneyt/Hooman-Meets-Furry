@@ -1,10 +1,8 @@
 import * as React from "react";
 import { makeStyles } from "@mui/styles";
-import TextField from "@mui/material/TextField";
-import SearchIcon from "@mui/icons-material/Search";
-import InputAdornment from "@mui/material/InputAdornment";
 import PetSearchEngine from "../components/PetSearchPage/PetSearchEngine";
 import PetSearchBar from "../components/PetSearchPage/PetSearchBar";
+import Drawer from "@mui/material/Drawer";
 
 const useStyles = makeStyles({
   root: {
@@ -35,20 +33,6 @@ export default function PetSearchPage() {
       <div className={styles.root}>
         <div className={styles.searchItem}>
           <PetSearchEngine />
-          {/* <TextField
-          label="Enter Your Search Query"
-          value={value}
-          onChange={handleChange}
-          fullWidth
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon />
-              </InputAdornment>
-            ),
-          }}
-          variant="standard"
-        /> */}
         </div>
       </div>
     </div>

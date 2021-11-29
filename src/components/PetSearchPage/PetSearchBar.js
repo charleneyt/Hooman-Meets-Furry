@@ -64,6 +64,7 @@ export default function PetSearchBar() {
           <IconButton size="large" edge="start" sx={{ mr: 1 }}>
             <FaCat />
           </IconButton>
+          {/* TODO: change the button to ToggleButton*/}
           {/* TODO: change button css */}
           {/* TODO: Onclick change color */}
           {/* TODO: hover change color */}
