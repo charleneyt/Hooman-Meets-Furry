@@ -1,3 +1,29 @@
+import React from "react";
+import BreedRaterTable from "../components/BreedRaterPage/BreedRaterTable";
+import BreedRaterSelectBar from "../components/BreedRaterPage/BreedRaterSelectBar";
+
+class BreedRaterPageClass extends React.Component {
+  render() {
+    return (
+      <div className="container">
+        <h1 style={{ textAlign: "center" }}>Breed Rater</h1>
+
+        <BreedRaterSelectBar />
+
+        <div
+          style={{
+            minWidth: 750,
+            width: "80%",
+            margin: "auto",
+          }}
+        >
+          <BreedRaterTable />
+        </div>
+      </div>
+    );
+  }
+}
+
 export default function BreedRaterPage() {
-  return <div>BreedRater</div>;
+  return <BreedRaterPageClass />;
 }
