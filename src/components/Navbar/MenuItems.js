@@ -26,11 +26,6 @@ export const MenuItems = [
     cName: "nav-links",
   },
   {
-    title: "Top 10",
-    url: "/top_ten",
-    cName: "nav-links",
-  },
-  {
     title: "Pet Comparing",
     url: "/compare",
     cName: "nav-links",

@@ -5,9 +5,9 @@ import Navbar from "./components/Navbar/Navbar";
 import PetSearchPage from "./Pages/PetSearch";
 import RecommendationsPage from "./Pages/RecommendationsPage";
 import RescuePage from "./Pages/RescuePage";
-import BreedRaterPage from "./Pages/BreedRaterPage";
+// import BreedRaterPage from "./Pages/BreedRaterPage1";
 import PetComparePage from "./Pages/PetComparePage";
-import TopTenPage from "./Pages/TopTenPage";
+import BreedRaterPage from "./Pages/BreedRaterPage";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 const theme = createTheme({
@@ -29,7 +29,6 @@ function App() {
               <Route path="recommendations" element={<RecommendationsPage />} />
               <Route path="rescue_search" element={<RescuePage />} />
               <Route path="breed_rater" element={<BreedRaterPage />} />
-              <Route path="top_ten" element={<TopTenPage />} />
               <Route path="compare" element={<PetComparePage />} />
             </Routes>
           </div>

@@ -148,7 +148,7 @@ const ImageTableCell = styled(TableCell)`
   padding-left: 16px;
 `;
 
-export default function EnhancedTable() {
+export default function BreedRaterTable() {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("rank");
   const [page, setPage] = React.useState(0);
