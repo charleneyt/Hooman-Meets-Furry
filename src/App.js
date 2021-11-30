@@ -5,7 +5,6 @@ import Navbar from "./components/Navbar/Navbar";
 import PetSearchPage from "./Pages/PetSearch";
 import RecommendationsPage from "./Pages/RecommendationsPage";
 import RescuePage from "./Pages/RescuePage";
-// import BreedRaterPage from "./Pages/BreedRaterPage1";
 import PetComparePage from "./Pages/PetComparePage";
 import BreedRaterPage from "./Pages/BreedRaterPage";
 

@@ -1,6 +1,5 @@
 import React from "react";
 import BreedRaterTable from "../components/BreedRaterPage/BreedRaterTable";
-import Box from "@mui/material/Box";
 import BreedRaterSelectBar from "../components/BreedRaterPage/BreedRaterSelectBar";
 
 class BreedRaterPageClass extends React.Component {
@@ -8,9 +7,9 @@ class BreedRaterPageClass extends React.Component {
     return (
       <div className="container">
         <h1 style={{ textAlign: "center" }}>Breed Rater</h1>
-        <Box>
-          <BreedRaterSelectBar />
-        </Box>
+
+        <BreedRaterSelectBar />
+
         <div
           style={{
             minWidth: 750,

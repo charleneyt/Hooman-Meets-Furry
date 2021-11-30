@@ -1,7 +1,6 @@
-import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import { styled, alpha } from "@mui/material/styles";
-import { IconButton, TextField, Toolbar, Typography } from "@mui/material";
+import { IconButton, TextField, Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
 import { FaCat, FaDog } from "react-icons/fa";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -9,8 +8,6 @@ import { HiOutlineLocationMarker } from "react-icons/hi";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import Divider from "@mui/material/Divider";
-import { MdOutlineExpandMore } from "react-icons/md";
-import { CollectionsOutlined } from "@mui/icons-material";
 
 // Search bar theme
 const Search = styled("div")(({ theme }) => ({
