@@ -9,9 +9,11 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
+
 import Paper from "@mui/material/Paper";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
+
 import { visuallyHidden } from "@mui/utils";
 import { styled } from "@mui/material/styles";
 
@@ -144,7 +146,9 @@ const ImageTableCell = styled(TableCell)`
   padding-left: 16px;
 `;
 
+
 export default function BreedRaterTable() {
+
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("rank");
   const [page, setPage] = React.useState(0);
