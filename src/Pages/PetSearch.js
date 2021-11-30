@@ -57,34 +57,36 @@ export default function PetSearchPage() {
     </Box>
   );
 
+  const sideSearchBar = (
+    <Box>
+      {/* TODO: uncomment this after finish the page */}
+      {/* <Fab>
+            <GrSearchAdvanced />
+          </Fab> */}
+      <Button onClick={toggleDrawer("Menu", true)}>Menu</Button>
+      <Drawer
+        anchor="left"
+        open={state["Menu"]}
+        onClose={toggleDrawer("Menu", false)}
+        sx={{
+          width: 280,
+          flexShrink: 0,
+        }}
+      >
+        <List>
+          <PetSearchEngine />
+        </List>
+
+        {console.log("left drawer open")}
+      </Drawer>
+    </Box>
+  );
+
   return (
     <div>
       <PetSearchBar />
 
-      <div className={styles.root}>
-        <Box>
-          {/* TODO: uncomment this after finish the page */}
-          {/* <Fab>
-            <GrSearchAdvanced />
-          </Fab> */}
-          <Button onClick={toggleDrawer("Menu", true)}>Menu</Button>
-          <Drawer
-            anchor="left"
-            open={state["Menu"]}
-            onClose={toggleDrawer("Menu", false)}
-            sx={{
-              width: 280,
-              flexShrink: 0,
-            }}
-          >
-            <List>
-              <PetSearchEngine />
-            </List>
-
-            {console.log("left drawer open")}
-          </Drawer>
-        </Box>
-      </div>
+      <div className={styles.root}>{sideSearchBar}</div>
     </div>
   );
 }
