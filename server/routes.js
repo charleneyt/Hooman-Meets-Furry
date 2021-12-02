@@ -258,10 +258,181 @@ async function compare(req, res) {
     });
 }
 
+// ********************************************
+//             RECOMMENDING SYSTEM ROUTES
+// ********************************************
+
+//Query b - recommend pets with certain breed featuers to the user
+async function recommend(req, res) {
+    const input_feature = req.query.input_feature ? req.query.input_feature : 'general_health' 
+    const type = req.query.type? req.query.type : 'cat'
+
+    if (req.query.page && !isNaN(req.query.page)) {
+        //pagination
+        const pagesize = req.query.pagesize ? req.query.pagesize : 10 
+        var start = (req.query.page - 1) * pagesize;
+        var rowNum = pagesize;
+
+        var q = `WITH Temp AS (
+            SELECT DISTINCT ${input_feature} FROM Breeds_Rating ORDER BY ${input_feature} DESC LIMIT 2), 
+            Breeds_Name AS (
+            SELECT breed_name FROM Breeds_Rating WHERE ${input_feature} IN (SELECT * FROM Temp))
+            SELECT P.id, P.organization_id, type, breed, color, age, gender, P.name, P.photo, O.city AS location
+            FROM Pet P
+            JOIN Breeds_Name BN on P.breed = BN.breed_name
+            JOIN Organization O on P.organization_id = O.id
+            WHERE type = '${type}'
+            LIMIT ${start}, ${rowNum};`
+
+        connection.query(q, function (error, results, fields) {
+
+            if (error) {
+                console.log(error)
+                res.json({ error: error })
+            } else if (results) {
+                res.json({ results: results })
+            }
+        });
+    }
+    else {
+        var q = `WITH Temp AS (
+            SELECT DISTINCT ${input_feature} FROM Breeds_Rating ORDER BY ${input_feature} DESC LIMIT 2), 
+            Breeds_Name AS (
+            SELECT breed_name FROM Breeds_Rating WHERE ${input_feature} IN (SELECT * FROM Temp))
+            SELECT P.id, P.organization_id, type, breed, color, age, gender, P.name, P.photo, O.city AS location
+            FROM Pet P
+            JOIN Breeds_Name BN on P.breed = BN.breed_name
+            JOIN Organization O on P.organization_id = O.id
+            WHERE type = '${type}';`
+
+        connection.query(q, function (error, results, fields) {
+
+            if (error) {
+                console.log(error)
+                res.json({ error: error })
+            } else if (results) {
+                res.json({ results: results })
+            }
+        });
+    }
+
+}
+
+// ********************************************
+//             FIND-SIMILAR-PETS ROUTES
+// ********************************************
+
+//Query f - find similar pets based on pets already liked by the user
+// things to consider:
+// 1. if a breed is rare, there might only be one pet that matches the criteria; in contrast, if a user likes domestic shorthair or other generic breeds, they will get lots of similar pets;
+async function get_similar(req, res) {
+    const username = req.query.username ? req.query.username : 'testuser'
+    // added type as a WHERE clause constraint for easier filtering of cat v.s. dog
+    const type = req.query.type ? req.query.type : "cat" 
+
+    if (req.query.page && !isNaN(req.query.page)) {
+        //pagination
+        const pagesize = req.query.pagesize ? req.query.pagesize : 10 
+        var start = (req.query.page - 1) * pagesize;
+        var rowNum = pagesize;
+
+        // added P.id <> LP.id to avoid recommending the same pet
+        var q = `WITH Liked_pet AS (
+            SELECT P.id, type, breed, color, age, gender, P.name, P.photo, O.city AS location
+            FROM Pet P
+            JOIN Liked_by Lb on P.id = Lb.pet_id
+            JOIN Organization O on O.id = P.organization_id
+            WHERE username = '${username}'
+            )
+            SELECT DISTINCT P.id, P.organization_id, P.type, P.breed, P.color, P.age, P.gender, P.name, P.photo, O.city AS location
+            FROM Pet P, Organization O, Liked_pet LP
+            WHERE P.type = LP.type
+            AND P.breed = LP.breed
+            AND P.color = LP.color
+            AND P.age = LP.age
+            AND P.gender = LP.gender
+            AND O.city = LP.location
+            AND P.type = '${type}'
+            AND P.id <> LP.id
+            LIMIT ${start}, ${rowNum};`
+
+        connection.query(q, function (error, results, fields) {
+            if (error) {
+                console.log(error)
+                res.json({ error: error })
+            } else if (results) {
+                res.json({ results: results })
+            }
+        });
+    }
+    else {
+        var q = `WITH Liked_pet AS (
+            SELECT P.id, type, breed, color, age, gender, P.name, P.photo, O.city AS location
+            FROM Pet P
+            JOIN Liked_by Lb on P.id = Lb.pet_id
+            JOIN Organization O on O.id = P.organization_id
+            WHERE username = '${username}'
+            )
+            SELECT DISTINCT P.id, P.organization_id, P.type, P.breed, P.color, P.age, P.gender, P.name, P.photo, O.city AS location
+            FROM Pet P, Organization O, Liked_pet LP
+            WHERE P.type = LP.type
+            AND P.breed = LP.breed
+            AND P.color = LP.color
+            AND P.age = LP.age
+            AND P.gender = LP.gender
+            AND O.city = LP.location
+            AND P.type = '${type}'
+            AND P.id <> LP.id;`
+
+        connection.query(q, function (error, results, fields) {
+            if (error) {
+                console.log(error)
+                res.json({ error: error })
+            } else if (results) {
+                res.json({ results: results })
+            }
+        });
+    }
+
+
+}
+
+// ********************************************
+//             USER LOGIN ROUTES
+// ********************************************
+
+//Query g - retrieve username based on the login information
+//Things to consider:
+//1. how to handle password securely?
+//2. how to handle the case where a user does not exist?
+async function user_login(req, res) {
+    const email = req.query.email ? req.query.email : 'testemail@gmail.com'
+    const password = req.query.password ? req.query.password : 'testpassword'
+
+    var q = `SELECT username
+    FROM User
+    WHERE email = '${email}' AND password = '${password}';`
+
+    connection.query(q, function (error, results, fields) {
+
+        if (error) {
+            console.log(error)
+            res.json({ error: error })
+        } else if (results) {
+            res.json({ results: results })
+        }
+    });
+}
+
+//Query X? - we may need a post request so that users can create their accounts
+
 
 module.exports = {
     rescues,
-    search_rescues，
+    search_rescues,
     top10,
-    compare
+    compare,
+    recommend,
+    get_similar,
+    user_login
 }

@@ -24,6 +24,15 @@ app.get('/top10/:type', routes.top10)
 // Route e - register as GET 
 app.get('/compare/:username', routes.compare)
 
+// Route b - register as GET
+app.get('/recommend', routes.recommend)
+
+// Route f - register as GET
+app.get('/get_similar', routes.get_similar)
+
+// Route g - register as GET
+app. get('/user_login', routes.user_login)
+
 app.listen(config.server_port, () => {
     console.log(`Server running at http://${config.server_host}:${config.server_port}/`);
 });
