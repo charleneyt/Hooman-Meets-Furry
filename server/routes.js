@@ -18,22 +18,23 @@ connection.connect();
 async function pet_search(req, res) {
   const params = [];
 
-  function pushIfDefinedAndNotNan(fieldName, queryField) {
-    if (queryField && !isNaN(queryField)) {
+  // If string not empty and no undefined
+  function pushIfDefined(fieldName, queryField) {
+    if (queryField) {
       params.push(`${fieldName} LIKE '%${queryField}%'`);
     }
   }
 
-  pushIfDefinedAndNotNan("type", req.query.type);
-  pushIfDefinedAndNotNan("gender", req.query.gender);
-  pushIfDefinedAndNotNan("color", req.query.color);
-  pushIfDefinedAndNotNan("breed", req.query.breed);
-  pushIfDefinedAndNotNan("O.city", req.query.location);
-  pushIfDefinedAndNotNan("spayed_neutered", req.query.spayed_neutered);
-  pushIfDefinedAndNotNan("shots_current", req.query.shots_current);
-  pushIfDefinedAndNotNan("children_friendly", req.query.children_friendly);
-  pushIfDefinedAndNotNan("dogs_friendly", req.query.dogs_friendly);
-  pushIfDefinedAndNotNan("cats_friendly", req.cats_friendly);
+  pushIfDefined("type", req.query.type);
+  pushIfDefined("gender", req.query.gender);
+  pushIfDefined("color", req.query.color);
+  pushIfDefined("breed", req.query.breed);
+  pushIfDefined("O.city", req.query.location);
+  pushIfDefined("spayed_neutered", req.query.spayed_neutered);
+  pushIfDefined("shots_current", req.query.shots_current);
+  pushIfDefined("children_friendly", req.query.children_friendly);
+  pushIfDefined("dogs_friendly", req.query.dogs_friendly);
+  pushIfDefined("cats_friendly", req.cats_friendly);
 
   // If params length is zero we want an empty string, if not we join the queries
   const finalWhereQuery = params.length ? "WHERE " + params.join(" AND ") : "";
@@ -50,9 +51,9 @@ async function pet_search(req, res) {
 
   connection.query(
     `SELECT P.id, P.organization_id, type, breed, color, age, gender, P.name, P.photo, O.city AS location
-     FROM Pet P JOIN Organization O on P.organization_id = O.id ${finalWhereQuery}
-     ${pageLimitString}
-     `,
+       FROM Pet P JOIN Organization O on P.organization_id = O.id ${finalWhereQuery}
+       ${pageLimitString}
+       `,
     function (error, results, fields) {
       if (error) {
         console.log(error);
