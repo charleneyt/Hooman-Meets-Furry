@@ -248,7 +248,8 @@ async function compare(req, res) {
                         FROM Pet P
                         JOIN Liked_by LB on P.id = LB.pet_id
                         JOIN Organization O on O.id = P.organization_id
-                        WHERE username = '${username}'`, function (error, results, fields) {
+                        WHERE username = '${username}'
+                        LIMIT 3`, function (error, results, fields) {
                                 if (error) {
                                     console.log(error)
                                     res.json({ error: error })
