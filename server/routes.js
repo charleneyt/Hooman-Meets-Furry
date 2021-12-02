@@ -211,8 +211,57 @@ async function search_rescues(req, res) {
         }
     }
 }
+// ********************************************
+//             TOP 10 Cat/Dog Breeds 
+// ********************************************
+
+// Route d (handler)
+async function top10(req, res) {
+    // default the feature to affectionate_with_family
+    const feature = req.query.feature ? req.query.feature : "affectionate_with_family"
+
+    connection.query(`SELECT DISTINCT breed_name, ${feature} AS feature_rating
+                            FROM Breeds_Rating BR LEFT JOIN Pet P ON BR.breed_name = P.breed
+                            WHERE P.type = '${req.params.type}'
+                            ORDER BY ${feature} DESC 
+                            LIMIT 10`, function (error, results, fields) {
+                                if (error) {
+                                    console.log(error)
+                                    res.json({ error: error })
+                                } else if (results) {
+                                    res.json({ results: results })
+                                }
+    });
+}
+
+// ********************************************
+//               Pet Comparing
+// ********************************************
+
+
+// Route e (handler)
+async function compare(req, res) {
+    // not necessary - just used for testing
+    const username = req.params.username ? req.params.username : "testuser"
+
+    connection.query(`SELECT LB.pet_id, P.name, type, breed, color, age, gender, P.photo, O.city AS location
+                        FROM Pet P
+                        JOIN Liked_by LB on P.id = LB.pet_id
+                        JOIN Organization O on O.id = P.organization_id
+                        WHERE username = '${username}'`, function (error, results, fields) {
+                                if (error) {
+                                    console.log(error)
+                                    res.json({ error: error })
+                                } else if (results) {
+                                    res.json({ results: results })
+                                }
+    });
+}
+
 
 module.exports = {
     rescues,
-    search_rescues
+    search_rescues，
+    top10,
+    compare
 }
