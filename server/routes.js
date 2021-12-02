@@ -17,6 +17,7 @@ connection.connect();
 // ********************************************
 
 // Route 1 (handler)
+// Returns an array of information about a rescue, specified by organization_id
 async function rescues(req, res) {
     const id = req.query.id
     if (req.query.id && !isNaN(req.query.id)) {
@@ -56,6 +57,8 @@ async function rescues(req, res) {
 // ********************************************
 
 // Route 2 (handler)
+// Return an array of selected attributes for rescues that match the search query
+// Return an array with all rescues that match the constraints. If no rescue satisfies the constraints, return an empty array without causing an error
 async function search_rescues(req, res) {
     
     const City = req.query.City
