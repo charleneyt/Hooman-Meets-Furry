@@ -43,8 +43,6 @@ const getRescues = async (id) => {
   return res.json();
 };
 
-// TODO: check if undefined, and refine this method
-// 0
 const getSearchRescues = async (city, state, page, pagesize) => {
   let res = await fetch(
     `http://${config.server_host}:${config.server_port}/search/rescues?city=${city}&state=${state}&page=${page}&pagesize=${pagesize}`,
