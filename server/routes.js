@@ -73,37 +73,77 @@ async function pet_search(req, res) {
 // Route 1 (handler)
 // Returns an array of information about a rescue, specified by organization_id
 async function rescues(req, res) {
-  const id = req.query.id;
-  if (req.query.id && !isNaN(req.query.id)) {
-    var query = `
+    const id = req.query.id
+    const page = req.query.page
+    const pagesize = req.query.pagesize ? req.query.pagesize : 10
+
+    if (req.query.id) {
+        if (req.query.page && !isNaN(req.query.page)) {
+            var offset = ((parseInt(page) - 1) * parseInt(pagesize)).toString()
+            var query = `
+                SELECT P.organization_id, O.name, O.address, O.city AS location, O.email, type, COUNT(*) AS num
+                FROM Organization O JOIN Pet P on P.organization_id = O.id
+                WHERE O.id = '${id}'
+                GROUP BY P.organization_id, O.name, O.address, O.city, O.email, type
+                LIMIT ${pagesize} OFFSET ${offset};
+            `;
+            connection.query(query, function (error, results, fields) {
+                if (error) {
+                    console.log(error)
+                    res.json({ error: error })
+                } else if (results) {
+                    res.json({ results: results })
+                }
+            });
+        } else {
+            var query = `
             SELECT P.organization_id, O.name, O.address, O.city AS location, O.email, type, COUNT(*) AS num
             FROM Organization O JOIN Pet P on P.organization_id = O.id
-            WHERE P.organization_id = ${id}
+            WHERE P.organization_id = '${id}'
             GROUP BY P.organization_id, O.name, O.address, O.city, O.email, type;
-        `;
-    connection.query(query, function (error, results, fields) {
-      if (error) {
-        console.log(error);
-        res.json({ error: error });
-      } else if (results) {
-        res.json({ results: results });
-      }
-    });
-  } else {
-    var query = `
-            SELECT P.organization_id, O.name, O.address, O.city AS location, O.email, type, COUNT(*) AS num
-            FROM Organization O JOIN Pet P on P.organization_id = O.id
-            GROUP BY P.organization_id, O.name, O.address, O.city, O.email, type;
-        `;
-    connection.query(query, function (error, results, fields) {
-      if (error) {
-        console.log(error);
-        res.json({ error: error });
-      } else if (results) {
-        res.json({ results: results });
-      }
-    });
-  }
+            `;
+            connection.query(query, function (error, results, fields) {
+                if (error) {
+                    console.log(error)
+                    res.json({ error: error })
+                } else if (results) {
+                    res.json({ results: results })
+                }
+            });
+        }
+    } else {
+        if (req.query.page && !isNaN(req.query.page)) {
+            var offset = ((parseInt(page) - 1) * parseInt(pagesize)).toString()
+                var query = `
+                SELECT P.organization_id, O.name, O.address, O.city AS location, O.email, type, COUNT(*) AS num
+                FROM Organization O JOIN Pet P on P.organization_id = O.id
+                GROUP BY P.organization_id, O.name, O.address, O.city, O.email, type
+                LIMIT ${pagesize} OFFSET ${offset};
+            `;
+            connection.query(query, function (error, results, fields) {
+                if (error) {
+                    console.log(error)
+                    res.json({ error: error })
+                } else if (results) {
+                    res.json({ results: results })
+                }
+            });
+        } else {
+            var query = `
+                SELECT P.organization_id, O.name, O.address, O.city AS location, O.email, type, COUNT(*) AS num
+                FROM Organization O JOIN Pet P on P.organization_id = O.id
+                GROUP BY P.organization_id, O.name, O.address, O.city, O.email, type;
+            `;
+            connection.query(query, function (error, results, fields) {
+                if (error) {
+                    console.log(error)
+                    res.json({ error: error })
+                } else if (results) {
+                    res.json({ results: results })
+                }
+            });
+        }
+    }
 }
 
 // ********************************************
