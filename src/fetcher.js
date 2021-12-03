@@ -1,7 +1,6 @@
 import config from "./config.json";
 
 // 35702
-
 async function getPetSearch(params, page, pagesize) {
   const {
     type,
@@ -44,10 +43,11 @@ const getRescues = async (id) => {
   return res.json();
 };
 
+// TODO: check if undefined, and refine this method
 // 0
-const getSearchRescues = async (id, city, state, page, pagesize) => {
+const getSearchRescues = async (city, state, page, pagesize) => {
   let res = await fetch(
-    `http://${config.server_host}:${config.server_port}/search/rescues?id=${id}&City=${city}&State=${state}&page=${page}&pagesize=${pagesize}`,
+    `http://${config.server_host}:${config.server_port}/search/rescues?city=${city}&state=${state}&page=${page}&pagesize=${pagesize}`,
     { method: "GET" }
   );
   return res.json();

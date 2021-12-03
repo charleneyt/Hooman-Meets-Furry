@@ -7,8 +7,8 @@ import {
   getCompare,
   getSimilar,
   getUserLogin,
-} from "../fetcher"
-import React from "react"
+} from "../fetcher";
+import React from "react";
 
 function componentDidMount() {
   // getUserLogin().then((res) => {
@@ -17,18 +17,18 @@ function componentDidMount() {
   // getSimilar().then((res) => {
   //   console.log(res);
   // });
-  getPetSearch({ gender: "female" }, 10, 100)
+  getSearchRescues()
     .then((res) => {
-      console.log(res)
+      console.log(res);
     })
     .catch((e) => {
-      console.log(e)
-    })
+      console.log(e);
+    });
 }
 
 export default function HomePage() {
   React.useEffect(() => {
-    componentDidMount()
-  }, [])
-  return <div>Hello!</div>
+    componentDidMount();
+  }, []);
+  return <div>Hello world!</div>;
 }
