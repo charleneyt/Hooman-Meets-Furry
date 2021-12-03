@@ -2,7 +2,6 @@ const config = require("./config.json");
 const mysql = require("mysql");
 const e = require("express");
 
-// TODO: fill in your connection details here
 const connection = mysql.createConnection({
   host: config.rds_host,
   user: config.rds_user,
@@ -18,9 +17,9 @@ connection.connect();
 async function pet_search(req, res) {
   const params = [];
 
-  // If string not empty and no undefined
+  // If string not empty and not undefined
   function pushIfDefined(fieldName, queryField) {
-    if (queryField) {
+    if (queryField && queryField !== "undefined") {
       params.push(`${fieldName} LIKE '%${queryField}%'`);
     }
   }

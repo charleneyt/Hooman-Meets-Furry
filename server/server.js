@@ -12,8 +12,8 @@ app.use(
   })
 );
 
-// Route a
-app.get("/petSearch/pet", routes.pet_search);
+// Route a - register as GET
+app.get("/petsearch", routes.pet_search);
 
 // Route b - register as GET
 app.get("/recommend", routes.recommend);
