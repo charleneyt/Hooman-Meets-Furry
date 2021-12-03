@@ -5,26 +5,12 @@ import RescueTable from "../components/RescuePage/RescueTable";
 import { FormGroup } from "@mui/material";
 import { Form, FormInput, Button } from "shards-react";
 
-import config from '../config.json';
+import { getRescues, getSearchRescues } from "../fetcher";
 
 import {
     Row, 
     Col,
 } from 'antd'
- 
-const getRescueSearch = async (city, state, page, pagesize) => {
-    var result = await fetch(`http://${config.server_host}:${config.server_port}/search/rescue_serach?City=${city}&State=${state}&page=${page}&pagesize=${pagesize}`, {
-        method: 'GET',
-    })
-    return result.json()
-}
-
-const getRescue = async (id) => {
-    var result = await fetch(`http://${config.server_host}:${config.server_port}/rescue_serach?id=${id}`, {
-        method: 'GET',
-    })
-    return result.json()
-}
 
 class RescuePageClass extends React.Component {
     constructor(props) {
@@ -56,17 +42,17 @@ class RescuePageClass extends React.Component {
     }
 
     updateSearchResults() {
-        getRescueSearch(this.state.cityQuery, this.state.stateQuery, null, null).then(res => {
+        getSearchRescues(this.state.cityQuery, this.state.stateQuery, null, null).then(res => {
             this.setState({ rescueResults: res.results })
         }) 
     }
     
     componentDidMount() {
-        getRescueSearch(this.state.cityQuery, this.state.stateQuery, null, null).then(res => {
+        getSearchRescues(this.state.cityQuery, this.state.stateQuery, null, null).then(res => {
             this.setState({ rescueResults: res.results })
         })
 
-        getRescue(this.state.selectedRescueId).then(res => {
+        getRescues(this.state.selectedRescueId).then(res => {
             this.setState({ selectedRescueDetails: res.results[0] })
         })
     }
