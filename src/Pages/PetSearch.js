@@ -5,9 +5,10 @@ import PetSearchBar from "../components/PetSearchPage/PetSearchBar";
 import Drawer from "@mui/material/Drawer";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import { List } from "@mui/material";
+import { List, Grid } from "@mui/material";
 import Fab from "@mui/material/Fab";
 import { GrSearchAdvanced } from "react-icons/gr";
+import PetSearchCard from "../components/PetSearchPage/PetSearchCard";
 
 const useStyles = makeStyles({
   root: {
@@ -57,34 +58,42 @@ export default function PetSearchPage() {
     </Box>
   );
 
+  const sideSearchBar = (
+    <Box>
+      {/* TODO: uncomment this after finish the page */}
+      <Fab>
+        <GrSearchAdvanced />
+      </Fab>
+      <Button onClick={toggleDrawer("Menu", true)}>Menu</Button>
+      <Drawer
+        anchor="left"
+        open={state["Menu"]}
+        onClose={toggleDrawer("Menu", false)}
+        sx={{
+          width: 280,
+          flexShrink: 0,
+        }}
+      >
+        <List>
+          <PetSearchEngine />
+        </List>
+
+        {console.log("left drawer open")}
+      </Drawer>
+    </Box>
+  );
+
   return (
     <div>
       <PetSearchBar />
-
-      <div className={styles.root}>
-        <Box>
-          {/* TODO: uncomment this after finish the page */}
-          {/* <Fab>
-            <GrSearchAdvanced />
-          </Fab> */}
-          <Button onClick={toggleDrawer("Menu", true)}>Menu</Button>
-          <Drawer
-            anchor="left"
-            open={state["Menu"]}
-            onClose={toggleDrawer("Menu", false)}
-            sx={{
-              width: 280,
-              flexShrink: 0,
-            }}
-          >
-            <List>
-              <PetSearchEngine />
-            </List>
-
-            {console.log("left drawer open")}
-          </Drawer>
-        </Box>
+      <div>
+        <Grid container>
+          <Grid item>
+            <PetSearchCard />
+          </Grid>
+        </Grid>
       </div>
+      <div className={styles.root}>{sideSearchBar}</div>
     </div>
   );
 }
