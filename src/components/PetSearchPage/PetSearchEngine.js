@@ -1,17 +1,11 @@
-import * as React from "react";
-import Stack from "@mui/material/Stack";
-import Autocomplete from "@mui/material/Autocomplete";
-import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";
+import * as React from "react"
+import Stack from "@mui/material/Stack"
+import Autocomplete from "@mui/material/Autocomplete"
+import TextField from "@mui/material/TextField"
+import Box from "@mui/material/Box"
 
-import {
-  FormControl,
-  FormControlLabel,
-  FormGroup,
-  Typography,
-} from "@mui/material";
-import Checkbox from "@mui/material/Checkbox";
-// ${gender}, ${color}, ${breed}, ${location}, ${spayed/neutered}, ${shots_current}, ${children_friendly}, ${dogs_friendly}, ${cats_friendly} are parameters that user inputs.
+import { FormControlLabel, FormGroup, Typography } from "@mui/material"
+import Checkbox from "@mui/material/Checkbox"
 
 const catDataDemo = [
   { breed: "Domestic Short Hair" },
@@ -20,7 +14,7 @@ const catDataDemo = [
   { breed: "Russian Blue" },
   { breed: "Tabby" },
   { breed: "Tuxedo" },
-];
+]
 
 const catColorDemo = [
   "Black",
@@ -33,19 +27,19 @@ const catColorDemo = [
   "Brown",
   "Chocolate",
   "Red",
-];
+]
 
 // TODO: dog has a different one
-const catCoatLengthOptions = ["Hairless", "Short", "Medium", "Long"];
+const catCoatLengthOptions = ["Hairless", "Short", "Medium", "Long"]
 
-const petAge = ["Baby", "Young", "Adult", "Senior"];
+const petAge = ["Baby", "Young", "Adult", "Senior"]
 
 export default function PetSearchEngine() {
-  const [checked, setChecked] = React.useState([true, false]);
-  const [catColorArr, setCatColorArr] = React.useState([]);
+  const [checked, setChecked] = React.useState([true, false])
+  const [catColorArr, setCatColorArr] = React.useState([])
   const handleCheckedBoxChange = (event) => {
-    setChecked([event.target.checked, checked[1]]);
-  };
+    setChecked([event.target.checked, checked[1]])
+  }
 
   // TODO: onHandleChange
   const petBreedSelect = (
@@ -65,7 +59,7 @@ export default function PetSearchEngine() {
         />
       )}
     />
-  );
+  )
 
   const petAgeSelect = (
     <Box>
@@ -93,7 +87,7 @@ export default function PetSearchEngine() {
         />
       </FormGroup>
     </Box>
-  );
+  )
 
   const petColorSelect = (
     <Box>
@@ -114,7 +108,7 @@ export default function PetSearchEngine() {
         )}
       />
     </Box>
-  );
+  )
 
   const petGenderSelect = (
     <Box>
@@ -130,7 +124,7 @@ export default function PetSearchEngine() {
         />
       </FormGroup>
     </Box>
-  );
+  )
 
   const petSizeSelect = (
     <Box>
@@ -154,7 +148,7 @@ export default function PetSearchEngine() {
         />
       </FormGroup>
     </Box>
-  );
+  )
 
   const petCoatLengthSelect = (
     <Box>
@@ -176,7 +170,7 @@ export default function PetSearchEngine() {
         )}
       />
     </Box>
-  );
+  )
 
   const behaviroalCheckbox = (
     <Box>
@@ -231,7 +225,7 @@ export default function PetSearchEngine() {
         />
       </FormGroup>
     </Box>
-  );
+  )
 
   return (
     <div>
@@ -245,5 +239,5 @@ export default function PetSearchEngine() {
         {behaviroalCheckbox}
       </Stack>
     </div>
-  );
+  )
 }

@@ -1,14 +1,14 @@
-import * as React from "react";
-import { makeStyles } from "@mui/styles";
-import PetSearchEngine from "../components/PetSearchPage/PetSearchEngine";
-import PetSearchBar from "../components/PetSearchPage/PetSearchBar";
-import Drawer from "@mui/material/Drawer";
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
-import { List, Grid } from "@mui/material";
-import Fab from "@mui/material/Fab";
-import { GrSearchAdvanced } from "react-icons/gr";
-import PetSearchCard from "../components/PetSearchPage/PetSearchCard";
+import * as React from "react"
+import { makeStyles } from "@mui/styles"
+import PetSearchEngine from "../components/PetSearchPage/PetSearchEngine"
+import PetSearchBar from "../components/PetSearchPage/PetSearchBar"
+import Drawer from "@mui/material/Drawer"
+import Button from "@mui/material/Button"
+import Box from "@mui/material/Box"
+import { List, Grid } from "@mui/material"
+import Fab from "@mui/material/Fab"
+import { GrSearchAdvanced } from "react-icons/gr"
+import PetSearchCard from "../components/PetSearchPage/PetSearchCard"
 
 const useStyles = makeStyles({
   root: {
@@ -22,41 +22,41 @@ const useStyles = makeStyles({
     minWidth: 300,
     marginTop: 50,
   },
-});
+})
 
 export default function PetSearchPage() {
-  const styles = useStyles();
+  const styles = useStyles()
 
-  const [state, setState] = React.useState({ Menu: false });
+  const [state, setState] = React.useState({ Menu: false })
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
     ) {
-      return;
+      return
     }
     // we want to set the drawer to open
-    setState({ ...state, [anchor]: open });
-  };
+    setState({ ...state, [anchor]: open })
+  }
 
-  const sideBarSearchEng = (
-    <Box>
-      <Button onClick={toggleDrawer("Menu", true)}>Menu</Button>
-      <Drawer
-        anchor="left"
-        open={state["Menu"]}
-        onClose={toggleDrawer("Menu", false)}
-        sx={{
-          width: 280,
-        }}
-      >
-        <PetSearchEngine />
+  // const sideBarSearchEng = (
+  //   <Box>
+  //     <Button onClick={toggleDrawer("Menu", true)}>Menu</Button>
+  //     <Drawer
+  //       anchor="left"
+  //       open={state["Menu"]}
+  //       onClose={toggleDrawer("Menu", false)}
+  //       sx={{
+  //         width: 280,
+  //       }}
+  //     >
+  //       <PetSearchEngine />
 
-        {console.log("left drawer open")}
-      </Drawer>
-    </Box>
-  );
+  //       {console.log("left drawer open")}
+  //     </Drawer>
+  //   </Box>
+  // );
 
   const sideSearchBar = (
     <Box>
@@ -81,7 +81,7 @@ export default function PetSearchPage() {
         {console.log("left drawer open")}
       </Drawer>
     </Box>
-  );
+  )
 
   return (
     <div>
@@ -95,5 +95,5 @@ export default function PetSearchPage() {
       </div>
       <div className={styles.root}>{sideSearchBar}</div>
     </div>
-  );
+  )
 }
