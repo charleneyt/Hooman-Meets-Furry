@@ -1,20 +1,19 @@
 import config from "./config.json";
 
 // 35702
-const getPetSearch = async (
-  type,
-  gender,
-  color,
-  breed,
-  location,
-  spayed_neutered,
-  shots_current,
-  children_friendly,
-  dogs_friendly,
-  cats_friendly,
-  page,
-  pagesize
-) => {
+async function getPetSearch(params, page, pagesize) {
+  const {
+    type,
+    gender,
+    color,
+    breed,
+    location,
+    spayed_neutered,
+    shots_current,
+    children_friendly,
+    dogs_friendly,
+    cats_friendly,
+  } = params;
   let res = await fetch(
     `http://${config.server_host}:${config.server_port}/petsearch?type=${type}&gender=${gender}&color=${color}&breed=${breed}&location=${location}&spayed_neutered=${spayed_neutered}&shots_current=${shots_current}&children_friendly=${children_friendly}&dogs_friendly=${dogs_friendly}&cats_friendly=${cats_friendly}&page=${page}&pagesize=${pagesize}`,
     {
@@ -22,7 +21,7 @@ const getPetSearch = async (
     }
   );
   return res.json();
-};
+}
 
 // 0
 const getRecommend = async (feature, type, page, pagesize) => {
@@ -44,10 +43,9 @@ const getRescues = async (id) => {
   return res.json();
 };
 
-// 0
-const getSearchRescues = async (id, city, state, page, pagesize) => {
+const getSearchRescues = async (city, state, page, pagesize) => {
   let res = await fetch(
-    `http://${config.server_host}:${config.server_port}/search/rescues?id=${id}&City=${city}&State=${state}&page=${page}&pagesize=${pagesize}`,
+    `http://${config.server_host}:${config.server_port}/search/rescues?city=${city}&state=${state}&page=${page}&pagesize=${pagesize}`,
     { method: "GET" }
   );
   return res.json();

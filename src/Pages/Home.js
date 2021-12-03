@@ -8,14 +8,27 @@ import {
   getSimilar,
   getUserLogin,
 } from "../fetcher";
+import React from "react";
+
 function componentDidMount() {
-  getUserLogin().then((res) => {
-    console.log(res);
-  });
-  getSimilar().then((res) => {
-    console.log(res);
-  });
+  // getUserLogin().then((res) => {
+  //   console.log(res);
+  // });
+  // getSimilar().then((res) => {
+  //   console.log(res);
+  // });
+  getSearchRescues()
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((e) => {
+      console.log(e);
+    });
 }
+
 export default function HomePage() {
-  return <div>Hello! {componentDidMount()}</div>;
+  React.useEffect(() => {
+    componentDidMount();
+  }, []);
+  return <div>Hello world!</div>;
 }
