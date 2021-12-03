@@ -324,11 +324,11 @@ async function recommend(req, res) {
 // ********************************************
 
 //Query f - find similar pets based on pets already liked by the user
-// things to consider:
-// 1. if a breed is rare, there might only be one pet that matches the criteria; in contrast, if a user likes domestic shorthair or other generic breeds, they will get lots of similar pets;
 async function get_similar(req, res) {
-  const username = req.query.username ? req.query.username : "testuser";
-  // added type as a WHERE clause constraint for easier filtering of cat v.s. dog
+  
+  // default user is for testing purpose only
+  // const username = req.query.username ? req.query.username : "testuser";
+
   const type = req.query.type ? req.query.type : "cat";
 
   if (req.query.page && !isNaN(req.query.page)) {
@@ -400,9 +400,6 @@ async function get_similar(req, res) {
 // ********************************************
 
 //Query g - retrieve username based on the login information
-//Things to consider:
-//1. how to handle password securely?
-//2. how to handle the case where a user does not exist?
 async function user_login(req, res) {
   const email = req.query.email ? req.query.email : "testemail@gmail.com";
   const password = req.query.password ? req.query.password : "testpassword";
@@ -420,8 +417,6 @@ async function user_login(req, res) {
     }
   });
 }
-
-//Query X? - we may need a post request so that users can create their accounts
 
 module.exports = {
   pet_search,
