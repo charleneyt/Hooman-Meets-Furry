@@ -26,6 +26,7 @@ async function pet_search(req, res) {
 
   pushIfDefined("type", req.query.type);
   pushIfDefined("gender", req.query.gender);
+  pushIfDefined("age", req.age);
   pushIfDefined("color", req.query.color);
   pushIfDefined("breed", req.query.breed);
   pushIfDefined("O.city", req.query.location);

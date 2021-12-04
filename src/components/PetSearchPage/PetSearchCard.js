@@ -1,9 +1,6 @@
-import * as React from "react";
 import Card from "@mui/material/Card";
 import { CardHeader, CardMedia, CardContent, CardActions } from "@mui/material";
 import { Typography, IconButton } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import Collapse from "@mui/material/Collapse";
 import Avatar from "@mui/material/Avatar";
 import Chip from "@mui/material/Chip";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -11,6 +8,7 @@ import { RiHeart3Fill, RiHomeHeartLine } from "react-icons/ri";
 import { GiCat, GiSittingDog } from "react-icons/gi";
 import MaleIcon from "@mui/icons-material/Male";
 import FemaleIcon from "@mui/icons-material/Female";
+import { getPetSearch } from "../../fetcher";
 
 const dataDemo = [
   createData(
@@ -31,25 +29,8 @@ const dataDemo = [
     "Orlando",
     "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/53106827/1/?bust=1632791542"
   ),
-  createData(
-    "Cat",
-    "Domestic Short Hair",
-    "Orange & White",
-    "Baby",
-    "Male",
-    "Medium",
-    "Short",
-    false,
-    true,
-    false,
-    true,
-    true,
-    true,
-    true,
-    "Murray",
-    "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/53106825/1/?bust=1632791520"
-  ),
 ];
+
 function createData(
   type,
   breed,
@@ -87,14 +68,22 @@ function createData(
     photo,
   };
 }
+
+function fetchPetSearchData() {
+  getPetSearch({}, 1, 1)
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+}
+
 export default function PetSearchCard() {
-  const [expanded, setExpanded] = React.useState(false);
-  const handleExpandedClick = () => {
-    setExpanded(!expanded);
-  };
   return (
     // TODO: Change the data demo to real data
     <Card sx={{ maxWidth: 345 }}>
+      {fetchPetSearchData()}
       <CardHeader
         // Name
         title={dataDemo[0].name}
@@ -146,26 +135,7 @@ export default function PetSearchCard() {
         <IconButton aria-label="rescue">
           <RiHomeHeartLine />
         </IconButton>
-        {/* TODO: ask if we need collapse */}
-        <IconButton
-          sx={{
-            marginLeft: "auto",
-            transform: expanded ? "rotate(180deg)" : "rotate(0deg)",
-          }}
-        >
-          <ExpandMoreIcon
-            expand={expanded}
-            onClick={handleExpandedClick}
-            aria-expanded={expanded}
-            aria-label="show more"
-          />
-        </IconButton>
       </CardActions>
-      <Collapse in={expanded} timeout="auto">
-        <CardContent>
-          <Typography paragraph>This is hidden text</Typography>
-        </CardContent>
-      </Collapse>
     </Card>
   );
 }

@@ -6,6 +6,7 @@ async function getPetSearch(params, page, pagesize) {
     type,
     gender,
     color,
+    age,
     breed,
     location,
     spayed_neutered,
@@ -15,7 +16,7 @@ async function getPetSearch(params, page, pagesize) {
     cats_friendly,
   } = params;
   let res = await fetch(
-    `http://${config.server_host}:${config.server_port}/petsearch?type=${type}&gender=${gender}&color=${color}&breed=${breed}&location=${location}&spayed_neutered=${spayed_neutered}&shots_current=${shots_current}&children_friendly=${children_friendly}&dogs_friendly=${dogs_friendly}&cats_friendly=${cats_friendly}&page=${page}&pagesize=${pagesize}`,
+    `http://${config.server_host}:${config.server_port}/petsearch?type=${type}&gender=${gender}&color=${color}&breed=${breed}&age=${age}&location=${location}&spayed_neutered=${spayed_neutered}&shots_current=${shots_current}&children_friendly=${children_friendly}&dogs_friendly=${dogs_friendly}&cats_friendly=${cats_friendly}&page=${page}&pagesize=${pagesize}`,
     {
       method: "GET",
     }
