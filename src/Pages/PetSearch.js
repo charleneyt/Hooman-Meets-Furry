@@ -1,14 +1,18 @@
-import * as React from "react"
-import { makeStyles } from "@mui/styles"
-import PetSearchEngine from "../components/PetSearchPage/PetSearchEngine"
-import PetSearchBar from "../components/PetSearchPage/PetSearchBar"
-import Drawer from "@mui/material/Drawer"
-import Button from "@mui/material/Button"
-import Box from "@mui/material/Box"
-import { List, Grid } from "@mui/material"
-import Fab from "@mui/material/Fab"
-import { GrSearchAdvanced } from "react-icons/gr"
-import PetSearchCard from "../components/PetSearchPage/PetSearchCard"
+import * as React from "react";
+import { makeStyles } from "@mui/styles";
+import PetSearchEngine from "../components/PetSearchPage/PetSearchEngine";
+import PetSearchBar from "../components/PetSearchPage/PetSearchBar";
+import Drawer from "@mui/material/Drawer";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import { List, Grid } from "@mui/material";
+// TODO: need this
+import Fab from "@mui/material/Fab";
+import { GrSearchAdvanced } from "react-icons/gr";
+import PetSearchCard from "../components/PetSearchPage/PetSearchCard";
+import Pagination from "@mui/material/Pagination";
+import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
 
 const useStyles = makeStyles({
   root: {
@@ -22,23 +26,28 @@ const useStyles = makeStyles({
     minWidth: 300,
     marginTop: 50,
   },
-})
+});
 
 export default function PetSearchPage() {
-  const styles = useStyles()
+  const styles = useStyles();
 
-  const [state, setState] = React.useState({ Menu: false })
+  const [state, setState] = React.useState({ Menu: false });
+  const [currentPage, setCurrentPage] = React.useState(1);
+
+  function handleChange(event, value) {
+    setCurrentPage(value);
+  }
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
     ) {
-      return
+      return;
     }
     // we want to set the drawer to open
-    setState({ ...state, [anchor]: open })
-  }
+    setState({ ...state, [anchor]: open });
+  };
 
   // const sideBarSearchEng = (
   //   <Box>
@@ -61,9 +70,9 @@ export default function PetSearchPage() {
   const sideSearchBar = (
     <Box>
       {/* TODO: uncomment this after finish the page */}
-      <Fab>
+      {/* <Fab>
         <GrSearchAdvanced />
-      </Fab>
+      </Fab> */}
       <Button onClick={toggleDrawer("Menu", true)}>Menu</Button>
       <Drawer
         anchor="left"
@@ -77,16 +86,14 @@ export default function PetSearchPage() {
         <List>
           <PetSearchEngine />
         </List>
-
-        {console.log("left drawer open")}
       </Drawer>
     </Box>
-  )
+  );
 
   return (
     <div>
       <PetSearchBar />
-      <div>
+      <div className="pet-search-card">
         <Grid container>
           <Grid item>
             <PetSearchCard />
@@ -94,6 +101,13 @@ export default function PetSearchPage() {
         </Grid>
       </div>
       <div className={styles.root}>{sideSearchBar}</div>
+      <div className="pet-search-pagination">
+        <Stack spacing={2}>
+          <Typography>Page: {currentPage}</Typography>
+          {/* TODO: Add count for pages */}
+          <Pagination page={currentPage} onChange={handleChange} />
+        </Stack>
+      </div>
     </div>
-  )
+  );
 }

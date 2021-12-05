@@ -36,6 +36,14 @@ app.get("/get_similar", routes.get_similar);
 // Route g - register as GET
 app.get("/user_login", routes.user_login);
 
+app.get("/", function (req, res) {
+  res.send("Server status OK", 404);
+});
+
+app.get("*", function (req, res) {
+  res.send("404 Server Error", 404);
+});
+
 app.listen(config.server_port, () => {
   console.log(
     `Server running at http://${config.server_host}:${config.server_port}/`
