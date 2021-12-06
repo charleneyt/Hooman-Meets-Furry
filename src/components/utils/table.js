@@ -1,17 +1,21 @@
 import React from "react";
 
 export function createTable(renderFunc) {
-  return () => {
+  return (props) => {
     const [order, setOrder] = React.useState("asc");
     const [orderBy, setOrderBy] = React.useState("rank");
     const [page, setPage] = React.useState(0);
     const [dense, setDense] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
-    // TODO: setRows somehow.
-    const [rows] = React.useState([]);
+    const [rows, setRows] = React.useState(props.data);
+
+    React.useEffect(() => {
+      setRows(props.data);
+    }, [props.data]);
 
     const handleRequestSort = (event, property) => {
       const isAsc = orderBy === property && order === "asc";
+      console.log(event, property);
       setOrder(isAsc ? "desc" : "asc");
       setOrderBy(property);
     };
@@ -34,6 +38,7 @@ export function createTable(renderFunc) {
       page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
     return renderFunc(
+      rows,
       dense,
       order,
       orderBy,
@@ -43,7 +48,7 @@ export function createTable(renderFunc) {
       handleRequestSort,
       handleChangePage,
       handleChangeRowsPerPage,
-      handleChangeDense,
+      handleChangeDense
     );
   };
 }

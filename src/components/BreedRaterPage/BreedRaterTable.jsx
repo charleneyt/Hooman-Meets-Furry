@@ -55,7 +55,7 @@ const headCells = [
     label: "Breed Pictures",
   },
   {
-    id: "name",
+    id: "breed_name",
     numeric: false,
     disablePadding: false,
     label: "Breed(Name)",
@@ -102,8 +102,9 @@ const ImageTableCell = styled(TableCell)`
   padding-left: 16px;
 `;
 
-const BreedRaterTable = createTable((dense, order, orderBy, page, rowsPerPage, emptyRows, handleRequestSort, handleChangePage, handleChangeRowsPerPage, handleChangeDense) => {
-  return <Box sx={{width: "100%"}}>
+const BreedRaterTable = createTable((rows, dense, order, orderBy, page, rowsPerPage, emptyRows, handleRequestSort, handleChangePage, handleChangeRowsPerPage, handleChangeDense) => {
+  console.log(rows)
+    return <Box sx={{width: "100%"}}>
     <Paper sx={{width: "100%", mb: 2, rounded: true}}>
       <TableContainer>
         <Table
@@ -124,16 +125,14 @@ const BreedRaterTable = createTable((dense, order, orderBy, page, rowsPerPage, e
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row, index) => {
                 const labelId = `enhanced-table-checkbox-${index}`;
-                console.log(row);
-
                 return (
                   <TableRow role="checkbox" tabIndex={-1} key={row.name}>
                     <TableCell>{row.rank}</TableCell>
                     <ImageTableCell id={labelId} scope="row" padding="none">
                       {/* TODO: Make a placeholder if row.pic not exist */}
-                      <img src={row.pic} alt={row.name} height="200"/>
+                      <img src={row.pic} alt={row.breed_name} height="200"/>
                     </ImageTableCell>
-                    <TableCell align="center">{row.name}</TableCell>
+                    <TableCell align="center">{row.breed_name}</TableCell>
                     <TableCell align="center">
                       {row.rate}
                       <PetRating value={row.rate}/>

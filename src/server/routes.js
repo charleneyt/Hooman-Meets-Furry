@@ -63,7 +63,7 @@ async function pet_search(req, res) {
       } else {
         res.json({results: []});
       }
-    },
+    }
   );
 }
 
@@ -202,7 +202,7 @@ async function search_rescues(req, res) {
       } else {
         res.json({results: []});
       }
-    },
+    }
   );
 }
 // ********************************************
@@ -219,7 +219,7 @@ async function top10(req, res) {
   connection.query(
     `SELECT DISTINCT breed_name, ${feature} AS feature_rating
                             FROM Breeds_Rating BR LEFT JOIN Pet P ON BR.breed_name = P.breed
-                            WHERE P.type = '${req.params.type}'
+                            WHERE P.type = '${req.query.type}'
                             ORDER BY ${feature} DESC 
                             LIMIT 10`,
     (error, results, fields) => {
@@ -229,7 +229,7 @@ async function top10(req, res) {
       } else if (results) {
         res.json({results});
       }
-    },
+    }
   );
 }
 
@@ -256,7 +256,7 @@ async function compare(req, res) {
       } else if (results) {
         res.json({results});
       }
-    },
+    }
   );
 }
 

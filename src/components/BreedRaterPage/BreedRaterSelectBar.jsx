@@ -4,7 +4,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
-const menuItems = {
+export const menuItems = {
   affectionate_with_family: "Affectionate with Family",
   amount_of_shedding: "Amount of shedding",
   easy_to_groom: "Easy to groom",
@@ -15,11 +15,12 @@ const menuItems = {
   potential_for_playfulness: "Potential for playfulness",
 };
 
-export default function SelectLabels() {
-  const [feature, setFeature] = React.useState("");
+export default function BreedRateSelectBar(props) {
+  const {feature, setFeature} = props;
   const [open, setOpen] = React.useState(false);
 
   const handleChangeFeature = (event) => {
+    console.log(event.target.value)
     setFeature(event.target.value);
   };
 
@@ -46,7 +47,7 @@ export default function SelectLabels() {
           onChange={handleChangeFeature}
         >
           {Object.keys(menuItems).map((key) => (
-            <MenuItem value={key}>{menuItems[key]}</MenuItem>
+            <MenuItem key={key} value={key}>{menuItems[key]}</MenuItem>
           ))}
         </Select>
       </FormControl>

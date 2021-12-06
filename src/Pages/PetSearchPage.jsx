@@ -3,7 +3,9 @@ import {makeStyles} from "@mui/styles";
 import Drawer from "@mui/material/Drawer";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import {List, Grid} from "@mui/material";
+import {List, Grid, Typography} from "@mui/material";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 import Fab from "@mui/material/Fab";
 import {GrSearchAdvanced} from "react-icons/gr";
 import PetSearchBar from "../components/PetSearchPage/PetSearchBar";
@@ -57,6 +59,9 @@ export default function PetSearchPage() {
   //     </Drawer>
   //   </Box>
   // );
+  // TODO
+  const currentPage = 10;
+  const handleChange = () => {};
 
   const sideSearchBar = (
     <Box>

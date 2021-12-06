@@ -9,9 +9,8 @@ import {getRescues, getSearchRescues} from "../fetcher";
 
 import RescueTable from "../components/RescuePage/RescueTable";
 
-function RescuePageSelector() {
-  const [cityQuery, setCityQuery] = React.useState("");
-  const [stateQuery, setStateQuery] = React.useState("");
+function RescuePageSelector(props) {
+  const {state: stateQuery, setState: setStateQuery, city: cityQuery, setCity: setCityQuery} = props;
   const selectedRescueId = window.location.search
     ? window.location.search.substring(1).split("=")[1]
     : 0;
@@ -77,17 +76,24 @@ function RescuePageSelector() {
           </Col>
         </Row>
       </Form>
-      {/*TODO: Remove*/}
-      {selectedRescueDetails}
-      {rescueResults}
     </div>
   );
 }
 
 export default function RescuePage() {
+
+  const [city, setCity] = React.useState("")
+  const [state, setState] = React.useState("")
+  
+
   return (
     <div>
-      <RescuePageSelector />
+      <RescuePageSelector 
+        city={city}
+        setCity={setCity}
+        state={state}
+        setState={setState}
+      />
       <div
         style={{
           minWidth: 750,

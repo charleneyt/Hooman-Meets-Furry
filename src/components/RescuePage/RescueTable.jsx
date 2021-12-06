@@ -163,6 +163,7 @@ function EnhancedTableHead(props) {
 
 const RescueTable = createTable(
   (
+    rows,
     dense,
     order,
     orderBy,

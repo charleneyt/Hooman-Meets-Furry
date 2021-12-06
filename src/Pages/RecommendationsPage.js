@@ -3,7 +3,7 @@ import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-import { FaCat, FaDog } from "react-icons/fa";
+import {FaCat, FaDog} from "react-icons/fa";
 import RecCard from "../components/ReccomendationPage/RecCard";
 
 const features = {
@@ -64,16 +64,14 @@ export default function RecommendationsPage() {
           }}
           id="controllable-states-demo"
           options={Object.keys(features)}
-          sx={{ width: 300 }}
-          renderInput={(params) => {
-            return <TextField {...params} label="Features" />;
-          }}
+          sx={{width: 300}}
+          renderInput={(params) => <TextField {...params} label="Features" />}
         />
         <RecCard />
       </div>
 
-      {/* Recommending cards*/}
-      {/* TODO: implement card and uncoment this*/}
+      {/* Recommending cards */}
+      {/* TODO: implement card and uncoment this */}
       {/* <div>
         <Grid container spacing={1}>
           <Grid item xs={12} sm={6} md={2.4}>
