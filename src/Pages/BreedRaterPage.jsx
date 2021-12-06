@@ -5,7 +5,7 @@ import { getTopTen } from "../fetcher";
 
 export default function BreedRaterPage() {
 
-  const [feature, setFeature] = React.useState("general_health");
+  const [feature, setFeature] = React.useState("affectionate_with_family");
   const [type, setType] = React.useState("Dog");
   const [data, setData] = React.useState([]);
 
