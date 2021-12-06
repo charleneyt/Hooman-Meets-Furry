@@ -1,5 +1,5 @@
 import React from "react";
-import { styled } from "@mui/material/styles";
+import {styled} from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -14,15 +14,12 @@ const StyledRating = styled(Rating)({
   },
 });
 
-interface PetRatingProps {
-  value: number
-}
-
-export default function PetRating(props: PetRatingProps) {
-  const { value } = props;
-  return <Box
+export default function PetRating(props) {
+  const {value} = props;
+  return (
+    <Box
       sx={{
-        "& > legend": { mt: 2 },
+        "& > legend": {mt: 2},
       }}
     >
       <StyledRating
@@ -32,8 +29,9 @@ export default function PetRating(props: PetRatingProps) {
         value={value}
         getLabelText={(value) => `${value} Heart${value !== 1 ? "s" : ""}`}
         precision={0.5}
-        icon={<FavoriteIcon fontSize="inherit" />}
-        emptyIcon={<FavoriteBorderIcon fontSize="inherit" />}
+        icon={<FavoriteIcon fontSize="inherit"/>}
+        emptyIcon={<FavoriteBorderIcon fontSize="inherit"/>}
       />
     </Box>
+  );
 }

@@ -1,14 +1,20 @@
 import * as React from "react";
 import Card from "@mui/material/Card";
-import { CardHeader, CardMedia, CardContent, CardActions } from "@mui/material";
-import { Typography, IconButton } from "@mui/material";
+import {
+  CardHeader,
+  CardMedia,
+  CardContent,
+  CardActions,
+  Typography,
+  IconButton,
+} from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Collapse from "@mui/material/Collapse";
 import Avatar from "@mui/material/Avatar";
 import Chip from "@mui/material/Chip";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { RiHeart3Fill, RiHomeHeartLine } from "react-icons/ri";
-import { GiCat, GiSittingDog } from "react-icons/gi";
+import {RiHeart3Fill, RiHomeHeartLine} from "react-icons/ri";
+import {GiCat, GiSittingDog} from "react-icons/gi";
 import MaleIcon from "@mui/icons-material/Male";
 import FemaleIcon from "@mui/icons-material/Female";
 
@@ -29,7 +35,7 @@ const dataDemo = [
     "None",
     "None",
     "Orlando",
-    "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/53106827/1/?bust=1632791542"
+    "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/53106827/1/?bust=1632791542",
   ),
   createData(
     "Cat",
@@ -47,7 +53,7 @@ const dataDemo = [
     true,
     true,
     "Murray",
-    "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/53106825/1/?bust=1632791520"
+    "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/53106825/1/?bust=1632791520",
   ),
 ];
 function createData(
@@ -58,15 +64,15 @@ function createData(
   gender,
   size,
   coat,
-  spayed_neutered,
-  house_trained,
-  special_needs,
-  shots_current,
-  children_friendly,
-  dogs_friendly,
-  cats_friendly,
+  spayedNeutered,
+  houseTrained,
+  specialNeeds,
+  shotsCurrent,
+  childrenFriendly,
+  dogsFriendly,
+  catsFriendly,
   name,
-  photo
+  photo,
 ) {
   return {
     type,
@@ -76,13 +82,13 @@ function createData(
     gender,
     size,
     coat,
-    spayed_neutered,
-    house_trained,
-    special_needs,
-    shots_current,
-    children_friendly,
-    dogs_friendly,
-    cats_friendly,
+    spayed_neutered: spayedNeutered,
+    house_trained: houseTrained,
+    special_needs: specialNeeds,
+    shots_current: shotsCurrent,
+    children_friendly: childrenFriendly,
+    dogs_friendly: dogsFriendly,
+    cats_friendly: catsFriendly,
     name,
     photo,
   };
@@ -92,9 +98,10 @@ export default function PetSearchCard() {
   const handleExpandedClick = () => {
     setExpanded(!expanded);
   };
+
   return (
     // TODO: Change the data demo to real data
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{margin: 1, minWidth: 250, maxWidth: 345}}>
       <CardHeader
         // Name
         title={dataDemo[0].name}
@@ -104,13 +111,13 @@ export default function PetSearchCard() {
         avatar={
           <Avatar
             alt={dataDemo[0].type === "Cat" ? "Cat" : "Dog"}
-            sx={{ bgcolor: "#ef6694" }}
+            sx={{bgcolor: "#ef6694"}}
           >
             {dataDemo[0].type === "Cat" ? <GiCat /> : <GiSittingDog />}
           </Avatar>
         }
         action={
-          <IconButton aria-label="more" sx={{ marginLeft: "auto" }}>
+          <IconButton aria-label="more" sx={{marginLeft: "auto"}}>
             <MoreVertIcon />
           </IconButton>
         }

@@ -1,14 +1,15 @@
+import React from "react";
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+import {createTheme, ThemeProvider} from "@mui/material/styles";
 import HomePage from "./Pages/Home";
 import Navbar from "./components/Navbar/Navbar";
-import PetSearchPage from "./Pages/PetSearch";
+import PetSearchPage from "./Pages/PetSearchPage";
 import RecommendationsPage from "./Pages/RecommendationsPage";
 import RescuePage from "./Pages/RescuePage";
 import PetComparePage from "./Pages/PetComparePage";
 import BreedRaterPage from "./Pages/BreedRaterPage";
 
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 const theme = createTheme({
   palette: {
     type: "dark",

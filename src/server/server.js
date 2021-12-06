@@ -1,15 +1,15 @@
 const express = require("express");
-const mysql = require("mysql");
+// const mysql = require("mysql");
 
+const cors = require("cors");
 const routes = require("./routes");
 const config = require("./config.json");
-const cors = require("cors");
 
 const app = express();
 app.use(
   cors({
     origin: "*",
-  })
+  }),
 );
 
 // Route a - register as GET
@@ -37,8 +37,9 @@ app.get("/get_similar", routes.get_similar);
 app.get("/user_login", routes.user_login);
 
 app.listen(config.server_port, () => {
+  // eslint-disable-next-line no-console
   console.log(
-    `Server running at http://${config.server_host}:${config.server_port}/`
+    `Server running at http://${config.server_host}:${config.server_port}/`,
   );
 });
 

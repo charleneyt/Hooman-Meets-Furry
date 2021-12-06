@@ -1,16 +1,17 @@
 import AppBar from "@mui/material/AppBar";
-import { styled, alpha } from "@mui/material/styles";
-import { IconButton, TextField, Toolbar } from "@mui/material";
+import {styled, alpha} from "@mui/material/styles";
+import {IconButton, TextField, Toolbar} from "@mui/material";
 import Box from "@mui/material/Box";
-import { FaCat, FaDog } from "react-icons/fa";
+import {FaCat, FaDog} from "react-icons/fa";
 import InputAdornment from "@mui/material/InputAdornment";
-import { HiOutlineLocationMarker } from "react-icons/hi";
+import {HiOutlineLocationMarker} from "react-icons/hi";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import Divider from "@mui/material/Divider";
+import React from "react";
 
 // Search bar theme
-const Search = styled("div")(({ theme }) => ({
+const Search = styled("div")(({theme}) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha("#00bcd4", 0.15),
@@ -25,7 +26,7 @@ const Search = styled("div")(({ theme }) => ({
   },
 }));
 
-const SearchIconWrapper = styled("div")(({ theme }) => ({
+const SearchIconWrapper = styled("div")(({theme}) => ({
   color: "#000",
   padding: theme.spacing(0, 2),
   height: "100%",
@@ -36,7 +37,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   justifyContent: "center",
 }));
 
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
+const StyledInputBase = styled(InputBase)(({theme}) => ({
   // TODO: Input test color
   color: "#000",
   "& .MuiInputBase-input": {
@@ -56,20 +57,19 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function PetSearchBar(props) {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      {console.log(props)}
-      <AppBar position="relative" style={{ background: "#FFF" }}>
+    <Box sx={{flexGrow: 1}}>
+      <AppBar position="relative" style={{background: "#FFF"}}>
         <Toolbar>
-          <IconButton size="large" edge="start" sx={{ mr: 1 }}>
+          <IconButton size="large" edge="start" sx={{mr: 1}}>
             <FaCat />
           </IconButton>
-          {/* TODO: change the button to ToggleButton*/}
+          {/* TODO: change the button to ToggleButton */}
           {/* TODO: change button css */}
           {/* TODO: Onclick change color */}
           {/* TODO: hover change color */}
           <Divider orientation="vertical" variant="middle" flexItem light />
           {/* Dog */}
-          <IconButton size="large" edge="middle" sx={{ mr: 2 }}>
+          <IconButton size="large" edge="middle" sx={{mr: 2}}>
             <FaDog />
           </IconButton>
           {/* TODO: Location */}
@@ -88,19 +88,13 @@ export default function PetSearchBar(props) {
               }}
             />
           </Box>
-          {/* <Typography
-            color="black"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
-          >
-            Pet Search Bar
-          </Typography> */}
-          <Search style={{ marginLeft: "auto" }}>
+          <Search style={{marginLeft: "auto"}}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Search Pet..."
-              inputProps={{ "aria-label": "search" }}
+              inputProps={{"aria-label": "search"}}
             />
           </Search>
         </Toolbar>
