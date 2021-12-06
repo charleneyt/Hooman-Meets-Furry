@@ -1,12 +1,6 @@
 # Hooman-Meets-Furry
 
 # Settings & Setups
-| Command | Instructions          |
-| --------- | ----------------- |
-| `npm install`       | Install package and dependecies       | 
-| `npm start` | Start running frontend and backend 
-| `npm start:backend` | Start the backend server
-| `npm start:frontend` | Start the frontend
 
 | Command          | Instructions                       |
 | ---------------- | ---------------------------------- |
