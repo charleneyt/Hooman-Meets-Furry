@@ -1,6 +1,6 @@
-const config = require("./config.json");
 const mysql = require("mysql");
 const e = require("express");
+const config = require("./config.json");
 
 const connection = mysql.createConnection({
   host: config.rds_host,
@@ -25,6 +25,7 @@ async function pet_search(req, res) {
   }
 
   pushIfDefined("type", req.query.type);
+  pushIfDefined("age", req.query.age);
   pushIfDefined("gender", req.query.gender);
   pushIfDefined("age", req.age);
   pushIfDefined("color", req.query.color);
@@ -37,7 +38,7 @@ async function pet_search(req, res) {
   pushIfDefined("cats_friendly", req.cats_friendly);
 
   // If params length is zero we want an empty string, if not we join the queries
-  const finalWhereQuery = params.length ? "WHERE " + params.join(" AND ") : "";
+  const finalWhereQuery = params.length ? `WHERE ${params.join(" AND ")}` : "";
   let pageLimitString = "";
   if (req.query.page && !isNaN(req.query.page)) {
     const page = parseInt(req.query.page);
@@ -45,7 +46,7 @@ async function pet_search(req, res) {
       req.query.pagesize && !isNaN(req.query.pagesize)
         ? parseInt(req.query.pagesize)
         : 10;
-    pageLimitString = "LIMIT " + (page - 1) * pageSize + "," + pageSize;
+    pageLimitString = `LIMIT ${(page - 1) * pageSize},${pageSize}`;
   }
 
   connection.query(
@@ -53,16 +54,16 @@ async function pet_search(req, res) {
        FROM Pet P JOIN Organization O on P.organization_id = O.id ${finalWhereQuery}
        ${pageLimitString}
        `,
-    function (error, results, fields) {
+    (error, results, fields) => {
       if (error) {
         console.log(error);
-        res.json({ results: [] });
+        res.json({results: []});
       } else if (results) {
-        res.json({ results: results });
+        res.json({results});
       } else {
-        res.json({ results: [] });
+        res.json({results: []});
       }
-    }
+    },
   );
 }
 
@@ -73,8 +74,8 @@ async function pet_search(req, res) {
 // Route 1 (handler)
 // Returns an array of information about a rescue, specified by organization_id
 async function rescues(req, res) {
-  const id = req.query.id;
-  const page = req.query.page;
+  const {id} = req.query;
+  const {page} = req.query;
   const pagesize = req.query.pagesize ? req.query.pagesize : 10;
 
   if (req.query.id) {
@@ -87,12 +88,12 @@ async function rescues(req, res) {
                 GROUP BY P.organization_id, O.name, O.address, O.city, O.email, type
                 LIMIT ${pagesize} OFFSET ${offset};
             `;
-      connection.query(query, function (error, results, fields) {
+      connection.query(query, (error, results, fields) => {
         if (error) {
           console.log(error);
-          res.json({ error: error });
+          res.json({error});
         } else if (results) {
-          res.json({ results: results });
+          res.json({results});
         }
       });
     } else {
@@ -102,47 +103,45 @@ async function rescues(req, res) {
             WHERE P.organization_id = '${id}'
             GROUP BY P.organization_id, O.name, O.address, O.city, O.email, type;
             `;
-      connection.query(query, function (error, results, fields) {
+      connection.query(query, (error, results, fields) => {
         if (error) {
           console.log(error);
-          res.json({ error: error });
+          res.json({error});
         } else if (results) {
-          res.json({ results: results });
+          res.json({results});
         }
       });
     }
-  } else {
-    if (req.query.page && !isNaN(req.query.page)) {
-      var offset = ((parseInt(page) - 1) * parseInt(pagesize)).toString();
-      var query = `
+  } else if (req.query.page && !isNaN(req.query.page)) {
+    var offset = ((parseInt(page) - 1) * parseInt(pagesize)).toString();
+    var query = `
                 SELECT P.organization_id, O.name, O.address, O.city AS location, O.email, type, COUNT(*) AS num
                 FROM Organization O JOIN Pet P on P.organization_id = O.id
                 GROUP BY P.organization_id, O.name, O.address, O.city, O.email, type
                 LIMIT ${pagesize} OFFSET ${offset};
             `;
-      connection.query(query, function (error, results, fields) {
-        if (error) {
-          console.log(error);
-          res.json({ error: error });
-        } else if (results) {
-          res.json({ results: results });
-        }
-      });
-    } else {
-      var query = `
+    connection.query(query, (error, results, fields) => {
+      if (error) {
+        console.log(error);
+        res.json({error});
+      } else if (results) {
+        res.json({results});
+      }
+    });
+  } else {
+    var query = `
                 SELECT P.organization_id, O.name, O.address, O.city AS location, O.email, type, COUNT(*) AS num
                 FROM Organization O JOIN Pet P on P.organization_id = O.id
                 GROUP BY P.organization_id, O.name, O.address, O.city, O.email, type;
             `;
-      connection.query(query, function (error, results, fields) {
-        if (error) {
-          console.log(error);
-          res.json({ error: error });
-        } else if (results) {
-          res.json({ results: results });
-        }
-      });
-    }
+    connection.query(query, (error, results, fields) => {
+      if (error) {
+        console.log(error);
+        res.json({error});
+      } else if (results) {
+        res.json({results});
+      }
+    });
   }
 }
 
@@ -172,7 +171,7 @@ async function search_rescues(req, res) {
   // if it is 0 then we don't want to add anything
   // if it is over 0 we want to add a "WHERE" for start
   // and join each string with "AND"
-  const whereQuery = params.length ? "WHERE " + params.join(" AND ") : "";
+  const whereQuery = params.length ? `WHERE ${params.join(" AND ")}` : "";
 
   // pagination
   let pageLimitString = "";
@@ -182,7 +181,7 @@ async function search_rescues(req, res) {
       req.query.pagesize && !isNaN(req.query.pagesize)
         ? parseInt(req.query.pagesize)
         : 10;
-    pageLimitString = "LIMIT " + (page - 1) * pageSize + "," + pageSize;
+    pageLimitString = `LIMIT ${(page - 1) * pageSize},${pageSize}`;
   }
 
   connection.query(
@@ -194,16 +193,16 @@ async function search_rescues(req, res) {
                 ORDER BY O.name;
                 ${pageLimitString}
             `,
-    function (error, results) {
+    (error, results) => {
       if (error) {
         console.log(error);
-        res.json({ results: [] });
+        res.json({results: []});
       } else if (results) {
-        res.json({ results: results });
+        res.json({results});
       } else {
-        res.json({ results: [] });
+        res.json({results: []});
       }
-    }
+    },
   );
 }
 // ********************************************
@@ -223,14 +222,14 @@ async function top10(req, res) {
                             WHERE P.type = '${req.params.type}'
                             ORDER BY ${feature} DESC 
                             LIMIT 10`,
-    function (error, results, fields) {
+    (error, results, fields) => {
       if (error) {
         console.log(error);
-        res.json({ error: error });
+        res.json({error});
       } else if (results) {
-        res.json({ results: results });
+        res.json({results});
       }
-    }
+    },
   );
 }
 
@@ -250,14 +249,14 @@ async function compare(req, res) {
                         JOIN Organization O on O.id = P.organization_id
                         WHERE username = '${username}'
                         LIMIT 3`,
-    function (error, results, fields) {
+    (error, results, fields) => {
       if (error) {
         console.log(error);
-        res.json({ error: error });
+        res.json({error});
       } else if (results) {
-        res.json({ results: results });
+        res.json({results});
       }
-    }
+    },
   );
 }
 
@@ -265,7 +264,7 @@ async function compare(req, res) {
 //             RECOMMENDING SYSTEM ROUTES
 // ********************************************
 
-//Query b - recommend pets with certain breed featuers to the user
+// Query b - recommend pets with certain breed featuers to the user
 async function recommend(req, res) {
   const input_feature = req.query.input_feature
     ? req.query.input_feature
@@ -273,10 +272,10 @@ async function recommend(req, res) {
   const type = req.query.type ? req.query.type : "cat";
 
   if (req.query.page && !isNaN(req.query.page)) {
-    //pagination
+    // pagination
     const pagesize = req.query.pagesize ? req.query.pagesize : 10;
-    var start = (req.query.page - 1) * pagesize;
-    var rowNum = pagesize;
+    const start = (req.query.page - 1) * pagesize;
+    const rowNum = pagesize;
 
     var q = `WITH Temp AS (
             SELECT DISTINCT ${input_feature} FROM Breeds_Rating ORDER BY ${input_feature} DESC LIMIT 2), 
@@ -289,12 +288,12 @@ async function recommend(req, res) {
             WHERE type = '${type}'
             LIMIT ${start}, ${rowNum};`;
 
-    connection.query(q, function (error, results, fields) {
+    connection.query(q, (error, results, fields) => {
       if (error) {
         console.log(error);
-        res.json({ error: error });
+        res.json({error});
       } else if (results) {
-        res.json({ results: results });
+        res.json({results});
       }
     });
   } else {
@@ -308,12 +307,12 @@ async function recommend(req, res) {
             JOIN Organization O on P.organization_id = O.id
             WHERE type = '${type}';`;
 
-    connection.query(q, function (error, results, fields) {
+    connection.query(q, (error, results, fields) => {
       if (error) {
         console.log(error);
-        res.json({ error: error });
+        res.json({error});
       } else if (results) {
-        res.json({ results: results });
+        res.json({results});
       }
     });
   }
@@ -323,19 +322,18 @@ async function recommend(req, res) {
 //             FIND-SIMILAR-PETS ROUTES
 // ********************************************
 
-//Query f - find similar pets based on pets already liked by the user
-// things to consider:
-// 1. if a breed is rare, there might only be one pet that matches the criteria; in contrast, if a user likes domestic shorthair or other generic breeds, they will get lots of similar pets;
+// Query f - find similar pets based on pets already liked by the user
 async function get_similar(req, res) {
-  const username = req.query.username ? req.query.username : "testuser";
-  // added type as a WHERE clause constraint for easier filtering of cat v.s. dog
+  // default user is for testing purpose only
+  // const username = req.query.username ? req.query.username : "testuser";
+
   const type = req.query.type ? req.query.type : "cat";
 
   if (req.query.page && !isNaN(req.query.page)) {
-    //pagination
+    // pagination
     const pagesize = req.query.pagesize ? req.query.pagesize : 10;
-    var start = (req.query.page - 1) * pagesize;
-    var rowNum = pagesize;
+    const start = (req.query.page - 1) * pagesize;
+    const rowNum = pagesize;
 
     // added P.id <> LP.id to avoid recommending the same pet
     var q = `WITH Liked_pet AS (
@@ -357,12 +355,12 @@ async function get_similar(req, res) {
             AND P.id <> LP.id
             LIMIT ${start}, ${rowNum};`;
 
-    connection.query(q, function (error, results, fields) {
+    connection.query(q, (error, results, fields) => {
       if (error) {
         console.log(error);
-        res.json({ error: error });
+        res.json({error});
       } else if (results) {
-        res.json({ results: results });
+        res.json({results});
       }
     });
   } else {
@@ -384,12 +382,12 @@ async function get_similar(req, res) {
             AND P.type = '${type}'
             AND P.id <> LP.id;`;
 
-    connection.query(q, function (error, results, fields) {
+    connection.query(q, (error, results, fields) => {
       if (error) {
         console.log(error);
-        res.json({ error: error });
+        res.json({error});
       } else if (results) {
-        res.json({ results: results });
+        res.json({results});
       }
     });
   }
@@ -399,29 +397,24 @@ async function get_similar(req, res) {
 //             USER LOGIN ROUTES
 // ********************************************
 
-//Query g - retrieve username based on the login information
-//Things to consider:
-//1. how to handle password securely?
-//2. how to handle the case where a user does not exist?
+// Query g - retrieve username based on the login information
 async function user_login(req, res) {
   const email = req.query.email ? req.query.email : "testemail@gmail.com";
   const password = req.query.password ? req.query.password : "testpassword";
 
-  var q = `SELECT username
+  const q = `SELECT username
     FROM User
     WHERE email = '${email}' AND password = '${password}';`;
 
-  connection.query(q, function (error, results, fields) {
+  connection.query(q, (error, results, fields) => {
     if (error) {
       console.log(error);
-      res.json({ error: error });
+      res.json({error});
     } else if (results) {
-      res.json({ results: results });
+      res.json({results});
     }
   });
 }
-
-//Query X? - we may need a post request so that users can create their accounts
 
 module.exports = {
   pet_search,

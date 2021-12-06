@@ -8,14 +8,20 @@
 | `npm start:backend` | Start the backend server
 | `npm start:frontend` | Start the frontend
 
+| Command          | Instructions                       |
+| ---------------- | ---------------------------------- |
+| `npm install`    | Install package and dependecies    |
+| `npm start`      | Start running frontend and backend |
+| `start:backend`  | Start the backend server           |
+| `start:frontend` | Start the frontend                 |
 
-Networking
----
+## Networking
+
 List of network requests by screen
 
 # API Endpoints
 
-* Base URL
+- Base URL
 
 | HTTP Verb | Endpoint          | Description                         |
 | --------- | ----------------- | ----------------------------------- |
@@ -28,8 +34,4 @@ List of network requests by screen
 | GET       | /get_similar      | Find similar pets according to user |
 | GET       | /user_login       | User Login                          |
 
-
-
 ###### tags: `PetFinder`
-
-

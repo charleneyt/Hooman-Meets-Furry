@@ -1,18 +1,14 @@
-import * as React from "react";
-import { makeStyles } from "@mui/styles";
-import PetSearchEngine from "../components/PetSearchPage/PetSearchEngine";
-import PetSearchBar from "../components/PetSearchPage/PetSearchBar";
+import React from "react";
+import {makeStyles} from "@mui/styles";
 import Drawer from "@mui/material/Drawer";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import { List, Grid } from "@mui/material";
-// TODO: need this
+import {List, Grid} from "@mui/material";
 import Fab from "@mui/material/Fab";
-import { GrSearchAdvanced } from "react-icons/gr";
+import {GrSearchAdvanced} from "react-icons/gr";
+import PetSearchBar from "../components/PetSearchPage/PetSearchBar";
+import PetSearchEngine from "../components/PetSearchPage/PetSearchEngine";
 import PetSearchCard from "../components/PetSearchPage/PetSearchCard";
-import Pagination from "@mui/material/Pagination";
-import Typography from "@mui/material/Typography";
-import Stack from "@mui/material/Stack";
 
 const useStyles = makeStyles({
   root: {
@@ -22,7 +18,7 @@ const useStyles = makeStyles({
     justifyContent: "center",
   },
   searchItem: {
-    wids: 800,
+    width: 800,
     minWidth: 300,
     marginTop: 50,
   },
@@ -31,12 +27,7 @@ const useStyles = makeStyles({
 export default function PetSearchPage() {
   const styles = useStyles();
 
-  const [state, setState] = React.useState({ Menu: false });
-  const [currentPage, setCurrentPage] = React.useState(1);
-
-  function handleChange(event, value) {
-    setCurrentPage(value);
-  }
+  const [state, setState] = React.useState({Menu: false});
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -46,7 +37,7 @@ export default function PetSearchPage() {
       return;
     }
     // we want to set the drawer to open
-    setState({ ...state, [anchor]: open });
+    setState({...state, [anchor]: open});
   };
 
   // const sideBarSearchEng = (
@@ -76,7 +67,7 @@ export default function PetSearchPage() {
       <Button onClick={toggleDrawer("Menu", true)}>Menu</Button>
       <Drawer
         anchor="left"
-        open={state["Menu"]}
+        open={state.Menu}
         onClose={toggleDrawer("Menu", false)}
         sx={{
           width: 280,

@@ -1,5 +1,5 @@
 {
-  "name": "header-app",
+  "name": "hooman-meets-furry",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -20,6 +20,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "mysql": "^2.18.1",
+    "node": "^17.2.0",
     "node-fetch": "^3.0.0",
     "nodemon": "^2.0.12",
     "react": "^17.0.2",
@@ -41,12 +42,14 @@
     "eject": "react-scripts eject",
     "lint": "eslint src",
     "lint:fix": "eslint --fix src",
-    "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\""
+    "postinstall": "husky install",
+    "pre-commit": "lint-staged"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest",
+      "eslint-config-with-prettier"
     ]
   },
   "browserslist": {
@@ -70,14 +73,11 @@
     "*.+(js|jsx)": [
       "eslint --fix",
       "git add"
-    ],
-    "*.+(json|css|md)": [
-      "prettier --write",
-      "git add"
     ]
   },
   "devDependencies": {
     "eslint-config-prettier": "^8.3.0",
+    "eslint-config-with-prettier": "^6.0.0",
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^7.0.4",
     "lint-staged": "^12.1.2",
