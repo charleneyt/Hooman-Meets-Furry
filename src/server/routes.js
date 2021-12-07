@@ -1,5 +1,5 @@
 const mysql = require("mysql");
-const e = require("express");
+// const e = require("express");
 const config = require("./config.json");
 
 const connection = mysql.createConnection({
@@ -80,8 +80,8 @@ async function rescues(req, res) {
 
   if (req.query.id) {
     if (req.query.page && !isNaN(req.query.page)) {
-      var offset = ((parseInt(page) - 1) * parseInt(pagesize)).toString();
-      var query = `
+      const offset = ((parseInt(page) - 1) * parseInt(pagesize)).toString();
+      const query = `
                 SELECT P.organization_id, O.name, O.address, O.city AS location, O.email, type, COUNT(*) AS num
                 FROM Organization O JOIN Pet P on P.organization_id = O.id
                 WHERE O.id = '${id}'
@@ -97,7 +97,7 @@ async function rescues(req, res) {
         }
       });
     } else {
-      var query = `
+      const query = `
             SELECT P.organization_id, O.name, O.address, O.city AS location, O.email, type, COUNT(*) AS num
             FROM Organization O JOIN Pet P on P.organization_id = O.id
             WHERE P.organization_id = '${id}'
@@ -113,8 +113,8 @@ async function rescues(req, res) {
       });
     }
   } else if (req.query.page && !isNaN(req.query.page)) {
-    var offset = ((parseInt(page) - 1) * parseInt(pagesize)).toString();
-    var query = `
+    const offset = ((parseInt(page) - 1) * parseInt(pagesize)).toString();
+    const query = `
                 SELECT P.organization_id, O.name, O.address, O.city AS location, O.email, type, COUNT(*) AS num
                 FROM Organization O JOIN Pet P on P.organization_id = O.id
                 GROUP BY P.organization_id, O.name, O.address, O.city, O.email, type
@@ -129,7 +129,7 @@ async function rescues(req, res) {
       }
     });
   } else {
-    var query = `
+    const query = `
                 SELECT P.organization_id, O.name, O.address, O.city AS location, O.email, type, COUNT(*) AS num
                 FROM Organization O JOIN Pet P on P.organization_id = O.id
                 GROUP BY P.organization_id, O.name, O.address, O.city, O.email, type;
@@ -217,7 +217,7 @@ async function top10(req, res) {
     : "affectionate_with_family";
 
   connection.query(
-    `SELECT DISTINCT breed_name, ${feature} AS feature_rating
+    `SELECT DISTINCT breed_name, ${feature} AS feature_rating, photo
                             FROM Breeds_Rating BR LEFT JOIN Pet P ON BR.breed_name = P.breed
                             WHERE P.type = '${req.query.type}'
                             ORDER BY ${feature} DESC 
@@ -277,7 +277,7 @@ async function recommend(req, res) {
     const start = (req.query.page - 1) * pagesize;
     const rowNum = pagesize;
 
-    var q = `WITH Temp AS (
+    const q = `WITH Temp AS (
             SELECT DISTINCT ${input_feature} FROM Breeds_Rating ORDER BY ${input_feature} DESC LIMIT 2), 
             Breeds_Name AS (
             SELECT breed_name FROM Breeds_Rating WHERE ${input_feature} IN (SELECT * FROM Temp))
@@ -297,7 +297,7 @@ async function recommend(req, res) {
       }
     });
   } else {
-    var q = `WITH Temp AS (
+    const q = `WITH Temp AS (
             SELECT DISTINCT ${input_feature} FROM Breeds_Rating ORDER BY ${input_feature} DESC LIMIT 2), 
             Breeds_Name AS (
             SELECT breed_name FROM Breeds_Rating WHERE ${input_feature} IN (SELECT * FROM Temp))
@@ -324,8 +324,8 @@ async function recommend(req, res) {
 
 // Query f - find similar pets based on pets already liked by the user
 async function get_similar(req, res) {
-  // default user is for testing purpose only
-  // const username = req.query.username ? req.query.username : "testuser";
+  // TODO: default user is for testing purpose only
+  const username = req.query.username ? req.query.username : "testuser";
 
   const type = req.query.type ? req.query.type : "cat";
 
@@ -336,7 +336,7 @@ async function get_similar(req, res) {
     const rowNum = pagesize;
 
     // added P.id <> LP.id to avoid recommending the same pet
-    var q = `WITH Liked_pet AS (
+    const q = `WITH Liked_pet AS (
             SELECT P.id, type, breed, color, age, gender, P.name, P.photo, O.city AS location
             FROM Pet P
             JOIN Liked_by Lb on P.id = Lb.pet_id
@@ -364,7 +364,7 @@ async function get_similar(req, res) {
       }
     });
   } else {
-    var q = `WITH Liked_pet AS (
+    const q = `WITH Liked_pet AS (
             SELECT P.id, type, breed, color, age, gender, P.name, P.photo, O.city AS location
             FROM Pet P
             JOIN Liked_by Lb on P.id = Lb.pet_id

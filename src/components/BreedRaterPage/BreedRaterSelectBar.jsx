@@ -15,12 +15,13 @@ export const menuItems = {
   potential_for_playfulness: "Potential for playfulness",
 };
 
+// TODO: add cat dog select
+
 export default function BreedRateSelectBar(props) {
   const {feature, setFeature} = props;
   const [open, setOpen] = React.useState(false);
 
   const handleChangeFeature = (event) => {
-    console.log(event.target.value)
     setFeature(event.target.value);
   };
 

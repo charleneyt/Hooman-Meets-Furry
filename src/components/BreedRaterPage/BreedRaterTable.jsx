@@ -19,28 +19,6 @@ import PetRating from "./PetRating";
 import {getComparator, stableSort} from "../utils/comparators";
 import {createTable} from "../utils/table";
 
-function createData(rank, pic, name, rate) {
-  return {
-    rank,
-    pic,
-    name,
-    rate,
-  };
-}
-
-const rows = [
-  createData(1, "https://placekitten.com/g/200/200", "Cupcake", 1),
-  createData(2, "https://placekitten.com/g/200/200", "Donut", 2),
-  createData(3, "https://placekitten.com/g/200/200", "Eclair", 5),
-  createData(4, "https://placekitten.com/g/200/200", "Frozen yoghurt", 5),
-  createData(5, "https://placekitten.com/g/200/200", "Gingerbread", 2.5),
-  createData(6, "https://placekitten.com/g/200/200", "Honeycomb", 4.4),
-  createData(7, "https://placekitten.com/g/200/200", "Ice cream sandwich", 2),
-  createData(8, "https://placekitten.com/g/200/200", "Jelly Bean", 3.3),
-  createData(9, "https://placekitten.com/g/200/200", "KitKat", 5.5),
-  createData(10, "https://placekitten.com/g/200/200", "Lollipop", 6.5),
-];
-
 const headCells = [
   {
     id: "rank",
@@ -49,7 +27,7 @@ const headCells = [
     label: "Ranking",
   },
   {
-    id: "pic",
+    id: "photo",
     numeric: false,
     disablePadding: false,
     label: "Breed Pictures",
@@ -103,7 +81,6 @@ const ImageTableCell = styled(TableCell)`
 `;
 
 const BreedRaterTable = createTable((rows, dense, order, orderBy, page, rowsPerPage, emptyRows, handleRequestSort, handleChangePage, handleChangeRowsPerPage, handleChangeDense) => {
-  console.log(rows)
     return <Box sx={{width: "100%"}}>
     <Paper sx={{width: "100%", mb: 2, rounded: true}}>
       <TableContainer>
@@ -130,7 +107,7 @@ const BreedRaterTable = createTable((rows, dense, order, orderBy, page, rowsPerP
                     <TableCell>{row.rank}</TableCell>
                     <ImageTableCell id={labelId} scope="row" padding="none">
                       {/* TODO: Make a placeholder if row.pic not exist */}
-                      <img src={row.pic} alt={row.breed_name} height="200"/>
+                      <img src={row.photo} alt={row.breed_name} height="200"/>
                     </ImageTableCell>
                     <TableCell align="center">{row.breed_name}</TableCell>
                     <TableCell align="center">
