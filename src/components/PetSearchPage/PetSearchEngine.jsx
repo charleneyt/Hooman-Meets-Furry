@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import Stack from "@mui/material/Stack";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 
 import {FormControlLabel, FormGroup, Typography} from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
+import {produce} from "immer";
 
 const catDataDemo = [
   {breed: "Domestic Short Hair"},
@@ -34,10 +35,74 @@ const catCoatLengthOptions = ["Hairless", "Short", "Medium", "Long"];
 
 const petAge = ["Baby", "Young", "Adult", "Senior"];
 
-export default function PetSearchEngine() {
-  const [checked, setChecked] = React.useState([true, false]);
+const checkBoxConfigs = {
+  age: {
+    options: { 
+      "baby": "Baby", 
+      "young": "Young",
+      "adult": "Adult", 
+      "senior": "Senior"
+    }
+  },
+  spayed_neutered: {
+    options: {
+      "TRUE": "Spayed-neutered"
+    }
+  }
+}
+
+export default function PetSearchEngine(props) {
+  const {checkBoxOptions, setCheckBoxOptions} = props;
+
+  const setCheckBoxState = (settingName, attributeName) => (event) => {
+    const newState = produce((checkBoxOptions) => {
+      if (event.target.checked) {
+        checkBoxOptions[settingName] = checkBoxOptions[settingName] || new Set();
+        checkBoxOptions[settingName].add(attributeName);
+      } else {
+        if (checkBoxOptions[settingName]) {
+          checkBoxOptions[settingName].delete(attributeName)
+          if (!checkBoxOptions[settingName].size) {
+            delete checkBoxOptions[settingName]
+          }
+        }
+      }
+    })
+    setCheckBoxOptions(newState);
+  };
+
+  const getCheckBoxState = (settingName, attributeName) => {
+    return (checkBoxOptions[settingName] || new Set()).has(attributeName)
+  }
+
+  // const [checked, setChecked] = React.useState([true, false]);
   const handleCheckedBoxChange = (event) => {
     setChecked([event.target.checked, checked[1]]);
+    console.log(event.target.checked, checked[1])
+  };
+
+  const [checked, setChecked] = React.useState(true);
+
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+  };
+
+  const generateCheckboxes = (configKey) => {
+    const config = checkBoxConfigs[configKey];
+    return Object.entries(config.options).map(([key, label]) => {
+      return  <FormControlLabel
+      key={key}
+      control={
+        <Checkbox
+        checked={getCheckBoxState(configKey, key)}
+        onChange={setCheckBoxState(configKey, key)}
+        name={key} 
+        inputProps={{ 'aria-label': 'controlled' }}
+        />
+      }
+      label={label}
+    />
+    });
   };
 
   return (
@@ -69,30 +134,7 @@ export default function PetSearchEngine() {
           {/* TODO: change font size */}
           <Typography> Age:</Typography>
           <FormGroup sx={{flexDirection: "row", alignItems: "center"}}>
-            <FormControlLabel
-              control={
-                <Checkbox onChange={handleCheckedBoxChange} name="baby" />
-              }
-              label={petAge[0]}
-            />
-            <FormControlLabel
-              control={
-                <Checkbox onChange={handleCheckedBoxChange} name="young" />
-              }
-              label={petAge[1]}
-            />
-            <FormControlLabel
-              control={
-                <Checkbox onChange={handleCheckedBoxChange} name="adult" />
-              }
-              label={petAge[2]}
-            />
-            <FormControlLabel
-              control={
-                <Checkbox onChange={handleCheckedBoxChange} name="senior" />
-              }
-              label={petAge[3]}
-            />
+            {generateCheckboxes('age')}
           </FormGroup>
         </Box>
         {/* Color Select */}
@@ -181,15 +223,7 @@ export default function PetSearchEngine() {
         </Box>
         <Box sx={{margin: 1, marginTop: 0, marginBottom: 0}}>
           <FormGroup sx={{flexDirection: "row"}}>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  onChange={handleCheckedBoxChange}
-                  name="spayed-neutered"
-                />
-              }
-              label="Spayed-neutered"
-            />
+            {generateCheckboxes('spayed_neutered')}
             <FormControlLabel
               control={
                 <Checkbox

@@ -69,7 +69,7 @@ export default function PetSearchBar(props) {
           {/* TODO: hover change color */}
           <Divider orientation="vertical" variant="middle" flexItem light />
           {/* Dog */}
-          <IconButton size="large" edge="middle" sx={{mr: 2}}>
+          <IconButton size="large" edge="start" sx={{mr: 2}}>
             <FaDog />
           </IconButton>
           {/* TODO: Location */}

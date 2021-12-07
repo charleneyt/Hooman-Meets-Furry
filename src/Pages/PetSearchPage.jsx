@@ -11,6 +11,7 @@ import {GrSearchAdvanced} from "react-icons/gr";
 import PetSearchBar from "../components/PetSearchPage/PetSearchBar";
 import PetSearchEngine from "../components/PetSearchPage/PetSearchEngine";
 import PetSearchCard from "../components/PetSearchPage/PetSearchCard";
+import { getPetSearch } from "../fetcher";
 
 const useStyles = makeStyles({
   root: {
@@ -27,10 +28,25 @@ const useStyles = makeStyles({
 });
 
 export default function PetSearchPage() {
+  // Fetch data and set data hoooks
+  const [checkBoxOptions, setCheckBoxOptions] = React.useState({});
+
+  // TODO: Make a select bar for user to decide pagesize
   const styles = useStyles();
+  
+  React.useEffect(() => {
+    const params = {};
+    Object.entries(checkBoxOptions).map(([key, entry]) => {
+      params[key] = [...entry]
+    })
+    console.log(params)
+    getPetSearch(params, currentPage, 100).then(resp => resp.json()).then(resp => {
+      console.log(resp)
+    })
+  }, [checkBoxOptions]);
 
+  // Drawer
   const [state, setState] = React.useState({Menu: false});
-
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event.type === "keydown" &&
@@ -42,49 +58,10 @@ export default function PetSearchPage() {
     setState({...state, [anchor]: open});
   };
 
-  // const sideBarSearchEng = (
-  //   <Box>
-  //     <Button onClick={toggleDrawer("Menu", true)}>Menu</Button>
-  //     <Drawer
-  //       anchor="left"
-  //       open={state["Menu"]}
-  //       onClose={toggleDrawer("Menu", false)}
-  //       sx={{
-  //         width: 280,
-  //       }}
-  //     >
-  //       <PetSearchEngine />
-
-  //       {console.log("left drawer open")}
-  //     </Drawer>
-  //   </Box>
-  // );
-  // TODO
-  const currentPage = 10;
-  const handleChange = () => {};
-
-  const sideSearchBar = (
-    <Box>
-      {/* TODO: uncomment this after finish the page */}
-      {/* <Fab>
-        <GrSearchAdvanced />
-      </Fab> */}
-      <Button onClick={toggleDrawer("Menu", true)}>Menu</Button>
-      <Drawer
-        anchor="left"
-        open={state.Menu}
-        onClose={toggleDrawer("Menu", false)}
-        sx={{
-          width: 280,
-          flexShrink: 0,
-        }}
-      >
-        <List>
-          <PetSearchEngine />
-        </List>
-      </Drawer>
-    </Box>
-  );
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const handleChange = (event, value) => {
+    setCurrentPage(value);
+  };
 
   return (
     <div>
@@ -96,7 +73,28 @@ export default function PetSearchPage() {
           </Grid>
         </Grid>
       </div>
-      <div className={styles.root}>{sideSearchBar}</div>
+      <div className={styles.root}>
+        <Box>
+          {/* TODO: uncomment this after finish the page */}
+          {/* <Fab>
+            <GrSearchAdvanced />
+          </Fab> */}
+          <Button onClick={toggleDrawer("Menu", true)}>Menu</Button>
+          <Drawer
+            anchor="left"
+            open={state.Menu}
+            onClose={toggleDrawer("Menu", false)}
+            sx={{
+              width: 280,
+              flexShrink: 0,
+            }}
+          >
+            <List>
+              <PetSearchEngine checkBoxOptions={checkBoxOptions} setCheckBoxOptions={setCheckBoxOptions}/>
+            </List>
+          </Drawer>
+        </Box>
+      </div>
       <div className="pet-search-pagination">
         <Stack spacing={2}>
           <Typography>Page: {currentPage}</Typography>
