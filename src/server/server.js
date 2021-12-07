@@ -37,7 +37,8 @@ app.get("/get_similar", routes.get_similar);
 app.get("/user_login", routes.user_login);
 
 app.get("/", (req, res) => {
-  res.send("Server status OK", 404);
+  // res.send("Server status OK", 404);
+  res.status(404).send("Server status OK");
 });
 
 app.get("*", (req, res) => {

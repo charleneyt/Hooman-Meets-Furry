@@ -1,7 +1,9 @@
 import React from "react";
 import BreedRaterTable from "../components/BreedRaterPage/BreedRaterTable";
 import BreedRateSelectBar from "../components/BreedRaterPage/BreedRaterSelectBar";
+import BreeRaterSwitch from "../components/BreedRaterPage/BreedRaterSwitch"
 import { getTopTen } from "../fetcher";
+
 
 export default function BreedRaterPage() {
 
@@ -11,7 +13,7 @@ export default function BreedRaterPage() {
 
   React.useEffect(() => {
     getTopTen(type, feature).then(resp => resp.json()).then(resp => {
-      const modifiedResults = [];
+       const modifiedResults = [];
       let i = 1;
       for (const result of resp.results) {
         modifiedResults.push({
@@ -19,6 +21,8 @@ export default function BreedRaterPage() {
           rank: i++
         })
       }
+      
+
       setData(modifiedResults);
     });
   }, [feature, type])
@@ -34,7 +38,9 @@ export default function BreedRaterPage() {
         }}
       >
         <BreedRateSelectBar feature={feature} setFeature={setFeature}/>
+        <BreeRaterSwitch type={type} setType={setType}/>
         <BreedRaterTable data={data}/>
+        
       </div>
     </div>
   );
