@@ -81,7 +81,6 @@ const ImageTableCell = styled(TableCell)`
 `;
 
 const BreedRaterTable = createTable((rows, dense, order, orderBy, page, rowsPerPage, emptyRows, handleRequestSort, handleChangePage, handleChangeRowsPerPage, handleChangeDense) => {
-  console.log(rows)
     return <Box sx={{width: "100%"}}>
     <Paper sx={{width: "100%", mb: 2, rounded: true}}>
       <TableContainer>
