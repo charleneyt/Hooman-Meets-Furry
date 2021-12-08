@@ -39,14 +39,14 @@ export function getPetSearch(params, page, pagesize) {
 
 // 0
 export const getRecommend = async (feature, type, page, pagesize) => {
-  const res = await fetch(
+ 
+
+  return fetch(
     `http://${config.server_host}:${config.server_port}/recommend?feature=${feature}&type=${type}&page=${page}&pagesize=${pagesize}`,
     {
       method: "GET",
     }
-  );
-
-  return res.json();
+  );;
 };
 
 // 5294
