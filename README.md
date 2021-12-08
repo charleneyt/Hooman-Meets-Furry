@@ -4,10 +4,10 @@
 
 | Command          | Instructions                       |
 | ---------------- | ---------------------------------- |
-| `npm install`    | Install package and dependecies    |
-| `npm start`      | Start running frontend and backend |
-| `start:backend`  | Start the backend server           |
-| `start:frontend` | Start the frontend                 |
+| `yarn install`    | Install package and dependecies    |
+| `yarn start`      | Start running frontend and backend |
+| `yarn start:backend`  | Start the backend server           |
+| `yarn start:frontend` | Start the frontend                 |
 
 ## Networking
 
