@@ -8,8 +8,6 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Grid from '@mui/material/Grid';
 
-// TODO: refactor the breed rater page
-
 const features = {
   general_health: "General health",
   affectionate_with_family: "Affectionate with Family",
@@ -21,12 +19,15 @@ const features = {
   potential_for_playfulness: "Potential for playfulness",
 };
 
+// TODO: add a just for you on top
+
 export default function RecommendationsPage() {
   // for type button
   const [type, setType] = React.useState("Dog")
   // for select
   const [feature, setFeature] = React.useState("general_health");
   const [open, setOpen] = React.useState(false);
+  // TODO: do pagination 
   // page and pagesize
   const [page, setPage] = React.useState(1);
   const [pageSize, setPageSize] = React.useState(25);
@@ -47,6 +48,7 @@ export default function RecommendationsPage() {
   
   React.useEffect(() => {
     getRecommend(feature, type, page, pageSize).then(resp => resp.json()).then(resp => {
+      console.log(resp)
       setData(resp.results);
     })
   }, [type, feature, page, pageSize]);
@@ -85,10 +87,9 @@ export default function RecommendationsPage() {
       <div>
         <Grid container spacing={1}>
           {data.map(row =>           
-          <Grid item xs={12} sm={6} md={2.4}>
+          <Grid key={row.id} item xs={12} sm={6} md={2.4}>
             <RecCard key={row.id}  data={row}/>
           </Grid>)}
-          
         </Grid>
       </div>
     </div>
