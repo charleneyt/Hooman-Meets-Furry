@@ -48,7 +48,6 @@ export default function RecommendationsPage() {
   
   React.useEffect(() => {
     getRecommend(feature, type, page, pageSize).then(resp => resp.json()).then(resp => {
-      console.log(resp)
       setData(resp.results);
     })
   }, [type, feature, page, pageSize]);
