@@ -19,6 +19,7 @@
     "concurrently": "^6.4.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "immer": "^9.0.7",
     "mysql": "^2.18.1",
     "node": "^17.2.0",
     "node-fetch": "^3.0.0",

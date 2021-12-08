@@ -1,28 +1,40 @@
 import config from "./config.json";
 
+const addIfExists = (paramName, params, paramsList) => {
+  if (params[paramName] !== undefined) {
+    paramsList[paramName] = params[paramName];
+  }
+};
+
 // 35702
-export async function getPetSearch(params, page, pagesize) {
-  const {
-    type,
-    gender,
-    color,
-    age,
-    breed,
-    location,
-    shotsCurrent,
-    spayedNeutered,
-    childrenFriendly,
-    dogsFriendly,
-    catsFriendly,
-  } = params;
-  const res = await fetch(
-    `http://${config.server_host}:${config.server_port}/petsearch?type=${type}&gender=${gender}&color=${color}&breed=${breed}&age=${age}&location=${location}&spayed_neutered=${spayedNeutered}&shots_current=${shotsCurrent}&children_friendly=${childrenFriendly}&dogs_friendly=${dogsFriendly}&cats_friendly=${catsFriendly}&page=${page}&pagesize=${pagesize}`,
+export function getPetSearch(params, page, pagesize) {
+  const paramsList = {};
+  [
+    "type",
+    "gender",
+    "color",
+    "age",
+    "breed",
+    "location",
+    "shots_current",
+    "spayed_neutered",
+    "children_friendly",
+    "dogs_friendly",
+    "cats_friendly",
+  ].map((item) => addIfExists(item, params, paramsList));
+
+  const queryString = Object.entries(paramsList)
+    .map(([key, value]) => {
+      return `&${key}=${value}`;
+    })
+    .join("");
+
+  return fetch(
+    `http://${config.server_host}:${config.server_port}/petsearch?page=${page}&pagesize=${pagesize}${queryString}`,
     {
       method: "GET",
     }
   );
-
-  return res.json();
 }
 
 // 0

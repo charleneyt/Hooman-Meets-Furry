@@ -18,6 +18,8 @@ function RescuePageSelector(props) {
     React.useState(null);
   const [rescueResults, setRescueResults] = React.useState([]);
 
+  console.log(selectedRescueDetails, rescueResults)
+
   const handleCityQueryChange = (event) => {
     setCityQuery(event.target.value);
   };

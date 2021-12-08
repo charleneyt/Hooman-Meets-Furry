@@ -7,10 +7,10 @@ export function createTable(renderFunc) {
     const [page, setPage] = React.useState(0);
     const [dense, setDense] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
-    const [rows, setRows] = React.useState(props.data);
+    const [rows, setRows] = React.useState(props.data || []);
 
     React.useEffect(() => {
-      setRows(props.data);
+      setRows(props.data || []);
     }, [props.data]);
 
     const handleRequestSort = (event, property) => {

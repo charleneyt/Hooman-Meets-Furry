@@ -21,8 +21,6 @@ export default function BreedRaterPage() {
           rank: i++
         })
       }
-      
-
       setData(modifiedResults);
     });
   }, [feature, type])
