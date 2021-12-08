@@ -39,14 +39,12 @@ export function getPetSearch(params, page, pagesize) {
 
 // 0
 export const getRecommend = async (feature, type, page, pagesize) => {
- 
-
   return fetch(
     `http://${config.server_host}:${config.server_port}/recommend?feature=${feature}&type=${type}&page=${page}&pagesize=${pagesize}`,
     {
       method: "GET",
     }
-  );;
+  );
 };
 
 // 5294
@@ -59,13 +57,11 @@ export const getRescues = async (id) => {
   return res.json();
 };
 
-export const getSearchRescues = async (city, state, page, pagesize) => {
-  const res = await fetch(
+export const getSearchRescues = (city, state, page, pagesize) => {
+  return fetch(
     `http://${config.server_host}:${config.server_port}/search/rescues?city=${city}&state=${state}&page=${page}&pagesize=${pagesize}`,
     {method: "GET"}
   );
-
-  return res.json();
 };
 
 // 0

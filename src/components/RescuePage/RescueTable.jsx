@@ -14,85 +14,6 @@ import Switch from "@mui/material/Switch";
 import {createTable} from "../utils/table";
 import {getComparator, stableSort} from "../utils/comparators";
 
-function createData(name, address, city, email, type, num) {
-  return {
-    name,
-    address,
-    city,
-    email,
-    type,
-    num,
-  };
-}
-
-const rows = [
-  createData(
-    "Rescue 1",
-    "123 First Ave",
-    "New York",
-    "abc1@gmail.com",
-    "Cat",
-    "20",
-  ),
-  createData(
-    "Rescue 2",
-    "123 2nd Ave",
-    "New York",
-    "abc2@gmail.com",
-    "Cat",
-    "5",
-  ),
-  createData(
-    "Rescue 3",
-    "123 3rd Ave",
-    "New York",
-    "abc3@gmail.com",
-    "Dog",
-    "10",
-  ),
-  createData(
-    "Rescue 4",
-    "123 4th Ave",
-    "New York",
-    "abc4@gmail.com",
-    "Cat",
-    "15",
-  ),
-  createData(
-    "Rescue 5",
-    "123 5th Ave",
-    "New York",
-    "abc5@gmail.com",
-    "Dog",
-    "6",
-  ),
-  createData(
-    "Rescue 6",
-    "123 6th Ave",
-    "New York",
-    "abc6@gmail.com",
-    "Cat",
-    "20",
-  ),
-  createData(
-    "Rescue 7",
-    "123 7th Ave",
-    "New York",
-    "abc7@gmail.com",
-    "Cat",
-    "9",
-  ),
-  createData(
-    "Rescue 8",
-    "123 8th Ave",
-    "New York",
-    "abc8@gmail.com",
-    "Dog",
-    "20",
-  ),
-];
-
-console.log(rows);
 
 const headCells = [
   {
@@ -111,7 +32,7 @@ const headCells = [
     id: "location",
     numeric: false,
     disablePadding: true,
-    label: "Location",
+    label: "City",
   },
   {
     id: "email",
@@ -134,6 +55,7 @@ const headCells = [
 ];
 
 function EnhancedTableHead(props) {
+
   const {order, orderBy, onRequestSort} = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
@@ -198,7 +120,7 @@ const RescueTable = createTable(
                   return (
                     <TableRow role="checkbox" tabIndex={-1} key={row.name}>
                       <TableCell align="center">{row.name}</TableCell>
-                      <TableCell align="center">{row.address}</TableCell>
+                      <TableCell align="center">{row.address ? row.address : "Not available"}</TableCell>
                       <TableCell align="center">{row.city}</TableCell>
                       <TableCell align="center">{row.email}</TableCell>
                       <TableCell align="center">{row.type}</TableCell>
