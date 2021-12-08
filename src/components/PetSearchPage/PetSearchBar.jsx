@@ -81,13 +81,13 @@ export default function PetSearchBar(props) {
           {/* TODO: change button css */}
           {/* TODO: Onclick change color */}
           {/* TODO: hover change color */}
-          <IconButton value="catButton" size="large" edge="start" sx={{mr: 1}} onClick={() => {setType("Cat")}}>
+          <IconButton color={type === "Cat" ? "secondary" : undefined} value="catButton" size="large" edge="start" sx={{mr: 1}} onClick={() => {setType("Cat")}}>
             <FaCat />
           </IconButton>
           
           <Divider orientation="vertical" variant="middle" flexItem light />
           {/* Dog */}
-          <IconButton value="dogButton" size="large" edge="start" sx={{mr: 2, ml:0.8}} onClick={() => {setType("Dog")}}>
+          <IconButton color={type === "Dog" ? "secondary" : undefined} value="dogButton" size="large" edge="start" sx={{mr: 2, ml:0.8}} onClick={() => {setType("Dog")}}>
             <FaDog />
           </IconButton>
 

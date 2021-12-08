@@ -25,6 +25,22 @@ const useStyles = makeStyles({
     minWidth: 300,
     marginTop: 50,
   },
+  cardContainerStyle: {
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-evenly",
+    alignContent: "space-around",
+    marginTop: 30,
+  },
+  fabStyle: {
+    margin: 0,
+    top: 'auto',
+    right: 20,
+    bottom: 20,
+    left: 'auto',
+    position: 'fixed',
+  }
 });
 
 export default function PetSearchPage() {
@@ -32,7 +48,13 @@ export default function PetSearchPage() {
   const [checkBoxOptions, setCheckBoxOptions] = React.useState({});
   const [type, setType] = React.useState("Cat");
   const [location, setLocation] = React.useState("");
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const handleChange = (event, value) => {
+    setCurrentPage(value);
+  };
 
+  // Store data
+  const [data, setData] = React.useState([]);
 
   // TODO: Make a select bar for user to decide pagesize
   const styles = useStyles();
@@ -40,21 +62,17 @@ export default function PetSearchPage() {
   React.useEffect(() => {
     const params = {};
     
-    Object.entries(checkBoxOptions).map(([key, entry]) => {
+    Object.entries(checkBoxOptions).forEach(([key, entry]) => {
       params[key] = [...entry]
     })
-    console.log(params);
 
     params["type"] = type;
     params["location"] = location;
 
-    console.log(params);
-
-    
-    getPetSearch(params, currentPage, 100).then(resp => resp.json()).then(resp => {
-      console.log(resp);
+    getPetSearch(params, currentPage, 25).then(resp => resp.json()).then(resp => {
+      setData(resp.results);
     })
-  }, [checkBoxOptions, type]);
+  }, [checkBoxOptions, type, currentPage, location]);
 
   // Drawer
   const [state, setState] = React.useState({Menu: false});
@@ -69,28 +87,21 @@ export default function PetSearchPage() {
     setState({...state, [anchor]: open});
   };
 
-  const [currentPage, setCurrentPage] = React.useState(1);
-  const handleChange = (event, value) => {
-    setCurrentPage(value);
-  };
-
   return (
     <div>
       <PetSearchBar type={type} setType={setType} location={location} setLocation={setLocation}/>
-      <div className="pet-search-card">
-        <Grid container>
-          <Grid item>
-            <PetSearchCard />
-          </Grid>
-        </Grid>
+      <div className={styles.cardContainerStyle}>      
+        {
+        data.map(row => 
+          <PetSearchCard key={row.id} data={row}/>)
+        }
       </div>
       <div className={styles.root}>
-        <Box>
-          {/* TODO: uncomment this after finish the page */}
-          {/* <Fab>
+        <Box className={styles.fabStyle}>
+          {console.log(styles)}
+          <Fab className={styles.fabStyle} aria-label="Menu" onClick={toggleDrawer("Menu", true)}>
             <GrSearchAdvanced />
-          </Fab> */}
-          <Button onClick={toggleDrawer("Menu", true)}>Menu</Button>
+          </Fab>
           <Drawer
             anchor="left"
             open={state.Menu}
@@ -101,7 +112,7 @@ export default function PetSearchPage() {
             }}
           >
             <List>
-              <PetSearchEngine checkBoxOptions={checkBoxOptions} setCheckBoxOptions={setCheckBoxOptions}/>
+              <PetSearchEngine type={type} checkBoxOptions={checkBoxOptions} setCheckBoxOptions={setCheckBoxOptions}/>
             </List>
           </Drawer>
         </Box>

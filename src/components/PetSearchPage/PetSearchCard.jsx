@@ -1,4 +1,3 @@
-import React from "react";
 import Card from "@mui/material/Card";
 import {
   CardHeader,
@@ -8,8 +7,6 @@ import {
   Typography,
   IconButton,
 } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import Collapse from "@mui/material/Collapse";
 import Avatar from "@mui/material/Avatar";
 import Chip from "@mui/material/Chip";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -17,8 +14,8 @@ import {RiHeart3Fill, RiHomeHeartLine} from "react-icons/ri";
 import {GiCat, GiSittingDog} from "react-icons/gi";
 import MaleIcon from "@mui/icons-material/Male";
 import FemaleIcon from "@mui/icons-material/Female";
-import { getPetSearch } from "../../fetcher";
 
+// TODO: kill this
 const dataDemo = [
   createData(
     "Cat",
@@ -96,37 +93,21 @@ function createData(
   };
 }
 
-function fetchPetSearchData() {
-  getPetSearch({}, 1, 1)
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((e) => {
-      console.log(e);
-    });
-}
 
-export default function PetSearchCard() {
-  const [expanded, setExpanded] = React.useState(false);
-  const handleExpandedClick = () => {
-    setExpanded(!expanded);
-  };
-
-  return (
-    // TODO: Change the data demo to real data
-    <Card sx={{margin: 1, minWidth: 250, maxWidth: 345}}>
+export default function PetSearchCard(props) {
+  const dataRow = props.data;
+  return <Card sx={{margin: 1, width: 280}}>
       <CardHeader
-        // Name
-        title={dataDemo[0].name}
+        title={dataRow.name}
         // Breed?
-        subheader={dataDemo[0].breed}
+        subheader={dataRow.breed}
         // TODO: add img
         avatar={
           <Avatar
-            alt={dataDemo[0].type === "Cat" ? "Cat" : "Dog"}
+            alt={dataRow.type === "Cat" ? "Cat" : "Dog"}
             sx={{bgcolor: "#ef6694"}}
           >
-            {dataDemo[0].type === "Cat" ? <GiCat /> : <GiSittingDog />}
+            {dataRow.type === "Cat" ? <GiCat /> : <GiSittingDog />}
           </Avatar>
         }
         action={
@@ -139,16 +120,16 @@ export default function PetSearchCard() {
       <CardMedia
         component="img"
         height="225"
-        image={dataDemo[0].photo}
-        alt="cat name"
+        image={dataRow.photo}
+        alt={dataRow.name}
       />
       <CardContent>
         {/* Gender */}
 
         {/* Ugly */}
         <Chip
-          icon={dataDemo[0].gender === "Male" ? <MaleIcon /> : <FemaleIcon />}
-          label={dataDemo[0].gender}
+          icon={dataRow.gender === "Male" ? <MaleIcon /> : <FemaleIcon />}
+          label={dataRow.gender}
           variant="outlined"
           sx={{
             background: dataDemo[0].gender === "Male" ? "#afdcec" : "#ffc0cb",
@@ -167,6 +148,5 @@ export default function PetSearchCard() {
           <RiHomeHeartLine />
         </IconButton>
       </CardActions>
-    </Card>
-  );
+    </Card>;
 }

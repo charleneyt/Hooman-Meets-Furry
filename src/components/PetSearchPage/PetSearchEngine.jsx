@@ -3,11 +3,11 @@ import Stack from "@mui/material/Stack";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
-
 import {FormControlLabel, FormGroup, Typography} from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import {produce} from "immer";
 
+// TODO: color demo, coat length, breed
 const catDataDemo = [
   {breed: "Domestic Short Hair"},
   {breed: "Bombay"},
@@ -30,9 +30,8 @@ const catColorDemo = [
   "Red",
 ];
 
-// TODO: dog has more wire curly but i just want to add it 
 const catCoatLengthOptions = ["Hairless", "Short", "Medium", "Long"];
-const dogCoarLengthOptions = ["Hairless", "Short", "Medium", "Long", "Wire", "Curly"]
+const dogCoatLengthOptions = ["Hairless", "Short", "Medium", "Long", "Wire", "Curly"]
 
 const checkBoxConfigs = {
   age: {
@@ -87,8 +86,8 @@ const checkBoxConfigs = {
 }
 
 export default function PetSearchEngine(props) {
-  const {checkBoxOptions, setCheckBoxOptions} = props;
-
+  const {checkBoxOptions, setCheckBoxOptions, type} = props;
+  
   const setCheckBoxState = (settingName, attributeName) => (event) => {
     const newState = produce((checkBoxOptions) => {
       if (event.target.checked) {
@@ -115,12 +114,7 @@ export default function PetSearchEngine(props) {
     setChecked([event.target.checked, checked[1]]);
     console.log(event.target.checked, checked[1])
   };
-
   const [checked, setChecked] = React.useState(true);
-
-  const handleChange = (event) => {
-    setChecked(event.target.checked);
-  };
 
   const generateCheckboxes = (configKey) => {
     const config = checkBoxConfigs[configKey];
@@ -151,7 +145,6 @@ export default function PetSearchEngine(props) {
             id="catBreed"
             options={catDataDemo}
             getOptionLabel={(option) => option.breed}
-            // renderTags?
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -233,14 +226,14 @@ export default function PetSearchEngine(props) {
             multiple
             id="pet-coat-select"
             // TODO: if dog is selected then need to change the coat
-            options={catCoatLengthOptions}
+            options={type === "Cat" ? catCoatLengthOptions : dogCoatLengthOptions}
             getOptionLabel={(option) => option}
             // renderTags?
             renderInput={(params) => (
               <TextField
                 {...params}
                 variant="standard"
-                label="Select coat length"
+                label="Select Coat Length"
                 placeholder="Coat length"
               />
             )}
