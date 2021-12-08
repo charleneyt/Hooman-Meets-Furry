@@ -5,7 +5,7 @@ import Switch from '@mui/material/Switch';
 
 
 // TODO: Change background color
-const CatDogSwitch = styled(Switch)(({ theme }) => ({
+const CatDogSelectSwitch = styled(Switch)(({ theme }) => ({
   width: 62,
   height: 34,
   padding: 7,
@@ -49,7 +49,7 @@ const CatDogSwitch = styled(Switch)(({ theme }) => ({
 }));
 
 
-export default function BreedRaterSwitch(props) {
+export default function CatDogSwitch(props) {
   const {type, setType} = props;
   const handleChangeType = (event) => {
     if (type === "Cat") {
@@ -60,6 +60,6 @@ export default function BreedRaterSwitch(props) {
   };
 
   return (
-<CatDogSwitch sx={{ m: 1 }}  defaultChecked onChange={handleChangeType}/>
+<CatDogSelectSwitch sx={{ m: 1 }}  defaultChecked onChange={handleChangeType}/>
   );
 }
