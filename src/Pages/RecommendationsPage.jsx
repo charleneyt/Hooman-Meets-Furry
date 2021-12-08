@@ -1,11 +1,12 @@
 import React from "react";
 import RecCard from "../components/ReccomendationPage/RecCard";
-import BreedRaterSwitch from "../components/BreedRaterPage/BreedRaterSwitch";
+import CatDogSwitch from "../components/utils/CatDogSwitch";
 import { getRecommend } from "../fetcher";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import Grid from '@mui/material/Grid';
 
 // TODO: refactor the breed rater page
 
@@ -32,7 +33,6 @@ export default function RecommendationsPage() {
   // data and setData
   const [data, setData] = React.useState([]);
 
-
   const handleChangeFeature = (event) => {
     setFeature(event.target.value);
   };
@@ -57,7 +57,7 @@ export default function RecommendationsPage() {
     <div>
       {/* TODO: icon bigger, add colors, or even change the icon */}
       <div className="select-type">
-        <BreedRaterSwitch type={type} setType={setType}/>
+        <CatDogSwitch type={type} setType={setType}/>
       </div>
       <div>
       {/* Select Bar */}
@@ -78,31 +78,19 @@ export default function RecommendationsPage() {
           ))}
         </Select>
       </FormControl>
-    
-        <RecCard />
       </div>
 
       {/* Recommending cards */}
-      {/* TODO: implement card and uncoment this */}
-      {/* <div>
+  
+      <div>
         <Grid container spacing={1}>
+          {data.map(row =>           
           <Grid item xs={12} sm={6} md={2.4}>
-            <Card />
-          </Grid>
-          <Grid item xs={12} sm={6} md={2.4}>
-            <Card />
-          </Grid>
-          <Grid item xs={12} sm={6} md={2.4}>
-            <Card />
-          </Grid>
-          <Grid item xs={12} sm={6} md={2.4}>
-            <Card />
-          </Grid>
-          <Grid item xs={12} sm={6} md={2.4}>
-            <Card />
-          </Grid>
+            <RecCard key={row.id}  data={row}/>
+          </Grid>)}
+          
         </Grid>
-      </div> */}
+      </div>
     </div>
   );
 }

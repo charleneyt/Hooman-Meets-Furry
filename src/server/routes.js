@@ -286,7 +286,7 @@ async function recommend(req, res) {
             SELECT DISTINCT ${input_feature} FROM Breeds_Rating ORDER BY ${input_feature} DESC LIMIT 2), 
             Breeds_Name AS (
             SELECT breed_name FROM Breeds_Rating WHERE ${input_feature} IN (SELECT * FROM Temp))
-            SELECT P.id, P.organization_id, type, breed, color, age, gender, P.name, P.photo, O.city AS location
+            SELECT P.id AS id, P.organization_id, type, breed, color, age, gender, P.name, P.photo, O.city AS location
             FROM Pet P
             JOIN Breeds_Name BN on P.breed = BN.breed_name
             JOIN Organization O on P.organization_id = O.id

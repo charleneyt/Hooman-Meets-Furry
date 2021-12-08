@@ -1,7 +1,7 @@
 import React from "react";
 import BreedRaterTable from "../components/BreedRaterPage/BreedRaterTable";
 import BreedRateSelectBar from "../components/BreedRaterPage/BreedRaterSelectBar";
-import BreeRaterSwitch from "../components/BreedRaterPage/BreedRaterSwitch"
+import CatDogSwitch from "../components/utils/CatDogSwitch"
 import { getTopTen } from "../fetcher";
 
 
@@ -36,7 +36,7 @@ export default function BreedRaterPage() {
         }}
       >
         <BreedRateSelectBar feature={feature} setFeature={setFeature}/>
-        <BreeRaterSwitch type={type} setType={setType}/>
+        <CatDogSwitch type={type} setType={setType}/>
         <BreedRaterTable data={data}/>
         
       </div>
