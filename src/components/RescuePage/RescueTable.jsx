@@ -92,6 +92,8 @@ const rows = [
   ),
 ];
 
+console.log(rows);
+
 const headCells = [
   {
     id: "name",

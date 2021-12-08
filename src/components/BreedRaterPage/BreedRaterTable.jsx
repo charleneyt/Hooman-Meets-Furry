@@ -96,8 +96,6 @@ const BreedRaterTable = createTable((rows, dense, order, orderBy, page, rowsPerP
             onRequestSort={handleRequestSort}
           />
           <TableBody>
-            {/* if you don't need to support IE11, you can replace the `stableSort` call with:
-                 rows.slice().sort(getComparator(order, orderBy)) */}
             {stableSort(rows, getComparator(order, orderBy))
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row, index) => {
@@ -106,6 +104,7 @@ const BreedRaterTable = createTable((rows, dense, order, orderBy, page, rowsPerP
                   <TableRow role="checkbox" tabIndex={-1} key={row.name}>
                     <TableCell>{row.rank}</TableCell>
                     <ImageTableCell id={labelId} scope="row" padding="none">
+                      {/* TODO: Image height weight */}
                       {/* TODO: Make a placeholder if row.pic not exist */}
                       <img src={row.photo} alt={row.breed_name} height="200"/>
                     </ImageTableCell>

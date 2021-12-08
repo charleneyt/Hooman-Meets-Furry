@@ -20,7 +20,12 @@ async function pet_search(req, res) {
   // If string not empty and not undefined
   function pushIfDefined(fieldName, queryField) {
     if (queryField && queryField !== "undefined") {
-      params.push(`${fieldName} LIKE '%${queryField}%'`);
+      const fields = queryField.split(",");
+      const queries = fields.map(
+        (field) => `LOWER(${fieldName}) LIKE '%${field.toLowerCase()}%'`
+      );
+      console.log(`(${queries.join(" OR ")})`);
+      params.push(`(${queries.join(" OR ")})`);
     }
   }
 
