@@ -1,25 +1,21 @@
 /* eslint-disable jsx-a11y/label-has-associated-control, jsx-a11y/label-has-for */
 import React from "react";
-
 import {FormGroup} from "@mui/material";
 import {Form, FormInput, Button} from "shards-react";
-
 import {Row, Col} from "antd";
-import {getRescues, getSearchRescues} from "../fetcher";
+import {getSearchRescues} from "../fetcher";
 
 import RescueTable from "../components/RescuePage/RescueTable";
 
 function RescuePageSelector(props) {
+  const {setRescueResults} = props;
   const {state: stateQuery, setState: setStateQuery, city: cityQuery, setCity: setCityQuery} = props;
-  const selectedRescueId = window.location.search
-    ? window.location.search.substring(1).split("=")[1]
-    : 0;
-  const [selectedRescueDetails, setSelectedRescueDetails] =
-    React.useState(null);
-  const [rescueResults, setRescueResults] = React.useState([]);
-
-  console.log(selectedRescueDetails, rescueResults)
-
+  // const selectedRescueId = window.location.search
+  //   ? window.location.search.substring(1).split("=")[1]
+  //   : 0;
+  // const [selectedRescueDetails, setSelectedRescueDetails] =
+  //   React.useState();
+  
   const handleCityQueryChange = (event) => {
     setCityQuery(event.target.value);
   };
@@ -29,20 +25,11 @@ function RescuePageSelector(props) {
   };
 
   const updateSearchResults = () => {
-    getSearchRescues(cityQuery, stateQuery, null, null).then((res) => {
-      setRescueResults(res.results);
+    getSearchRescues(cityQuery, stateQuery, null, null).then(resp => resp.json()).then(resp => {
+      setRescueResults(resp.results);
     });
   };
 
-  React.useEffect(() => {
-    getSearchRescues(cityQuery, stateQuery, null, null).then((res) => {
-      setRescueResults(res.results);
-    });
-
-    getRescues(selectedRescueId).then((res) => {
-      setSelectedRescueDetails(res.results[0]);
-    });
-  }, [cityQuery, selectedRescueId, stateQuery]);
 
   return (
     <div>
@@ -61,6 +48,7 @@ function RescuePageSelector(props) {
           </Col>
           <Col flex={2}>
             <FormGroup style={{width: "20vw", margin: "0 auto"}}>
+              {/* TODO: add select to state */}
               <label>State</label>
               <FormInput
                 placeholder="State"
@@ -83,18 +71,14 @@ function RescuePageSelector(props) {
 }
 
 export default function RescuePage() {
-
-  const [city, setCity] = React.useState("")
-  const [state, setState] = React.useState("")
-  
+  const [state, setState] = React.useState("");
+  const [city, setCity] = React.useState("");
+  const [rescueResults, setRescueResults] = React.useState([]);
 
   return (
     <div>
       <RescuePageSelector 
-        city={city}
-        setCity={setCity}
-        state={state}
-        setState={setState}
+        setRescueResults={setRescueResults} city={city} setCity={setCity} state={state} setState={setState}
       />
       <div
         style={{
@@ -104,7 +88,7 @@ export default function RescuePage() {
           marginTop: "5vh",
         }}
       >
-        <RescueTable />
+        <RescueTable data={rescueResults}/>
       </div>
     </div>
   );

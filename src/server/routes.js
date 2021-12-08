@@ -158,25 +158,25 @@ async function rescues(req, res) {
 // Return an array of selected attributes for rescues that match the search query
 // Return an array with all rescues that match the constraints. If no rescue satisfies the constraints, return an empty array without causing an error
 async function search_rescues(req, res) {
-  const city = req.query.City;
-  const state = req.query.State;
+  const city = req.query.city;
+  const state = req.query.state;
 
   // we want to push the query string inside this array
   const params = [];
 
   // check these two parameters if they are empty/undefined
   if (city && city !== "undefined") {
-    params.push(`O.city LIKE '%${city}%'`);
+    params.push(`O.City LIKE '%${city}%'`);
   }
   if (state && state !== "undefined") {
-    params.push(`O.state LIKE '%${state}%'`);
+    params.push(`O.State LIKE '%${state}%'`);
   }
 
   // then we want to check if the params length is 0
   // if it is 0 then we don't want to add anything
   // if it is over 0 we want to add a "WHERE" for start
   // and join each string with "AND"
-  const whereQuery = params.length ? `WHERE ${params.join(" AND ")}` : "";
+  const whereQuery = params.length ? `WHERE ${params.join(" OR ")}` : "";
 
   // pagination
   let pageLimitString = "";
@@ -191,7 +191,7 @@ async function search_rescues(req, res) {
 
   connection.query(
     `
-                SELECT P.organization_id, O.name, O.address, O.city AS location, O.email, type, COUNT(*) AS num
+                SELECT P.organization_id, O.name, O.address, O.city AS city, O.state AS state, O.email, type, COUNT(*) AS num
                 FROM Organization O JOIN Pet P on P.organization_id = O.id
                 ${whereQuery}
                 GROUP BY P.organization_id, O.name, O.address, O.city, O.email, type

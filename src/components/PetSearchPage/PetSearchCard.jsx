@@ -48,8 +48,9 @@ export default function PetSearchCard(props) {
       <CardContent>
         {/* TODO: fix css */}
         {/* Add location? */}
-      <Typography>
-      {dataRow.age} {dataRow.name} 
+      <Typography> 
+      {dataRow.age} 
+       {dataRow.name} 
         </Typography>
         <Typography>
           {dataRow.gender === "Male" ? <MaleIcon /> : <FemaleIcon />}
