@@ -30,20 +30,31 @@ const useStyles = makeStyles({
 export default function PetSearchPage() {
   // Fetch data and set data hoooks
   const [checkBoxOptions, setCheckBoxOptions] = React.useState({});
+  const [type, setType] = React.useState("Cat");
+  const [location, setLocation] = React.useState("");
+
 
   // TODO: Make a select bar for user to decide pagesize
   const styles = useStyles();
   
   React.useEffect(() => {
     const params = {};
+    
     Object.entries(checkBoxOptions).map(([key, entry]) => {
       params[key] = [...entry]
     })
-    console.log(params)
+    console.log(params);
+
+    params["type"] = type;
+    params["location"] = location;
+
+    console.log(params);
+
+    
     getPetSearch(params, currentPage, 100).then(resp => resp.json()).then(resp => {
-      console.log(resp)
+      console.log(resp);
     })
-  }, [checkBoxOptions]);
+  }, [checkBoxOptions, type]);
 
   // Drawer
   const [state, setState] = React.useState({Menu: false});
@@ -65,7 +76,7 @@ export default function PetSearchPage() {
 
   return (
     <div>
-      <PetSearchBar />
+      <PetSearchBar type={type} setType={setType} location={location} setLocation={setLocation}/>
       <div className="pet-search-card">
         <Grid container>
           <Grid item>

@@ -2,7 +2,6 @@ import React from "react";
 
 export function createTable(renderFunc) {
   return (props) => {
-    console.log("AAAA", props.data);
     const [order, setOrder] = React.useState("asc");
     const [orderBy, setOrderBy] = React.useState("rank");
     const [page, setPage] = React.useState(0);

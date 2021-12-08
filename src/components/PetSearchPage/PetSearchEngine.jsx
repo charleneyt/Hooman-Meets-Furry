@@ -30,10 +30,9 @@ const catColorDemo = [
   "Red",
 ];
 
-// TODO: dog has a different one
+// TODO: dog has more wire curly but i just want to add it 
 const catCoatLengthOptions = ["Hairless", "Short", "Medium", "Long"];
-
-const petAge = ["Baby", "Young", "Adult", "Senior"];
+const dogCoarLengthOptions = ["Hairless", "Short", "Medium", "Long", "Wire", "Curly"]
 
 const checkBoxConfigs = {
   age: {
@@ -44,9 +43,45 @@ const checkBoxConfigs = {
       "senior": "Senior"
     }
   },
+  gender: {
+    options: {
+      "male": "Male",
+      "female": "Female"
+    }
+  },
   spayed_neutered: {
     options: {
       "TRUE": "Spayed-neutered"
+    }
+  },
+  house_trained: {
+    options: {
+      "TRUE": "Housed-trained"
+    }
+  }, 
+  special_needs: {
+    options: {
+      "TRUE": "Special Needs"
+    }
+  },
+  shots_current: {
+    options: {
+      "TRUE": "Current Shots"
+    }
+  },
+  children_friendly: {
+    options: {
+      "TRUE": "Children-friendly"
+    }
+  },
+  dogs_friendly: {
+    options: {
+      "TRUE": "Dogs-friendly"
+    }
+  },
+  cats_friendly: {
+    options: {
+      "TRUE": "Cats-friendly"
     }
   }
 }
@@ -156,21 +191,11 @@ export default function PetSearchEngine(props) {
             )}
           />
         </Box>
+        {/* Gender */}
         <Box sx={{margin: 1, marginTop: 0, marginBottom: 0}}>
           <FormGroup sx={{flexDirection: "row", alignItems: "center"}}>
             <Typography> Gender: &nbsp;</Typography>
-            <FormControlLabel
-              control={
-                <Checkbox onChange={handleCheckedBoxChange} name="baby" />
-              }
-              label="Male"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox onChange={handleCheckedBoxChange} name="young" />
-              }
-              label="Female"
-            />
+            {generateCheckboxes('gender')}
           </FormGroup>
         </Box>
         <Box sx={{margin: 1, marginTop: 0, marginBottom: 0}}>
@@ -221,63 +246,16 @@ export default function PetSearchEngine(props) {
             )}
           />
         </Box>
+        {/* Check boxes for attributes */}
         <Box sx={{margin: 1, marginTop: 0, marginBottom: 0}}>
           <FormGroup sx={{flexDirection: "row"}}>
             {generateCheckboxes('spayed_neutered')}
-            <FormControlLabel
-              control={
-                <Checkbox
-                  onChange={handleCheckedBoxChange}
-                  name="house-trained"
-                />
-              }
-              label="House-trained"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  onChange={handleCheckedBoxChange}
-                  name="special-needs"
-                />
-              }
-              label="Special Needs"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  onChange={handleCheckedBoxChange}
-                  name="shots-current"
-                />
-              }
-              label="Current Shots"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  onChange={handleCheckedBoxChange}
-                  name="children-friendly"
-                />
-              }
-              label="Children-friendly"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  onChange={handleCheckedBoxChange}
-                  name="Dogs-friendly"
-                />
-              }
-              label="Dogs-friendly"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  onChange={handleCheckedBoxChange}
-                  name="Cats-friendly"
-                />
-              }
-              label="Cats-friendly"
-            />
+            {generateCheckboxes('house_trained')}
+            {generateCheckboxes('special_needs')}
+            {generateCheckboxes('shots_current')}
+            {generateCheckboxes('children_friendly')}
+            {generateCheckboxes('dogs_friendly')}
+            {generateCheckboxes('cats_friendly')}
           </FormGroup>
         </Box>
       </Stack>
