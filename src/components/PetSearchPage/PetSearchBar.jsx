@@ -9,7 +9,7 @@ import {HiOutlineLocationMarker} from "react-icons/hi";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import Divider from "@mui/material/Divider";
-import { ConstructionOutlined } from "@mui/icons-material";
+
 
 
 // Search bar theme
@@ -60,7 +60,7 @@ const StyledInputBase = styled(InputBase)(({theme}) => ({
 
 
 export default function PetSearchBar(props) {
-  const {type, setType, location, setLocation} = props; 
+  const {type, setType, setLocation} = props; 
   const [value, setValue] = React.useState("");
   
 

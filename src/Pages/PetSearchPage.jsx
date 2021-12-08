@@ -1,9 +1,8 @@
 import React from "react";
 import {makeStyles} from "@mui/styles";
 import Drawer from "@mui/material/Drawer";
-import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import {List, Grid, Typography} from "@mui/material";
+import {List, Typography} from "@mui/material";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import Fab from "@mui/material/Fab";
@@ -44,11 +43,14 @@ const useStyles = makeStyles({
 });
 
 export default function PetSearchPage() {
-  // Fetch data and set data hoooks
+  // Fetch data and set data hooks
   const [checkBoxOptions, setCheckBoxOptions] = React.useState({});
   const [type, setType] = React.useState("Cat");
   const [location, setLocation] = React.useState("");
   const [currentPage, setCurrentPage] = React.useState(1);
+  // TODO: complete select options after query implemented
+  const [selectOptions, setSelectOptions] = React.useState({});
+
   const handleChange = (event, value) => {
     setCurrentPage(value);
   };
@@ -98,7 +100,6 @@ export default function PetSearchPage() {
       </div>
       <div className={styles.root}>
         <Box className={styles.fabStyle}>
-          {console.log(styles)}
           <Fab className={styles.fabStyle} aria-label="Menu" onClick={toggleDrawer("Menu", true)}>
             <GrSearchAdvanced />
           </Fab>
@@ -112,7 +113,7 @@ export default function PetSearchPage() {
             }}
           >
             <List>
-              <PetSearchEngine type={type} checkBoxOptions={checkBoxOptions} setCheckBoxOptions={setCheckBoxOptions}/>
+              <PetSearchEngine type={type} checkBoxOptions={checkBoxOptions} setCheckBoxOptions={setCheckBoxOptions} selectOptions={selectOptions} setSelectOptions={setSelectOptions}/>
             </List>
           </Drawer>
         </Box>
