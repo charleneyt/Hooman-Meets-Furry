@@ -10,6 +10,7 @@ import RecommendationsPage from "./Pages/RecommendationsPage";
 import RescuePage from "./Pages/RescuePage";
 import PetComparePage from "./Pages/PetComparePage";
 import BreedRaterPage from "./Pages/BreedRaterPage";
+import PetSimilarPage from "./Pages/PetSimilarPage";
 
 const theme = createTheme({
   palette: {
@@ -34,6 +35,7 @@ function App() {
               <Route path="rescue_search" element={<RescuePage />} />
               <Route path="breed_rater" element={<BreedRaterPage />} />
               <Route path="compare" element={<PetComparePage />} />
+              <Route path="similar" element={<PetSimilarPage />} />
             </Routes>
           </div>
         </BrowserRouter>

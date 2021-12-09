@@ -16,12 +16,6 @@ function Navbar() {
 
   return (
     <nav className="NavBarItems">
-      {/* <h1 className="navbar-logo">
-        <div className="navbar-logo-content">Pet Web App</div>
-        <div className="navbar-logo-content">
-          <i className="fas fa-paw" />
-        </div>
-      </h1> */}
       <div className="menu-icon" onClick={handleClick}>
         <i className={clicked ? "fas fa-window-close" : "fas fa-bars"} />
       </div>
