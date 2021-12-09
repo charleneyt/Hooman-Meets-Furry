@@ -49,12 +49,10 @@ export const getRecommend = async (feature, type, page, pagesize) => {
 
 // 5294
 export const getRescues = async (id) => {
-  const res = await fetch(
+  return fetch(
     `http://${config.server_host}:${config.server_port}/rescues?id=${id}`,
     {method: "GET"}
   );
-
-  return res.json();
 };
 
 export const getSearchRescues = (city, state, page, pagesize) => {
@@ -77,30 +75,23 @@ export const getTopTen = (type, feature) => {
 
 // 0
 export const getCompare = async (username) => {
-  const res = await fetch(
+  return fetch(
     `http://${config.server_host}:${config.server_port}/compare/username?=${username}`,
     {method: "GET"}
   );
-
-  return res.json();
 };
 
 // 0
 export const getSimilar = async (username, type, page, pagesize) => {
-  const res = await fetch(
+  return fetch(
     `http://${config.server_host}:${config.server_port}/get_similar?username=${username}&type=${type}&page=${page}&pagesize=${pagesize}`,
     {method: "GET"}
   );
-
-  return res.json();
 };
 
-// 0
-export const getUserLogin = async (email, password) => {
-  const res = await fetch(
-    `http://${config.server_host}:${config.server_port}/user_login?email=${email}$password=${password}`,
+export const getUserLogin = (email, password) => {
+  return fetch(
+    `http://${config.server_host}:${config.server_port}/user_login?email=${email}&password=${password}`,
     {method: "GET"}
   );
-
-  return res.json();
 };

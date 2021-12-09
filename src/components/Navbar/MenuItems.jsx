@@ -30,9 +30,9 @@ export const MenuItems = [
     url: "/compare",
     cName: "nav-links",
   },
-  // {
-  //   title: "Sign up",
-  //   url: "#",
-  //   cName: "nav-links-mobile",
-  // },
+  {
+    title: "Similar Pets",
+    url: "/similar",
+    cName: "nav-links"
+  }
 ];
