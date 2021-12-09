@@ -176,7 +176,7 @@ async function search_rescues(req, res) {
   // if it is 0 then we don't want to add anything
   // if it is over 0 we want to add a "WHERE" for start
   // and join each string with "AND"
-  const whereQuery = params.length ? `WHERE ${params.join(" OR ")}` : "";
+  const whereQuery = params.length ? `WHERE ${params.join(" AND ")}` : "";
 
   // pagination
   let pageLimitString = "";
