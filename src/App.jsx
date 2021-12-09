@@ -1,4 +1,4 @@
-import React from "react";
+import UserBar from "./components/Navbar/UserBar"
 import "./App.css";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import {createTheme, ThemeProvider} from "@mui/material/styles";
@@ -21,6 +21,7 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <BrowserRouter>
+          <UserBar />
           <Navbar />
           <div id="content">
             <Routes>

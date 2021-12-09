@@ -2,7 +2,6 @@
 import React from "react";
 import {MenuItems} from "./MenuItems";
 import {Link} from "react-router-dom";
-
 import "./Navbar.css";
 
 const linkStyle = {
@@ -17,12 +16,12 @@ function Navbar() {
 
   return (
     <nav className="NavBarItems">
-      <h1 className="navbar-logo">
+      {/* <h1 className="navbar-logo">
         <div className="navbar-logo-content">Pet Web App</div>
         <div className="navbar-logo-content">
           <i className="fas fa-paw" />
         </div>
-      </h1>
+      </h1> */}
       <div className="menu-icon" onClick={handleClick}>
         <i className={clicked ? "fas fa-window-close" : "fas fa-bars"} />
       </div>
