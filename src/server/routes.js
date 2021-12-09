@@ -407,7 +407,7 @@ async function user_login(req, res) {
   const email = req.query.email ? req.query.email : "testemail@gmail.com";
   const password = req.query.password ? req.query.password : "testpassword";
 
-  const q = `SELECT username
+  const q = `SELECT username, email
     FROM User
     WHERE email = '${email}' AND password = '${password}';`;
 

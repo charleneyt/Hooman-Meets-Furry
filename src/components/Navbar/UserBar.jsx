@@ -13,6 +13,7 @@ import MenuItem from '@mui/material/MenuItem';
 import {MdPets} from "react-icons/md"
 import {BsHeartFill} from "react-icons/bs"
 import {FiUserPlus} from "react-icons/fi"
+import LoginPage from "../../Pages/LoginPage";
 
 
 
@@ -23,6 +24,7 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 const UserLoginBar = (props) => {
   const {auth, setAuth} = props;
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [open, setOpen] = React.useState(false); 
   // See if user is logged in 
 
   const handleOpenUserMenu = (event) => {
@@ -31,11 +33,21 @@ const UserLoginBar = (props) => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  const handleSignUpClicked = () => {setOpen(true)};
+  
+  const handleSignUpClose = () => {setOpen(false)};
+
 
 // Buttons
-  const notLoggedIn = (<Button variant="contained" size="small" startIcon={<FiUserPlus />} style={{boxShadow: "none", backgroundImage: "linear-gradient(to right, #fbc2eb 0%, #a6c1ee 51%, #fbc2eb 100%)"}}>
-  Sign Up
-  </Button>)
+  const notLoggedIn = (
+    <Box>
+  <Button variant="contained" size="small" onClick = {handleSignUpClicked} startIcon={<FiUserPlus />} style={{boxShadow: "none", backgroundImage: "linear-gradient(to right, #fbc2eb 0%, #a6c1ee 51%, #fbc2eb 100%)"}}>
+  Sign Up / Login
+  </Button>
+  <LoginPage open={open} setOpen={setOpen} setAuth={setAuth} onClose={handleSignUpClose} />
+  </Box>
+  )
+
 
   const loggedIn = (<Box sx={{ flexGrow: 0 }}>
     <IconButton >
@@ -46,7 +58,6 @@ const UserLoginBar = (props) => {
           <Avatar alt="User" src="https://img.icons8.com/pastel-glyph/100/000000/dog-muzzle.png" sx={{ bgcolor: "#FED8B1" }}/>
         </IconButton>
       </Tooltip>
-
       <Menu
         sx={{ mt: '45px' }}
         id="menu-appbar"

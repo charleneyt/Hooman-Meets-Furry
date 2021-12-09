@@ -95,12 +95,9 @@ export const getSimilar = async (username, type, page, pagesize) => {
   return res.json();
 };
 
-// 0
-export const getUserLogin = async (email, password) => {
-  const res = await fetch(
-    `http://${config.server_host}:${config.server_port}/user_login?email=${email}$password=${password}`,
+export const getUserLogin = (email, password) => {
+  return fetch(
+    `http://${config.server_host}:${config.server_port}/user_login?email=${email}&password=${password}`,
     {method: "GET"}
   );
-
-  return res.json();
 };
