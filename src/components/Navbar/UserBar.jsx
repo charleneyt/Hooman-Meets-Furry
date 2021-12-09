@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from "react";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -11,33 +11,77 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import {MdPets} from "react-icons/md"
+import {BsHeartFill} from "react-icons/bs"
+import {FiUserPlus} from "react-icons/fi"
+
+
+
 
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-const ResponsiveAppBar = () => {
+const UserLoginBar = (props) => {
+  const {auth, setAuth} = props;
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+  // See if user is logged in 
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
-
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
 
+// Buttons
+  const notLoggedIn = (<Button variant="contained" size="small" startIcon={<FiUserPlus />} style={{boxShadow: "none", backgroundImage: "linear-gradient(to right, #fbc2eb 0%, #a6c1ee 51%, #fbc2eb 100%)"}}>
+  Sign Up
+  </Button>)
+
+  const loggedIn = (<Box sx={{ flexGrow: 0 }}>
+    <IconButton >
+      <BsHeartFill />
+      </IconButton>
+      <Tooltip title="Open settings">
+        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+          <Avatar alt="User" src="https://img.icons8.com/pastel-glyph/100/000000/dog-muzzle.png" sx={{ bgcolor: "#FED8B1" }}/>
+        </IconButton>
+      </Tooltip>
+
+      <Menu
+        sx={{ mt: '45px' }}
+        id="menu-appbar"
+        anchorEl={anchorElUser}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        keepMounted
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        open={Boolean(anchorElUser)}
+        onClose={handleCloseUserMenu}
+      >
+        {settings.map((setting) => (
+          <MenuItem key={setting} >
+            <Typography textAlign="center">{setting}</Typography>
+          </MenuItem>
+        ))}
+      </Menu>
+    </Box>)
+
   return (
-    // TODO change this theme color
-    <AppBar position="static" style={{backgroundColor: "#FFC0CB"}}>
+    
+    <AppBar  sx={{minHeight: 32}} position="static" style={{backgroundColor: "#FFC0CB"}}>
       <Container >
-        <Toolbar disableGutters>
+        <Toolbar disableGutters={true} variant="dense">
           <MdPets size={26} style={{justifySelf: "start", marginLeft:"20px", display:"flex",  alignItems: "center"}}/>
           <Typography
             noWrap
             component="div"
             // TODO: fix hardcode
-            sx={{ ml: 1, mr: 2, mt: 0.3, display: { xs: 'none', md: 'flex', fontFamily: "Dongle", fontSize: 30 }}}
+            sx={{ ml: 1, mr: 2, display: { xs: 'none', md: 'flex', fontFamily: "Dongle", fontSize: 30 }}}
             style={{display:"flex", alignItems: "flex", justifyContent: 'center'}}
           >
             Hooman Meets Furry
@@ -58,44 +102,14 @@ const ResponsiveAppBar = () => {
           
           {/* When the screen get's larger */}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-          <Typography> I don't know what to put here
+          <Typography> Home? IDK
           </Typography>
           </Box>
-
-          {/* Open user menu bar */}
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              {/* TODO: fix this */}
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="User" src="https://img.icons8.com/pastel-glyph/100/000000/dog-muzzle.png" sx={{ bgcolor: "#FED8B1" }}/>
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} >
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
+          {/* If logged in render the logged in part */}
+          {auth? loggedIn : notLoggedIn}
         </Toolbar>
       </Container>
     </AppBar>
   );
 };
-export default ResponsiveAppBar;
+export default UserLoginBar;

@@ -1,4 +1,5 @@
-import UserBar from "./components/Navbar/UserBar"
+import React from "react";
+import UserLoginBar from "./components/Navbar/UserBar"
 import "./App.css";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import {createTheme, ThemeProvider} from "@mui/material/styles";
@@ -17,11 +18,13 @@ const theme = createTheme({
 });
 
 function App() {
+  const[auth, setAuth] = React.useState(false);
   return (
     <>
       <ThemeProvider theme={theme}>
         <BrowserRouter>
-          <UserBar />
+        
+          <UserLoginBar auth={auth} setAuth={setAuth} />
           <Navbar />
           <div id="content">
             <Routes>
