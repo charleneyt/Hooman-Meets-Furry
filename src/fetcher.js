@@ -55,9 +55,9 @@ export const getRescues = async (id) => {
   );
 };
 
-export const getSearchRescues = (city, state, page, pagesize) => {
+export const getSearchRescues = (city, state, type, page, pagesize) => {
   return fetch(
-    `http://${config.server_host}:${config.server_port}/search/rescues?city=${city}&state=${state}&page=${page}&pagesize=${pagesize}`,
+    `http://${config.server_host}:${config.server_port}/search/rescues?city=${city}&state=${state}&type=${type}&page=${page}&pagesize=${pagesize}`,
     {method: "GET"}
   );
 };
