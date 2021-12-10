@@ -36,6 +36,12 @@ app.get("/get_similar", routes.get_similar);
 // Route g - register as GET
 app.get("/user_login", routes.user_login);
 
+// to get a list of distinct breeds, parameter for dog/cat
+app.get("/get_all_breeds", routes,routes.get_all_breeds);
+
+// to get a list of distinct colors, parameter for dog/cat
+app.get("/get_all_colors", routes,routes.get_all_colors);
+
 app.get("/", (req, res) => {
   // res.send("Server status OK", 404);
   res.status(404).send("Server status OK");

@@ -48,10 +48,12 @@ export default function RecommendationsPage() {
   
   React.useEffect(() => {
     getRecommend(feature, type, page, pageSize).then(resp => resp.json()).then(resp => {
+      
       setData(resp.results);
     })
-  }, [type, feature, page, pageSize]);
 
+    console.log("after change: " + feature + "," + type + "," + page + "," + pageSize);
+  }, [type, feature, page, pageSize]);
 
 
   return (
@@ -73,6 +75,8 @@ export default function RecommendationsPage() {
           value={feature}
           label="Feature"
           onChange={handleChangeFeature}
+          // setFeature={setFeature}
+          // onClick={handleChangeFeature}
         >
           {Object.keys(features).map((key) => (
             <MenuItem key={key} value={key}>{features[key]}</MenuItem>

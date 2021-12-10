@@ -40,7 +40,7 @@ export function getPetSearch(params, page, pagesize) {
 // 0
 export const getRecommend = async (feature, type, page, pagesize) => {
   return fetch(
-    `http://${config.server_host}:${config.server_port}/recommend?feature=${feature}&type=${type}&page=${page}&pagesize=${pagesize}`,
+    `http://${config.server_host}:${config.server_port}/recommend?input_feature=${feature}&type=${type}&page=${page}&pagesize=${pagesize}`,
     {
       method: "GET",
     }
