@@ -160,6 +160,7 @@ async function rescues(req, res) {
 async function search_rescues(req, res) {
   const city = req.query.city;
   const state = req.query.state;
+  const type = req.query.type;
 
   // we want to push the query string inside this array
   const params = [];
@@ -171,11 +172,14 @@ async function search_rescues(req, res) {
   if (state && state !== "undefined") {
     params.push(`O.State LIKE '%${state}%'`);
   }
+  if (type && type !== "undefined") {
+    params.push(`P.type LIKE '%${type}%'`);
+  }
 
   // then we want to check if the params length is 0
   // if it is 0 then we don't want to add anything
   // if it is over 0 we want to add a "WHERE" for start
-  // and join each string with "AND"
+  // and join each string with "AND" // update from OR to AND
   const whereQuery = params.length ? `WHERE ${params.join(" AND ")}` : "";
 
   // pagination
