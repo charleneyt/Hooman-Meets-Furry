@@ -118,7 +118,7 @@ const RescueTable = createTable(
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => {
                   return (
-                    <TableRow role="checkbox" tabIndex={-1} key={row.name}>
+                    <TableRow role="checkbox" tabIndex={-1} key={row.id}>
                       <TableCell align="center">{row.name}</TableCell>
                       <TableCell align="center">{row.address ? row.address : "Not available"}</TableCell>
                       <TableCell align="center">{row.city}</TableCell>
