@@ -9,7 +9,7 @@ import Select from "@mui/material/Select";
 
 import RescueTable from "../components/RescuePage/RescueTable";
 
-const menuItems = {
+const menuItems_state = {
   AL: "AL",
   AK: "AK",
   AZ: "AZ",
@@ -65,9 +65,14 @@ const menuItems = {
   WY: "WY"
 };
 
+const menuItems_type = {
+  Cat: "Cat",
+  Dog: "Dog"
+};
+
 function RescuePageSelector(props) {
   const {setRescueResults} = props;
-  const {state: stateQuery, setState: setStateQuery, city: cityQuery, setCity: setCityQuery} = props;
+  const {state: stateQuery, setState: setStateQuery, city: cityQuery, setCity: setCityQuery, type: typeQuery, setType: setTypeQuery} = props;
   const [open, setOpen] = React.useState(false);
 
   const handleCityQueryChange = (event) => {
@@ -78,8 +83,12 @@ function RescuePageSelector(props) {
     setStateQuery(event.target.value);
   };
 
+  const handleTypeQueryChange = (event) => {
+    setTypeQuery(event.target.value);
+  };
+
   const updateSearchResults = () => {
-    getSearchRescues(cityQuery, stateQuery, null, null).then(resp => resp.json()).then(resp => {
+    getSearchRescues(cityQuery, stateQuery, typeQuery, null, null).then(resp => resp.json()).then(resp => {
       setRescueResults(resp.results);
     });
   };
@@ -106,8 +115,17 @@ function RescuePageSelector(props) {
                 value={stateQuery}
                 onChange={handleStateQueryChange}
               >
-                {Object.keys(menuItems).map((key) => (
-                  <MenuItem key={key} value={key}>{menuItems[key]}</MenuItem>
+                {Object.keys(menuItems_state).map((key) => (
+                  <MenuItem key={key} value={key}>{menuItems_state[key]}</MenuItem>
+                ))}
+              </Select>
+              <label>Type</label>
+              <Select
+                value={typeQuery}
+                onChange={handleTypeQueryChange}
+              >
+                {Object.keys(menuItems_type).map((key) => (
+                  <MenuItem key={key} value={key}>{menuItems_type[key]}</MenuItem>
                 ))}
               </Select>
             </FormGroup>
@@ -128,10 +146,11 @@ function RescuePageSelector(props) {
 export default function RescuePage() {
   const [state, setState] = React.useState("");
   const [city, setCity] = React.useState("");
+  const [type, setType] = React.useState("");
   const [rescueResults, setRescueResults] = React.useState([]);
 
   React.useEffect(() => {
-    getSearchRescues(city, state, null, null).then(resp => resp.json()).then(resp => {
+    getSearchRescues(city, state, type, null, null).then(resp => resp.json()).then(resp => {
       setRescueResults(resp.results);
     })
   }, []);
@@ -139,8 +158,9 @@ export default function RescuePage() {
   return (
     <div>
       <RescuePageSelector 
-        setRescueResults={setRescueResults} city={city} setCity={setCity} state={state} setState={setState}
+        setRescueResults={setRescueResults} city={city} setCity={setCity} state={state} setState={setState} type={type} setType={setType}
       />
+      {/* <CatDogSwitch type={type} setType={setType}/> */}
       <div
         style={{
           minWidth: 750,
