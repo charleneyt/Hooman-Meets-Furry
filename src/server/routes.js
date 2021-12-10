@@ -222,8 +222,11 @@ async function top10(req, res) {
     : "affectionate_with_family";
 
   connection.query(
-    `SELECT DISTINCT breed_name, ${feature} AS feature_rating, photo
-                            FROM Breeds_Rating BR LEFT JOIN Pet P ON BR.breed_name = P.breed
+    `WITH temp AS (SELECT breed, type, photo, row_number() over ( partition by breed ) AS rn FROM Pet)
+    SELECT DISTINCT breed_name, ${feature} AS feature_rating, photo
+                            FROM Breeds_Rating BR 
+                            LEFT JOIN (SELECT breed, type, photo FROM temp WHERE rn = 1) P 
+                            ON BR.breed_name = P.breed
                             WHERE P.type = '${req.query.type}'
                             ORDER BY ${feature} DESC 
                             LIMIT 10`,
