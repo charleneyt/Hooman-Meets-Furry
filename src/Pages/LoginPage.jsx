@@ -1,21 +1,21 @@
-import React, {useState} from "react"
 import { DialogAuth } from "react-mui-auth-page";
 import { getUserLogin } from "../fetcher";
-import Alert from '@mui/material/Alert';
 
 
 const LoginPage = (props) => {
-  const {open, setOpen, setAuth} = props;
+  const {open, setOpen, setAuth, setUsername} = props;
   // Fetch
   // TODO: test
+  // TODO: Add an alert or friendly reminder
   const handleSignIn = ({ email, password }) => {
     
     getUserLogin(email, password).then(resp => resp.json()).then(resp => {
       if (resp.results.length !== 0) {
-        console.log("correct");
+        console.log("corret email");
         const {username} = resp.results[0];
-        console.log(username);
         setAuth(true);
+        setUsername(username);
+        
       } else {
         console.log("wrong");
       }

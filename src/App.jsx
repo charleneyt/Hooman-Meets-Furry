@@ -20,12 +20,13 @@ const theme = createTheme({
 
 function App() {
   const[auth, setAuth] = React.useState(false);
+  const[username, setUsername] = React.useState("");
   return (
     <>
       <ThemeProvider theme={theme}>
         <BrowserRouter>
         
-          <UserLoginBar auth={auth} setAuth={setAuth} />
+          <UserLoginBar auth={auth} setAuth={setAuth} username={username} setUsername={setUsername}/>
           <Navbar />
           <div id="content">
             <Routes>
