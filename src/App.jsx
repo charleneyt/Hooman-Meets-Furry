@@ -36,7 +36,7 @@ function App() {
               <Route path="rescue_search" element={<RescuePage />} />
               <Route path="breed_rater" element={<BreedRaterPage />} />
               <Route path="compare" element={<PetComparePage />} />
-              <Route path="similar" element={<PetSimilarPage />} />
+              <Route path="similar" element={<PetSimilarPage username={username}/>} />
             </Routes>
           </div>
         </BrowserRouter>
