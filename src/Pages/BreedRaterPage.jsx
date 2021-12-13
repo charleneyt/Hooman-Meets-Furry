@@ -27,12 +27,13 @@ export default function BreedRaterPage() {
 
   return (
     <div className="container">
-      <h1 style={{textAlign: "center"}}>Breed Rater</h1>
+      <h1 style={{textAlign: "center", color: "lightblue"}}>Breed Rater</h1>
       <div
         style={{
           minWidth: 750,
           width: "80%",
           margin: "auto",
+          textAlign: "left"
         }}
       >
         <BreedRateSelectBar feature={feature} setFeature={setFeature}/>

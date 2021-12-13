@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control, jsx-a11y/label-has-for */
 import React from "react";
-import {FormGroup} from "@mui/material";
-import {Form, FormInput, Button} from "shards-react";
-import {Row, Col} from "antd";
-import {getSearchRescues} from "../fetcher";
+import { FormGroup } from "@mui/material";
+import { Form, FormInput, Button } from "shards-react";
+import { Row, Col } from "antd";
+import { getSearchRescues } from "../fetcher";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 
@@ -71,8 +71,8 @@ const menuItems_type = {
 };
 
 function RescuePageSelector(props) {
-  const {setRescueResults} = props;
-  const {state: stateQuery, setState: setStateQuery, city: cityQuery, setCity: setCityQuery, type: typeQuery, setType: setTypeQuery} = props;
+  const { setRescueResults } = props;
+  const { state: stateQuery, setState: setStateQuery, city: cityQuery, setCity: setCityQuery, type: typeQuery, setType: setTypeQuery } = props;
   const [open, setOpen] = React.useState(false);
 
   const handleCityQueryChange = (event) => {
@@ -95,11 +95,11 @@ function RescuePageSelector(props) {
 
   return (
     <div>
-      <h1 style={{textAlign: "center"}}>Enter your location to find rescues</h1>
-      <Form style={{width: "80vw", margin: "0 auto", marginTop: "5vh"}}>
+      <h1 style={{ textAlign: "center" }}>Enter your location to find rescues</h1>
+      <Form style={{ width: "80vw", margin: "0 auto", marginTop: "5vh" }}>
         <Row>
           <Col flex={2}>
-            <FormGroup style={{width: "20vw", margin: "0 auto"}}>
+            <FormGroup style={{ width: "20vw", margin: "0 auto" }}>
               <label>City</label>
               <FormInput
                 value={cityQuery}
@@ -108,12 +108,14 @@ function RescuePageSelector(props) {
             </FormGroup>
           </Col>
           <Col flex={2}>
-            <FormGroup style={{width: "20vw", margin: "0 auto"}}>
+            <FormGroup style={{ width: "20vw", margin: "0 auto" }}>
               {/* TODO: change the style of select bar */}
               <label>State</label>
               <Select
                 value={stateQuery}
                 onChange={handleStateQueryChange}
+                /*LL - updated*/
+                sx={{ height: 20 }}
               >
                 {Object.keys(menuItems_state).map((key) => (
                   <MenuItem key={key} value={key}>{menuItems_state[key]}</MenuItem>
@@ -123,6 +125,8 @@ function RescuePageSelector(props) {
               <Select
                 value={typeQuery}
                 onChange={handleTypeQueryChange}
+                /*LL - updated*/
+                sx={{ height: 20 }}
               >
                 {Object.keys(menuItems_type).map((key) => (
                   <MenuItem key={key} value={key}>{menuItems_type[key]}</MenuItem>
@@ -131,8 +135,8 @@ function RescuePageSelector(props) {
             </FormGroup>
           </Col>
           <Col flex={2}>
-            <FormGroup style={{width: "10vw", margin: "0 auto"}}>
-              <Button style={{marginTop: "4vh"}} onClick={updateSearchResults}>
+            <FormGroup style={{ width: "10vw", margin: "0 auto" }}>
+              <Button style={{ marginTop: "4vh" }} onClick={updateSearchResults}>
                 Search
               </Button>
             </FormGroup>
@@ -157,7 +161,7 @@ export default function RescuePage() {
 
   return (
     <div>
-      <RescuePageSelector 
+      <RescuePageSelector
         setRescueResults={setRescueResults} city={city} setCity={setCity} state={state} setState={setState} type={type} setType={setType}
       />
       {/* <CatDogSwitch type={type} setType={setType}/> */}
@@ -169,7 +173,7 @@ export default function RescuePage() {
           marginTop: "5vh",
         }}
       >
-        <RescueTable data={rescueResults}/>
+        <RescueTable data={rescueResults} />
       </div>
     </div>
   );

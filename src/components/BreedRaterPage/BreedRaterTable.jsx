@@ -13,11 +13,11 @@ import Paper from "@mui/material/Paper";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 
-import {styled} from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 
 import PetRating from "./PetRating";
-import {getComparator, stableSort} from "../utils/comparators";
-import {createTable} from "../utils/table";
+import { getComparator, stableSort } from "../utils/comparators";
+import { createTable } from "../utils/table";
 
 const headCells = [
   {
@@ -47,7 +47,7 @@ const headCells = [
 ];
 
 function EnhancedTableHead(props) {
-  const {order, orderBy, onRequestSort} = props;
+  const { order, orderBy, onRequestSort } = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
@@ -58,7 +58,9 @@ function EnhancedTableHead(props) {
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            align={headCell.numeric ? "right" : "left"}
+            // aligned everything to left
+            // align={headCell.numeric ? "right" : "left"}
+            align={"left"}
             padding={headCell.disablePadding ? "none" : "normal"}
             sortDirection={orderBy === headCell.id ? order : false}
           >
@@ -81,11 +83,11 @@ const ImageTableCell = styled(TableCell)`
 `;
 
 const BreedRaterTable = createTable((rows, dense, order, orderBy, page, rowsPerPage, emptyRows, handleRequestSort, handleChangePage, handleChangeRowsPerPage, handleChangeDense) => {
-    return <Box sx={{width: "100%"}}>
-    <Paper sx={{width: "100%", mb: 2, rounded: true}}>
+  return <Box sx={{ width: "100%" }}>
+    <Paper sx={{ width: "100%", mb: 2, rounded: true }}>
       <TableContainer>
         <Table
-          sx={{minWidth: 750}}
+          sx={{ minWidth: 750 }}
           aria-labelledby="tableTitle"
           size={dense ? "small" : "medium"}
         >
@@ -106,12 +108,13 @@ const BreedRaterTable = createTable((rows, dense, order, orderBy, page, rowsPerP
                     <ImageTableCell id={labelId} scope="row" padding="none">
                       {/* TODO: Image height weight */}
                       {/* TODO: Make a placeholder if row.pic not exist */}
-                      <img src={row.photo} alt={row.breed_name} height="200"/>
+                      {/* added width but it distorts some of the pics */}
+                      <img src={row.photo} alt={row.breed_name} height="200" width="150"/>
                     </ImageTableCell>
-                    <TableCell align="center">{row.breed_name}</TableCell>
-                    <TableCell align="center">
+                    <TableCell align="left">{row.breed_name}</TableCell>
+                    <TableCell align="left">
                       {row.rate}
-                      <PetRating value={row.rate}/>
+                      <PetRating value={row.rate} />
                     </TableCell>
                   </TableRow>
                 );
@@ -122,7 +125,7 @@ const BreedRaterTable = createTable((rows, dense, order, orderBy, page, rowsPerP
                   height: (dense ? 33 : 53) * emptyRows,
                 }}
               >
-                <TableCell colSpan={6}/>
+                <TableCell colSpan={6} />
               </TableRow>
             )}
           </TableBody>
@@ -139,7 +142,7 @@ const BreedRaterTable = createTable((rows, dense, order, orderBy, page, rowsPerP
       />
     </Paper>
     <FormControlLabel
-      control={<Switch checked={dense} onChange={handleChangeDense}/>}
+      control={<Switch checked={dense} onChange={handleChangeDense} />}
       label="Dense padding"
     />
   </Box>
