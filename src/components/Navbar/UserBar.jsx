@@ -18,11 +18,11 @@ import LoginPage from "../../Pages/LoginPage";
 
 
 
-
+// TODO: link this if have time (nice to have)
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const UserLoginBar = (props) => {
-  const {auth, setAuth} = props;
+  const {auth, setAuth, username, setUsername} = props;
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [open, setOpen] = React.useState(false); 
   // See if user is logged in 
@@ -44,12 +44,13 @@ const UserLoginBar = (props) => {
   <Button variant="contained" size="small" onClick = {handleSignUpClicked} startIcon={<FiUserPlus />} style={{boxShadow: "none", backgroundImage: "linear-gradient(to right, #fbc2eb 0%, #a6c1ee 51%, #fbc2eb 100%)"}}>
   Sign Up / Login
   </Button>
-  <LoginPage open={open} setOpen={setOpen} setAuth={setAuth} onClose={handleSignUpClose} />
+  <LoginPage open={open} setOpen={setOpen} setAuth={setAuth} onClose={handleSignUpClose} setUsername={setUsername} />
   </Box>
   )
 
 
   const loggedIn = (<Box sx={{ flexGrow: 0 }}>
+    {/* Heart */}
     <IconButton >
       <BsHeartFill />
       </IconButton>
@@ -110,10 +111,9 @@ const UserLoginBar = (props) => {
           >
             Hooman Meets Furry
           </Typography>
-          
           {/* When the screen get's larger */}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-          <Typography> Home? IDK
+          <Typography> Welcome {username}!
           </Typography>
           </Box>
           {/* If logged in render the logged in part */}
