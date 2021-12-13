@@ -20,7 +20,7 @@ const theme = createTheme({
 
 function App() {
   const[auth, setAuth] = React.useState(false);
-  const[username, setUsername] = React.useState("");
+  const[username, setUsername] = React.useState("testuser");
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -35,7 +35,7 @@ function App() {
               <Route path="recommendations" element={<RecommendationsPage />} />
               <Route path="rescue_search" element={<RescuePage />} />
               <Route path="breed_rater" element={<BreedRaterPage />} />
-              <Route path="compare" element={<PetComparePage />} />
+              <Route path="compare" element={<PetComparePage username={username}/>} />
               <Route path="similar" element={<PetSimilarPage username={username}/>} />
             </Routes>
           </div>

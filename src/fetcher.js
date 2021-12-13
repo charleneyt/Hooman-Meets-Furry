@@ -76,7 +76,7 @@ export const getTopTen = (type, feature) => {
 // 0
 export const getCompare = async (username) => {
   return fetch(
-    `http://${config.server_host}:${config.server_port}/compare/username?=${username}`,
+    `http://${config.server_host}:${config.server_port}/compare/${username}`,
     {method: "GET"}
   );
 };
