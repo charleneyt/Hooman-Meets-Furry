@@ -48,7 +48,6 @@ export default function PetSearchPage() {
   const [type, setType] = React.useState("Cat");
   const [location, setLocation] = React.useState("");
   const [currentPage, setCurrentPage] = React.useState(1);
-  // TODO: complete select options after query implemented
   const [selectOptions, setSelectOptions] = React.useState({});
 
   const handleChange = (event, value) => {
@@ -63,18 +62,21 @@ export default function PetSearchPage() {
   
   React.useEffect(() => {
     const params = {};
-    
+
     Object.entries(checkBoxOptions).forEach(([key, entry]) => {
       params[key] = [...entry]
     })
 
+    Object.entries(selectOptions).forEach(([key, entry]) => {
+      params[key] = [...entry]
+    })
     params["type"] = type;
     params["location"] = location;
 
     getPetSearch(params, currentPage, 25).then(resp => resp.json()).then(resp => {
       setData(resp.results);
     })
-  }, [checkBoxOptions, type, currentPage, location]);
+  }, [checkBoxOptions, type, currentPage, location, selectOptions]);
 
   // Drawer
   const [state, setState] = React.useState({Menu: false});
@@ -113,7 +115,7 @@ export default function PetSearchPage() {
             }}
           >
             <List>
-              <PetSearchEngine type={type} checkBoxOptions={checkBoxOptions} setCheckBoxOptions={setCheckBoxOptions} selectOptions={selectOptions} setSelectOptions={setSelectOptions}/>
+              <PetSearchEngine type={type} checkBoxOptions={checkBoxOptions} setCheckBoxOptions={setCheckBoxOptions} selectOptions={selectOptions} setSelectOptions={setSelectOptions} />
             </List>
           </Drawer>
         </Box>

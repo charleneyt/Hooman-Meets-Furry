@@ -15,12 +15,14 @@ export function getPetSearch(params, page, pagesize) {
     "color",
     "age",
     "breed",
+    "coat",
     "location",
     "shots_current",
     "spayed_neutered",
     "children_friendly",
     "dogs_friendly",
     "cats_friendly",
+    "size",
   ].map((item) => addIfExists(item, params, paramsList));
 
   const queryString = Object.entries(paramsList)
