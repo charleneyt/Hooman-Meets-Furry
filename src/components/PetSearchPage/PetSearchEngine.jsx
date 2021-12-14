@@ -114,10 +114,16 @@ export default function PetSearchEngine(props) {
     return (checkBoxOptions[settingName] || new Set()).has(attributeName)
   }
   
+  // TODO: fix duplicate code
   const onBreedClickChange = (event, values) => {
     const breedArr = values.map((element) => element.breed_name);
     setSelectOptions({...selectOptions, breed: breedArr})
+  }
 
+  const onColorClickChange = (event, values) => {
+    const colorArr = values.map((element) => element.color);
+    console.log(colorArr)
+    setSelectOptions({...selectOptions, color: colorArr})
   }
 
   const generateCheckboxes = (configKey) => {
@@ -180,7 +186,8 @@ export default function PetSearchEngine(props) {
             id="cat-color-select"
             options={colorOptions}
             getOptionLabel={(option) => option.color}
-            // renderTags?
+            isOptionEqualToValue={(option, value) => option.color === value.color}
+            onChange={onColorClickChange}
             renderInput={(params) => (
               <TextField
                 {...params}

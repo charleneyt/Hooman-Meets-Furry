@@ -62,7 +62,7 @@ export default function PetSearchPage() {
   
   React.useEffect(() => {
     const params = {};
-    
+
     Object.entries(checkBoxOptions).forEach(([key, entry]) => {
       params[key] = [...entry]
     })
@@ -70,8 +70,6 @@ export default function PetSearchPage() {
     Object.entries(selectOptions).forEach(([key, entry]) => {
       params[key] = [...entry]
     })
-
-    console.log("This is params:" ,params);
     params["type"] = type;
     params["location"] = location;
 
