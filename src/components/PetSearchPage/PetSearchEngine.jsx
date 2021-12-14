@@ -7,7 +7,6 @@ import {FormControlLabel, FormGroup, Typography} from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import {produce} from "immer";
 import { getAllBreeds, getAllColors } from "../../fetcher";
-import { GiConsoleController } from "react-icons/gi";
 
 const catCoatLengthOptions = ["Hairless", "Short", "Medium", "Long"];
 const dogCoatLengthOptions = ["Hairless", "Short", "Medium", "Long", "Wire", "Curly"]
