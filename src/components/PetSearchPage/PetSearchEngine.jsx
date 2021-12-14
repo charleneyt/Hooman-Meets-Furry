@@ -6,16 +6,9 @@ import Box from "@mui/material/Box";
 import {FormControlLabel, FormGroup, Typography} from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import {produce} from "immer";
+import { getAllBreeds } from "../../fetcher";
 
-// TODO: color demo, coat length, breed
-const catDataDemo = [
-  {breed: "Domestic Short Hair"},
-  {breed: "Bombay"},
-  {breed: "Dilute Calico"},
-  {breed: "Russian Blue"},
-  {breed: "Tabby"},
-  {breed: "Tuxedo"},
-];
+// TODO: color
 
 const catColorDemo = [
   "Black",
@@ -87,7 +80,15 @@ const checkBoxConfigs = {
 
 export default function PetSearchEngine(props) {
   const {checkBoxOptions, setCheckBoxOptions, type} = props;
+  const [breedOptions, setBreedOptions] = React.useState([]);
   
+  React.useEffect(() => {
+    getAllBreeds(type).then(resp => resp.json()).then(resp => {
+      setBreedOptions(resp.results);
+    })
+  }, [type])
+
+  // Check box
   const setCheckBoxState = (settingName, attributeName) => (event) => {
     const newState = produce((checkBoxOptions) => {
       if (event.target.checked) {
@@ -143,8 +144,8 @@ export default function PetSearchEngine(props) {
             disableCloseOnSelect
             multiple
             id="catBreed"
-            options={catDataDemo}
-            getOptionLabel={(option) => option.breed}
+            options={breedOptions}
+            getOptionLabel={(option) => option.breed_name}
             renderInput={(params) => (
               <TextField
                 {...params}
