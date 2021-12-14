@@ -71,7 +71,7 @@ export default function PetSearchPage() {
       params[key] = [...entry]
     })
 
-    console.log(params);
+    console.log("This is params:" ,params);
     params["type"] = type;
     params["location"] = location;
 

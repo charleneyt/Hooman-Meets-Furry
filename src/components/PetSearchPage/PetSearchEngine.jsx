@@ -7,6 +7,7 @@ import {FormControlLabel, FormGroup, Typography} from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import {produce} from "immer";
 import { getAllBreeds, getAllColors } from "../../fetcher";
+import { GiConsoleController } from "react-icons/gi";
 
 const catCoatLengthOptions = ["Hairless", "Short", "Medium", "Long"];
 const dogCoatLengthOptions = ["Hairless", "Short", "Medium", "Long", "Wire", "Curly"]
@@ -113,6 +114,11 @@ export default function PetSearchEngine(props) {
     return (checkBoxOptions[settingName] || new Set()).has(attributeName)
   }
   
+  const onBreedClickChange = (event, values) => {
+    const breedArr = values.map((element) => element.breed_name);
+    setSelectOptions({...selectOptions, breed: breedArr})
+
+  }
 
   const generateCheckboxes = (configKey) => {
     const config = checkBoxConfigs[configKey];
@@ -140,9 +146,11 @@ export default function PetSearchEngine(props) {
           <Autocomplete
             disableCloseOnSelect
             multiple
-            id="catBreed"
+            id="breed"
             options={breedOptions}
             getOptionLabel={(option) => option.breed_name}
+            isOptionEqualToValue={(option, value) => option.breed_name === value.breed_name}
+            onChange={onBreedClickChange}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -150,13 +158,14 @@ export default function PetSearchEngine(props) {
                 label="Select Breed"
                 placeholder="Breeds"
               />
-            )}
+            )
+          }
+          
           />
         </Box>
         {/* Age Select */}
         <Box sx={{margin: 1, marginBottom: 0}}>
           {/* TODO: if the user select dog/cat => label should be pupply/kitten */}
-          {/* TODO: change state function  */}
           {/* TODO: change font size */}
           <Typography> Age:</Typography>
           <FormGroup sx={{flexDirection: "row", alignItems: "center"}}>
