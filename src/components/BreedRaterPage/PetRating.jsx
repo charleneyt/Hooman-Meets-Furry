@@ -32,6 +32,7 @@ export default function PetRating(props) {
         icon={<FavoriteIcon fontSize="inherit"/>}
         emptyIcon={<FavoriteBorderIcon fontSize="inherit"/>}
       />
+      
     </Box>
   );
 }
