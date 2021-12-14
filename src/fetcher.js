@@ -21,6 +21,7 @@ export function getPetSearch(params, page, pagesize) {
     "children_friendly",
     "dogs_friendly",
     "cats_friendly",
+    "size",
   ].map((item) => addIfExists(item, params, paramsList));
 
   const queryString = Object.entries(paramsList)

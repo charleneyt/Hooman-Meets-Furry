@@ -45,10 +45,10 @@ const useStyles = makeStyles({
 export default function PetSearchPage() {
   // Fetch data and set data hooks
   const [checkBoxOptions, setCheckBoxOptions] = React.useState({});
+  
   const [type, setType] = React.useState("Cat");
   const [location, setLocation] = React.useState("");
   const [currentPage, setCurrentPage] = React.useState(1);
-  // TODO: complete select options after query implemented
   const [selectOptions, setSelectOptions] = React.useState({});
 
   const handleChange = (event, value) => {

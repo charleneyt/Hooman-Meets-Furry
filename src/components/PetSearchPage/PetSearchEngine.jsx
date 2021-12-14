@@ -20,12 +20,21 @@ const checkBoxConfigs = {
       "senior": "Senior"
     }
   },
+  size: {
+    options: {
+      "Small": "Small",
+      "Medium": "Medium",
+      "Large": "Large",
+      "Extra Large": "Extra Large"
+    }
+  },
   gender: {
     options: {
       "male": "Male",
       "female": "Female"
     }
   },
+
   spayed_neutered: {
     options: {
       "TRUE": "Spayed-neutered"
@@ -64,10 +73,11 @@ const checkBoxConfigs = {
 }
 
 export default function PetSearchEngine(props) {
-  const {checkBoxOptions, setCheckBoxOptions, type} = props;
+  const {checkBoxOptions, setCheckBoxOptions, type, selectOptions, setSelectOptions} = props;
   const [breedOptions, setBreedOptions] = React.useState([]);
   const [colorOptions, setColorOptions] = React.useState([]);
 
+  // Populate the selections
   React.useEffect(() => {
     getAllBreeds(type).then(resp => resp.json()).then(resp => {
       setBreedOptions(resp.results);
@@ -103,7 +113,7 @@ export default function PetSearchEngine(props) {
     return (checkBoxOptions[settingName] || new Set()).has(attributeName)
   }
 
-  // const [checked, setChecked] = React.useState([true, false]);
+  
   const handleCheckedBoxChange = (event) => {
     setChecked([event.target.checked, checked[1]]);
     console.log(event.target.checked, checked[1])
@@ -185,43 +195,22 @@ export default function PetSearchEngine(props) {
             {generateCheckboxes('gender')}
           </FormGroup>
         </Box>
+        {/* Size */}
         <Box sx={{margin: 1, marginTop: 0, marginBottom: 0}}>
           <Typography> Size: </Typography>
           <FormGroup sx={{flexDirection: "row", alignItems: "center"}}>
-            <FormControlLabel
-              control={
-                <Checkbox onChange={handleCheckedBoxChange} name="baby" />
-              }
-              label="Small"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox onChange={handleCheckedBoxChange} name="young" />
-              }
-              label="Medium"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox onChange={handleCheckedBoxChange} name="adult" />
-              }
-              label="Large"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox onChange={handleCheckedBoxChange} name="senior" />
-              }
-              label="Extra Large"
-            />
+          {generateCheckboxes('size')}
           </FormGroup>
         </Box>
         <Box sx={{margin: 1, marginTop: 0, marginBottom: 0}}>
+          {/* Coat Selection */}
           <Autocomplete
             disableCloseOnSelect
             multiple
             id="pet-coat-select"
-            // TODO: if dog is selected then need to change the coat
             options={type === "Cat" ? catCoatLengthOptions : dogCoatLengthOptions}
             getOptionLabel={(option) => option}
+            filterOptions={(x) => x}
             // renderTags?
             renderInput={(params) => (
               <TextField
@@ -229,6 +218,7 @@ export default function PetSearchEngine(props) {
                 variant="standard"
                 label="Select Coat Length"
                 placeholder="Coat length"
+                
               />
             )}
           />
