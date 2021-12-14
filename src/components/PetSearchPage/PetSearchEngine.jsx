@@ -73,7 +73,7 @@ const checkBoxConfigs = {
 }
 
 export default function PetSearchEngine(props) {
-  const {checkBoxOptions, setCheckBoxOptions, type, selectOptions, setSelectOptions} = props;
+  const {checkBoxOptions, setCheckBoxOptions, type, selectOptions, setSelectOptions } = props;
   const [breedOptions, setBreedOptions] = React.useState([]);
   const [colorOptions, setColorOptions] = React.useState([]);
 
@@ -112,13 +112,7 @@ export default function PetSearchEngine(props) {
   const getCheckBoxState = (settingName, attributeName) => {
     return (checkBoxOptions[settingName] || new Set()).has(attributeName)
   }
-
   
-  const handleCheckedBoxChange = (event) => {
-    setChecked([event.target.checked, checked[1]]);
-    console.log(event.target.checked, checked[1])
-  };
-  const [checked, setChecked] = React.useState(true);
 
   const generateCheckboxes = (configKey) => {
     const config = checkBoxConfigs[configKey];
@@ -207,10 +201,13 @@ export default function PetSearchEngine(props) {
           <Autocomplete
             disableCloseOnSelect
             multiple
-            id="pet-coat-select"
+            id="coat"
             options={type === "Cat" ? catCoatLengthOptions : dogCoatLengthOptions}
             getOptionLabel={(option) => option}
-            filterOptions={(x) => x}
+            // TODO: Fix this
+            onChange={(event, values) => {
+              setSelectOptions({...selectOptions, coat: values})
+            }}
             // renderTags?
             renderInput={(params) => (
               <TextField

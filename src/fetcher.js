@@ -15,6 +15,7 @@ export function getPetSearch(params, page, pagesize) {
     "color",
     "age",
     "breed",
+    "coat",
     "location",
     "shots_current",
     "spayed_neutered",

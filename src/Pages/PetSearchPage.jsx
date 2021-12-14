@@ -45,7 +45,6 @@ const useStyles = makeStyles({
 export default function PetSearchPage() {
   // Fetch data and set data hooks
   const [checkBoxOptions, setCheckBoxOptions] = React.useState({});
-  
   const [type, setType] = React.useState("Cat");
   const [location, setLocation] = React.useState("");
   const [currentPage, setCurrentPage] = React.useState(1);
@@ -68,13 +67,18 @@ export default function PetSearchPage() {
       params[key] = [...entry]
     })
 
+    Object.entries(selectOptions).forEach(([key, entry]) => {
+      params[key] = [...entry]
+    })
+
+    console.log(params);
     params["type"] = type;
     params["location"] = location;
 
     getPetSearch(params, currentPage, 25).then(resp => resp.json()).then(resp => {
       setData(resp.results);
     })
-  }, [checkBoxOptions, type, currentPage, location]);
+  }, [checkBoxOptions, type, currentPage, location, selectOptions]);
 
   // Drawer
   const [state, setState] = React.useState({Menu: false});
@@ -113,7 +117,7 @@ export default function PetSearchPage() {
             }}
           >
             <List>
-              <PetSearchEngine type={type} checkBoxOptions={checkBoxOptions} setCheckBoxOptions={setCheckBoxOptions} selectOptions={selectOptions} setSelectOptions={setSelectOptions}/>
+              <PetSearchEngine type={type} checkBoxOptions={checkBoxOptions} setCheckBoxOptions={setCheckBoxOptions} selectOptions={selectOptions} setSelectOptions={setSelectOptions} />
             </List>
           </Drawer>
         </Box>
