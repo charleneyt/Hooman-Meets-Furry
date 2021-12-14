@@ -7,6 +7,9 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import PaginationSlider from "../components/utils/PaginationSlider"
+import Pagination from '@mui/material/Pagination';
 
 const features = {
   general_health: "General health",
@@ -30,10 +33,14 @@ export default function RecommendationsPage() {
   // TODO: do pagination 
   // page and pagesize
   const [page, setPage] = React.useState(1);
-  const [pageSize, setPageSize] = React.useState(25);
+  const [pageSize, setPageSize] = React.useState(20);
   // data and setData
   const [data, setData] = React.useState([]);
+  const [pageCount, setPageCount] = React.useState(10);
 
+  const handlePageChange = (event, value) => {
+    setPage(value);
+  }
   const handleChangeFeature = (event) => {
     setFeature(event.target.value);
   };
@@ -45,19 +52,34 @@ export default function RecommendationsPage() {
   const handleOpen = () => {
     setOpen(true);
   };
-  
+
+  // This is for pagination
   React.useEffect(() => {
+    getRecommend(feature, type).then(resp => resp.json()).then(resp => {
+      setPageCount(resp.results.length);
+    })
+  }, [feature, type]);
+  
+  const totalPages = (pageCount, pageSize) => {
+    return Math.ceil(pageCount/pageSize);
+  }
+
+  // Query
+  React.useEffect(() => {   
     getRecommend(feature, type, page, pageSize).then(resp => resp.json()).then(resp => {
-      
       setData(resp.results);
     })
-
-    console.log("after change: " + feature + "," + type + "," + page + "," + pageSize);
   }, [type, feature, page, pageSize]);
+
+
+
 
 
   return (
     <div>
+      <Box sx={{float:"right"}}>
+      <PaginationSlider setPageSize={setPageSize}/>
+      </Box>
       {/* TODO: icon bigger, add colors, or even change the icon */}
       <div className="select-type">
         <CatDogSwitch type={type} setType={setType}/>
@@ -88,13 +110,17 @@ export default function RecommendationsPage() {
       {/* Recommending cards */}
   
       <div>
-        <Grid container spacing={1}>
+        <Grid container spacing={2}>
           {data.map(row =>           
-          <Grid key={row.id} item xs={12} sm={6} md={2.4}>
+          <Grid key={row.id} item xs={12} sm={6} md={4}>
             <RecCard key={row.id}  data={row}/>
           </Grid>)}
         </Grid>
       </div>
+      {/* Pagination */}
+      <Box>
+        <Pagination page={page} onChange={handlePageChange} count={totalPages(pageCount, pageSize)}/>
+      </Box>
     </div>
   );
 }

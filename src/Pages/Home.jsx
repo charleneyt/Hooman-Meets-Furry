@@ -45,7 +45,7 @@ export default function HomePage() {
       />
       <CardContent>
         {catCard.name}
-      <Button style={{ marginRight: "auto"}}>{<img src={catCard.catBtn}/>}</Button>
+      <Button style={{ marginRight: "auto"}}>{<img src={catCard.catBtn} alt="pet button"/>}</Button>
       </CardContent>
       </Card>
         ))}

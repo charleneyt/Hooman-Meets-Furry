@@ -43,21 +43,26 @@ const useStyles = makeStyles({
 });
 
 export default function PetSearchPage() {
+
   // Fetch data and set data hooks
   const [checkBoxOptions, setCheckBoxOptions] = React.useState({});
   const [type, setType] = React.useState("Cat");
   const [location, setLocation] = React.useState("");
-  const [currentPage, setCurrentPage] = React.useState(1);
   const [selectOptions, setSelectOptions] = React.useState({});
 
-  const handleChange = (event, value) => {
-    setCurrentPage(value);
-  };
+  // TODO: add pagination tool
+  // Pagination
+
+  const [page, setPage] = React.useState(1);
+  const [pageSize, setPageSize] = React.useState(25);
+  const [pageCount, setPageCount] = React.useState(10);
+  const handlePageChange = (event, value) => {
+    setPage(value);
+  }
 
   // Store data
   const [data, setData] = React.useState([]);
 
-  // TODO: Make a select bar for user to decide pagesize
   const styles = useStyles();
   
   React.useEffect(() => {
@@ -73,10 +78,19 @@ export default function PetSearchPage() {
     params["type"] = type;
     params["location"] = location;
 
-    getPetSearch(params, currentPage, 25).then(resp => resp.json()).then(resp => {
+    getPetSearch(params).then(resp => resp.json()).then(resp => {
+      setPageCount(resp.results.length);
+    })
+
+    getPetSearch(params, page, pageSize).then(resp => resp.json()).then(resp => {
       setData(resp.results);
     })
-  }, [checkBoxOptions, type, currentPage, location, selectOptions]);
+  }, [checkBoxOptions, type, page, pageSize, location, selectOptions]);
+
+    
+    const totalPages = (pageCount, pageSize) => {
+      return Math.ceil(pageCount/pageSize);
+    }
 
   // Drawer
   const [state, setState] = React.useState({Menu: false});
@@ -93,6 +107,8 @@ export default function PetSearchPage() {
 
   return (
     <div>
+      {/* Pagination things */}
+      
       <PetSearchBar type={type} setType={setType} location={location} setLocation={setLocation}/>
       <div className={styles.cardContainerStyle}>      
         {
@@ -122,9 +138,10 @@ export default function PetSearchPage() {
       </div>
       <div className="pet-search-pagination">
         <Stack spacing={2}>
-          <Typography>Page: {currentPage}</Typography>
+          <Typography>Page: {page}</Typography>
           {/* TODO: Add count for pages */}
-          <Pagination page={currentPage} onChange={handleChange} />
+                {/* Pagination */}
+          <Pagination page={page} onChange={handlePageChange} count={totalPages(pageCount, pageSize)}/>
         </Stack>
       </div>
     </div>
