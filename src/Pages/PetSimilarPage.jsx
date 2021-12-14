@@ -38,15 +38,16 @@ export default function PetSimilarPage(props) {
 
   React.useEffect(() => {
     getSimilar(username, type, page, pageSize).then(resp => resp.json()).then(resp => {
-      console.log(resp.results);
       setData(resp.results);
     })
   }, [username, type, page, pageSize])
   return (
   <div>
+    {/* TODO: do we need to show dots? draggable? */}
     <Carousel 
         responsive={responsive}
         centerMode={true}
+        draggable={true}
       >
       
       {data.map(dataRow => 
