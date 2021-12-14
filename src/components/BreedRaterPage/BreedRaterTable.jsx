@@ -114,7 +114,7 @@ const BreedRaterTable = createTable((rows, dense, order, orderBy, page, rowsPerP
                     <TableCell align="left">{row.breed_name}</TableCell>
                     <TableCell align="left">
                       {row.rate}
-                      <PetRating value={row.rate} />
+                      <PetRating value={row.feature_rating} />
                     </TableCell>
                   </TableRow>
                 );
