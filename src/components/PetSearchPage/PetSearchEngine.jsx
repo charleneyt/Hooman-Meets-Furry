@@ -6,29 +6,7 @@ import Box from "@mui/material/Box";
 import {FormControlLabel, FormGroup, Typography} from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import {produce} from "immer";
-
-// TODO: color demo, coat length, breed
-const catDataDemo = [
-  {breed: "Domestic Short Hair"},
-  {breed: "Bombay"},
-  {breed: "Dilute Calico"},
-  {breed: "Russian Blue"},
-  {breed: "Tabby"},
-  {breed: "Tuxedo"},
-];
-
-const catColorDemo = [
-  "Black",
-  "White",
-  "Tuxedo",
-  "Orange",
-  "Gray",
-  "Blue",
-  "Silver",
-  "Brown",
-  "Chocolate",
-  "Red",
-];
+import { getAllBreeds, getAllColors } from "../../fetcher";
 
 const catCoatLengthOptions = ["Hairless", "Short", "Medium", "Long"];
 const dogCoatLengthOptions = ["Hairless", "Short", "Medium", "Long", "Wire", "Curly"]
@@ -87,7 +65,23 @@ const checkBoxConfigs = {
 
 export default function PetSearchEngine(props) {
   const {checkBoxOptions, setCheckBoxOptions, type} = props;
-  
+  const [breedOptions, setBreedOptions] = React.useState([]);
+  const [colorOptions, setColorOptions] = React.useState([]);
+
+  React.useEffect(() => {
+    getAllBreeds(type).then(resp => resp.json()).then(resp => {
+      setBreedOptions(resp.results);
+    })
+  }, [type])
+
+  React.useEffect(() => {
+    getAllColors(type).then(resp => resp.json()).then(resp => {
+      setColorOptions(resp.results);
+    })
+  }, [type])
+
+
+  // Check box
   const setCheckBoxState = (settingName, attributeName) => (event) => {
     const newState = produce((checkBoxOptions) => {
       if (event.target.checked) {
@@ -143,8 +137,8 @@ export default function PetSearchEngine(props) {
             disableCloseOnSelect
             multiple
             id="catBreed"
-            options={catDataDemo}
-            getOptionLabel={(option) => option.breed}
+            options={breedOptions}
+            getOptionLabel={(option) => option.breed_name}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -171,8 +165,8 @@ export default function PetSearchEngine(props) {
             disableCloseOnSelect
             multiple
             id="cat-color-select"
-            options={catColorDemo}
-            getOptionLabel={(option) => option}
+            options={colorOptions}
+            getOptionLabel={(option) => option.color}
             // renderTags?
             renderInput={(params) => (
               <TextField
