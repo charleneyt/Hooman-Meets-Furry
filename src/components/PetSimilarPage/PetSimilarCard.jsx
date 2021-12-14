@@ -1,28 +1,40 @@
-import { Card, Box, Paper } from '@mui/material';
+import React from 'react';
+import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
+import { Button, CardActionArea, CardActions, Box } from '@mui/material';
 
 export default function PetSimilarCard(props) {
-  const{data} = props;
-
+  const dataRow = props.dataRow;
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-    <Card sx={{ display: 'flex' }}>
-      
-      <CardContent>           
-        <Typography component="div" variant="h5">
-          Live From Space
-        </Typography>
-        <Typography variant="subtitle1" color="text.secondary" component="div">
-            Mac Miller
+    <Box sx={{boxShadow: 1, minWidth: 300, margin: 1}}>
+      {/* TODO: add descriptions */}
+    <Card sx={{ maxWidth: 345, padding: 1, minWidth: 200 }}>
+      {console.log(dataRow)}
+      <CardActionArea>
+        <CardMedia
+          component="img"
+          height="140"
+          image={dataRow.photo}
+          alt={dataRow.name}
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            {dataRow.name}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {dataRow.age}
+            {dataRow.type}
           </Typography>
         </CardContent>
-        <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
-          <Typography>123</Typography>
-        </Box>
-        <CardMedia component="img" image="" sx={{ width: 151 }} alt="pet"/>
+      </CardActionArea>
+      <CardActions>
+        <Button variant="contained" size="small">
+          Adopt
+        </Button>
+      </CardActions>
     </Card>
     </Box>
-  )
+  );
 }
