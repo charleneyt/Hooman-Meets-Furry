@@ -24,7 +24,6 @@ async function pet_search(req, res) {
       const queries = fields.map(
         (field) => `LOWER(${fieldName}) LIKE '%${field.toLowerCase()}%'`
       );
-      console.log(`(${queries.join(" OR ")})`);
       params.push(`(${queries.join(" OR ")})`);
     }
   }
@@ -428,49 +427,45 @@ async function user_login(req, res) {
   });
 }
 
-
 // ********************************************
 // GET ALL BREEDS (no / or & in between) ROUTES
 // ********************************************
 async function get_all_breeds(req, res) {
-  const type = req.query.type ? req.query.type : "cat";
+  const type = req.query.type ? req.query.type : "Cat";
 
   const q = `SELECT DISTINCT breed_name
   FROM Breeds_Rating JOIN Pet on Breeds_Rating.breed_name = Pet.breed
   WHERE breed_name NOT LIKE '%/%' AND type = '${type}';
-  `
+  `;
   connection.query(q, (error, results, fields) => {
-  if (error) {
-    console.log(error);
-    res.json({error});
-  }
-  else if (results) {
-    res.json({results});
+    if (error) {
+      console.log(error);
+      res.json({error});
+    } else if (results) {
+      res.json({results});
     }
   });
 }
-  
-  // ********************************************
-  // GET ALL COLORS (no / or & in between) ROUTES
-  // ********************************************
+
+// ********************************************
+// GET ALL COLORS (no / or & in between) ROUTES
+// ********************************************
 async function get_all_colors(req, res) {
   const type = req.query.type ? req.query.type : "cat";
 
   const q = `SELECT DISTINCT color
   FROM Pet
   WHERE color NOT LIKE '%/%' AND color NOT LIKE '%(%' AND color NOT LIKE '%)%' AND color NOT LIKE '%&%' AND type = '${type}';
-  `
+  `;
   connection.query(q, (error, results, fields) => {
-  if (error) {
-   console.log(error);
-    res.json({error});
-  }
-  else if (results) {
-    res.json({results});
+    if (error) {
+      console.log(error);
+      res.json({error});
+    } else if (results) {
+      res.json({results});
     }
   });
 }
-
 
 module.exports = {
   pet_search,
@@ -482,5 +477,5 @@ module.exports = {
   get_similar,
   user_login,
   get_all_breeds,
-  get_all_colors
+  get_all_colors,
 };

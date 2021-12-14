@@ -37,7 +37,15 @@ export function getPetSearch(params, page, pagesize) {
   );
 }
 
-// 0
+export const getAllBreeds = (type) => {
+  return fetch(
+    `http://${config.server_host}:${config.server_port}/get_all_breeds?type=${type}`,
+    {
+      method: "GET",
+    }
+  );
+};
+
 export const getRecommend = async (feature, type, page, pagesize) => {
   return fetch(
     `http://${config.server_host}:${config.server_port}/recommend?input_feature=${feature}&type=${type}&page=${page}&pagesize=${pagesize}`,
@@ -47,7 +55,6 @@ export const getRecommend = async (feature, type, page, pagesize) => {
   );
 };
 
-// 5294
 export const getRescues = async (id) => {
   return fetch(
     `http://${config.server_host}:${config.server_port}/rescues?id=${id}`,
@@ -62,7 +69,6 @@ export const getSearchRescues = (city, state, type, page, pagesize) => {
   );
 };
 
-// 0
 export const getTopTen = (type, feature) => {
   if (type !== "Cat" && type !== "Dog") {
     throw new Error("Invalid API call, type must be Cat or Dog");
@@ -73,7 +79,6 @@ export const getTopTen = (type, feature) => {
   );
 };
 
-// 0
 export const getCompare = async (username) => {
   return fetch(
     `http://${config.server_host}:${config.server_port}/compare/${username}`,
@@ -81,7 +86,6 @@ export const getCompare = async (username) => {
   );
 };
 
-// 0
 export const getSimilar = async (username, type, page, pagesize) => {
   return fetch(
     `http://${config.server_host}:${config.server_port}/get_similar?username=${username}&type=${type}&page=${page}&pagesize=${pagesize}`,
