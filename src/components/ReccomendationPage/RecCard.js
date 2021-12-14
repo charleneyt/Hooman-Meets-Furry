@@ -19,7 +19,7 @@ export default function RecCard(props) {
         {/* TODO: fix the height let it the smae  */}
         <CardMedia
           component="img"
-          height="250"
+          height="400"
           image={dataRow.photo}
           alt={dataRow.name}
         />
