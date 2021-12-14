@@ -119,7 +119,7 @@ export default function RecommendationsPage() {
       </div>
       {/* Pagination */}
       <Box>
-        <Pagination count={10} page={page} onChange={handlePageChange} count={totalPages(pageCount, pageSize)}/>
+        <Pagination page={page} onChange={handlePageChange} count={totalPages(pageCount, pageSize)}/>
       </Box>
     </div>
   );

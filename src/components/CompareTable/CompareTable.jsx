@@ -39,7 +39,7 @@ export default function CompareTable(props) {
         <TableCell id="pet-photo" variant="head"></TableCell> 
           {data.map((dataRow) => (
             <>
-            <StyledTableCell><img src={dataRow.photo} height="200"/></StyledTableCell>
+            <StyledTableCell><img src={dataRow.photo} alt={dataRow.name} height="200"/></StyledTableCell>
             </>
           ))}
         </TableRow>

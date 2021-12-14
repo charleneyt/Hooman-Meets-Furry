@@ -51,7 +51,7 @@ export default function PetSearchPage() {
   const [selectOptions, setSelectOptions] = React.useState({});
 
   // TODO: add pagination tool
-// Pagination
+  // Pagination
 
   const [page, setPage] = React.useState(1);
   const [pageSize, setPageSize] = React.useState(25);
@@ -141,7 +141,7 @@ export default function PetSearchPage() {
           <Typography>Page: {page}</Typography>
           {/* TODO: Add count for pages */}
                 {/* Pagination */}
-          <Pagination count={10} page={page} onChange={handlePageChange} count={totalPages(pageCount, pageSize)}/>
+          <Pagination page={page} onChange={handlePageChange} count={totalPages(pageCount, pageSize)}/>
         </Stack>
       </div>
     </div>
