@@ -451,7 +451,7 @@ async function get_all_breeds(req, res) {
 // GET ALL COLORS (no / or & in between) ROUTES
 // ********************************************
 async function get_all_colors(req, res) {
-  const type = req.query.type ? req.query.type : "cat";
+  const type = req.query.type ? req.query.type : "Cat";
 
   const q = `SELECT DISTINCT color
   FROM Pet
