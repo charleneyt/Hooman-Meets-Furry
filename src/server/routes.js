@@ -235,7 +235,7 @@ async function top10(req, res) {
     ? req.query.feature
     : "affectionate_with_family";
 
-    // updated for efficiency
+  // updated for efficiency
   connection.query(
     `SELECT DISTINCT breed_name, ${feature} AS feature_rating, photo
     FROM Breeds_Rating BR JOIN breed_with_photo BP ON BR.breed_name = BP.breed
@@ -261,7 +261,7 @@ async function top10(req, res) {
 async function compare(req, res) {
   // not necessary - just used for testing
   const username = req.params.username ? req.params.username : "testuser";
- 
+
   connection.query(
     `SELECT LB.pet_id, P.name, type, breed, color, age, gender, P.photo, O.city AS location
                         FROM Pet P
@@ -494,7 +494,6 @@ async function get_all_info(req, res) {
 // POST request for adding favorite pet
 // ********************************************
 async function mark_favorite(req, res) {
-  // console.log("this is body!!!!!!!!"+ req.body);
   const user = req.body.user;
   const id = req.body.id;
   const q = `INSERT INTO Liked_by (username, pet_id) VALUES ('${user}', '${id}');

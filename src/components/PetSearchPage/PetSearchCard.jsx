@@ -15,7 +15,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import MoreIcon from '@mui/icons-material/More';
 import {RiHomeHeartLine} from "react-icons/ri";
 import AllPetInfoPage from "../../Pages/AllPetInfoPage";
-
+import {sendLike} from "../../fetcher";
 
 export default function PetSearchCard(props) {
   const username = props.username;
@@ -36,6 +36,7 @@ export default function PetSearchCard(props) {
   const handleLikeBtn = (event) => {
     console.log(event.currentTarget.value);
     console.log(username);
+    sendLike(username, event.currentTarget.value)
   };
 
   return <Card sx={{margin: 1, width: 280}}>

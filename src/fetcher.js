@@ -118,9 +118,18 @@ export const getAllInfo = (id) => {
   );
 };
 
-export const sendLike = (user, id) => {
+export const sendLike = async (user, id) => {
   return fetch(
-    `http://${config.server_host}:${config.server_port}/mark_favorite?id=${id}&user=${user}`,
-    {method: "POST", body: JSON.stringify({user: `${user}`, id: `${id}`})}
+    `http://${config.server_host}:${config.server_port}/mark_favorite?user=${user}&id=${id}`,
+    {
+      method: "POST",
+      mode: "cors",
+      credentials: "same-origin",
+      cache: "no-cache",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({user: `${user}`, id: `${id}`}),
+    }
   );
 };

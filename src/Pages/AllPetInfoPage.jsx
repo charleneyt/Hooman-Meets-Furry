@@ -18,7 +18,7 @@ import DoneRoundedIcon from '@mui/icons-material/DoneRounded';
 
 
 
-const data = {id:"VA226",organization_id:"VA226",type:"Cat",breed:"Tabby",color:"Orange / Red",age:"Baby",gender:"Male",size:"Medium",coat:"Short",spayed_neutered:"TRUE",house_trained:"TRUE",special_needs:"FALSE",shots_current:"TRUE",children_friendly:"TRUE",dogs_friendly:"None",cats_friendly:"TRUE",name:"SPCA-Eastern Shore Inc.",photo:"https://placekitten.com/200/300",email:"shorespca@gmail.com",phone:"(757)787-7385",address:"26528 Lankford Highway PO Box 164",city:"Onley",state:"VA",zipcode:"23418",country:"US","website":null,"facebook":null,"twitter":null,"youtube":null,"instagram":null,"pinterest":null};
+const data = {pet_name: "Scott", pet_id:"VA226",org_id:"VA226",type:"Cat",breed:"Tabby",color:"Orange / Red",age:"Baby",gender:"Male", org_name:"SPCA-Eastern Shore Inc.",size:"Medium",coat:"Short",spayed_neutered:"TRUE",house_trained:"TRUE",special_needs:"FALSE",shots_current:"TRUE",children_friendly:"TRUE",dogs_friendly:"None",cats_friendly:"TRUE",name:"SPCA-Eastern Shore Inc.",pet_photo:"https://placekitten.com/200/300",email:"shorespca@gmail.com",phone:"(757)787-7385",address:"26528 Lankford Highway PO Box 164",city:"Onley",state:"VA",zipcode:"23418",country:"US","website":null,"facebook":null,"twitter":null,"youtube":null,"instagram":null,"pinterest":null, "org_photo": null};
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -78,17 +78,17 @@ export default function AllPetInfoPage(props) {
   //   })
   // }, [petId]);
   return (
-    <>
+    <div>
     <BootstrapDialog open={openModal} onClose={handleClose} aria-labelledby="Dialog-Title">
       <BootstrapDialogTitle onClose={handleClose}>
       {data.type === "Dog"? <img src="https://img.icons8.com/color/25/000000/dog.png" alt="Dog"/> :<img src="https://img.icons8.com/color/25/000000/cat.png" alt="Cat"/> }
- {data.name}
+ {data.pet_name}
       </BootstrapDialogTitle>
 
-      <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex' }}>
       <CardMedia 
       component="img"
-      image={data.photo}
+      image={data.pet_photo}
       sx={{ width: 150 }}
       />
 
@@ -108,16 +108,19 @@ export default function AllPetInfoPage(props) {
           </Typography>
         </DialogContent>
         <DialogContent dividers>
+          {/* Rescue */}
           <Typography>
-            123
+            {data.org_name}
+            {/* {data.org_photo? <img src={org_photo} alt={data.org_name}  /> : "" } */}
+            {}
           </Typography>
         </DialogContent>
       </Box>
 
-      </Box>
+    </Box>
 
 
     </BootstrapDialog>
-    </>
+    </div>
   )
 }
