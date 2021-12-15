@@ -91,6 +91,7 @@ export default function PetSimilarPage(props) {
 
   return (
   <div>
+    <h1 style={{ textAlign: "center", color: "#8dbdc7", fontSize: 50 }}>Meet more similar pets...</h1>
     {/* Find next 100 */}
     <Stack direction="row">
     <IconButton aria-label="delete" size="small" disabled={page === 1 ? true : false} onClick={() => (setPage(page - 1))}>
