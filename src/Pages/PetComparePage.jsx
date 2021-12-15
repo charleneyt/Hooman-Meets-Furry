@@ -14,6 +14,6 @@ export default function PetCompare(props) {
   }, [username]);
 
   return <div>PetCompare!
-    <Box maxWidth={800}><CompareTable data={data}/></Box>
+    <Box maxWidth={800} style={{marginLeft: "auto", marginRight: "auto"}}><CompareTable data={data}/></Box>
   </div>;
 }

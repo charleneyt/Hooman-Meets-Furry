@@ -41,7 +41,7 @@ const UserLoginBar = (props) => {
 // Buttons
   const notLoggedIn = (
     <Box>
-  <Button variant="contained" size="small" onClick = {handleSignUpClicked} startIcon={<FiUserPlus />} style={{boxShadow: "none", backgroundImage: "linear-gradient(to right, #fbc2eb 0%, #a6c1ee 51%, #fbc2eb 100%)"}}>
+  <Button variant="contained" size="small" onClick={handleSignUpClicked} startIcon={<FiUserPlus />} style={{boxShadow: "none", backgroundImage: "linear-gradient(to right, #fbc2eb 0%, #a6c1ee 51%, #fbc2eb 100%)", borderRadius: "10px"}}>
   Sign Up / Login
   </Button>
   <LoginPage open={open} setOpen={setOpen} setAuth={setAuth} onClose={handleSignUpClose} setUsername={setUsername} />
