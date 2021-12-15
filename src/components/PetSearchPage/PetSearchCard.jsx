@@ -15,7 +15,6 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import AllPetInfoPage from "../../Pages/AllPetInfoPage";
 import {sendLike} from "../../fetcher";
 import InfoRoundedIcon from "@mui/icons-material/InfoRounded";
-import {AddLinkRounded} from "@mui/icons-material";
 
 export default function PetSearchCard(props) {
   const {liked, setForceUpdate, username, addLike} = props;
