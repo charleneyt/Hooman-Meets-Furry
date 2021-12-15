@@ -235,15 +235,13 @@ async function top10(req, res) {
     ? req.query.feature
     : "affectionate_with_family";
 
+    // updated for efficiency
   connection.query(
-    `WITH temp AS (SELECT breed, type, photo, row_number() over ( partition by breed ) AS rn FROM Pet)
-    SELECT DISTINCT breed_name, ${feature} AS feature_rating, photo
-                            FROM Breeds_Rating BR 
-                            LEFT JOIN (SELECT breed, type, photo FROM temp WHERE rn = 1) P 
-                            ON BR.breed_name = P.breed
-                            WHERE P.type = '${req.query.type}'
-                            ORDER BY ${feature} DESC 
-                            LIMIT 10`,
+    `SELECT DISTINCT breed_name, ${feature} AS feature_rating, photo
+    FROM Breeds_Rating BR JOIN breed_with_photo BP ON BR.breed_name = BP.breed
+    WHERE BP.type = '${req.query.type}'
+    ORDER BY ${feature} DESC
+    LIMIT 10;`,
     (error, results, fields) => {
       if (error) {
         console.log(error);
@@ -263,7 +261,7 @@ async function top10(req, res) {
 async function compare(req, res) {
   // not necessary - just used for testing
   const username = req.params.username ? req.params.username : "testuser";
-
+ 
   connection.query(
     `SELECT LB.pet_id, P.name, type, breed, color, age, gender, P.photo, O.city AS location
                         FROM Pet P
@@ -349,7 +347,7 @@ async function get_similar(req, res) {
   // TODO: default user is for testing purpose only
   const username = req.query.username ? req.query.username : "testuser";
 
-  const type = req.query.type ? req.query.type : "cat";
+  const type = req.query.type ? req.query.type : "Dog";
 
   if (req.query.page && !isNaN(req.query.page)) {
     // pagination
@@ -364,17 +362,14 @@ async function get_similar(req, res) {
             JOIN Liked_by Lb on P.id = Lb.pet_id
             JOIN Organization O on O.id = P.organization_id
             WHERE username = '${username}'
+            AND type = '${type}'
             )
             SELECT DISTINCT P.id, P.organization_id, P.type, P.breed, P.color, P.age, P.gender, P.name, P.photo, O.city AS location
-            FROM Pet P, Organization O, Liked_pet LP
-            WHERE P.type = LP.type
-            AND P.breed = LP.breed
-            AND P.color = LP.color
-            AND P.age = LP.age
-            AND P.gender = LP.gender
+            FROM Pet P JOIN Organization O ON P.organization_id = O.id
+            JOIN Liked_pet LP on P.type = LP.type
+            WHERE P.color LIKE LP.color
             AND O.city = LP.location
-            AND P.type = '${type}'
-            AND P.id <> LP.id
+            AND P.id <> LP.id;
             LIMIT ${start}, ${rowNum};`;
 
     connection.query(q, (error, results, fields) => {
@@ -392,16 +387,13 @@ async function get_similar(req, res) {
             JOIN Liked_by Lb on P.id = Lb.pet_id
             JOIN Organization O on O.id = P.organization_id
             WHERE username = '${username}'
+            AND type = '${type}'
             )
             SELECT DISTINCT P.id, P.organization_id, P.type, P.breed, P.color, P.age, P.gender, P.name, P.photo, O.city AS location
-            FROM Pet P, Organization O, Liked_pet LP
-            WHERE P.type = LP.type
-            AND P.breed = LP.breed
-            AND P.color = LP.color
-            AND P.age = LP.age
-            AND P.gender = LP.gender
+            FROM Pet P JOIN Organization O ON P.organization_id = O.id
+            JOIN Liked_pet LP on P.type = LP.type
+            WHERE P.color LIKE LP.color
             AND O.city = LP.location
-            AND P.type = '${type}'
             AND P.id <> LP.id;`;
 
     connection.query(q, (error, results, fields) => {
@@ -484,7 +476,7 @@ async function get_all_colors(req, res) {
 async function get_all_info(req, res) {
   const id = req.params.id;
 
-  const q = `SELECT *
+  const q = `SELECT P.id AS pet_id, type, breed, color, age, gender, size, coat, spayed_neutered, house_trained, special_needs, shots_current, children_friendly, dogs_friendly, cats_friendly, P.name AS pet_name, P.photo AS pet_photo, O.id AS org_id, O.name AS org_name, email, phone, address, city, state, zipcode, country, website, O.photo AS org_photo, facebook, twitter, youtube, instagram, pinterest
   FROM Pet P JOIN Organization O on P.organization_id = O.id
   WHERE P.id = '${id}';
   `;
