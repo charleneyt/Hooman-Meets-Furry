@@ -53,6 +53,12 @@ app.get("/get_all_info/:id", routes.get_all_info);
 // to insert a tuple of (username, pet_id) into Liked_by
 app.post("/mark_favorite", routes.mark_favorite);
 
+// to get all pets liked by a user
+app.get("/get_all_pets_liked_by_user", routes.get_all_pets_liked_by_user);
+
+// to delete a tuple of (username, pet_id) from Liked_by
+app.post("/delete_favorite", routes.delete_favorite);
+
 app.get("/", (req, res) => {
   // res.send("Server status OK", 404);
   res.status(404).send("Server status OK");
