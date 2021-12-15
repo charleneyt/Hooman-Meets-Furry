@@ -23,10 +23,9 @@ export default function PetSimilarCard(props) {
     card: {
       boxShadow: 1,
       // Spaces between cards
-      padding: 1, 
       display: "flex",
-      justifyContent: 'space-between', 
       flexDirection: 'column',
+      
     },
     grid: {
       display: "flex",
