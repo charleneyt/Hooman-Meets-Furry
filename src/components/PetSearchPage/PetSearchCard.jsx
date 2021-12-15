@@ -13,21 +13,26 @@ import {RiHeart3Fill, RiHomeHeartLine} from "react-icons/ri";
 import {GiCat, GiSittingDog} from "react-icons/gi";
 import MaleIcon from "@mui/icons-material/Male";
 import FemaleIcon from "@mui/icons-material/Female";
-
+import {TiLocation} from "react-icons/ti";
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 
 export default function PetSearchCard(props) {
   const dataRow = props.data;
+  
+
+
   return <Card sx={{margin: 1, width: 280}}>
       <CardHeader
         title={dataRow.name}
-        // Breed?
-        subheader={dataRow.breed}
-        // TODO: add img?
+        titleTypographyProps={{fontSize: 22, fontWeight: 700}}
+        subheader={<Typography> <TiLocation />{dataRow.location}</Typography>} 
+        subheaderTypographyProps={{fontSize: 15, fontWeight: 500}}
         avatar={
           <Avatar
             alt={dataRow.type === "Cat" ? "Cat" : "Dog"}
             sx={{bgcolor: "#ef6694"}}
+            src={dataRow.photo}
           >
             {dataRow.type === "Cat" ? <GiCat /> : <GiSittingDog />}
           </Avatar>
@@ -45,26 +50,25 @@ export default function PetSearchCard(props) {
         image={dataRow.photo}
         alt={dataRow.name}
       />
-      <CardContent>
+      
         {/* TODO: fix css */}
         {/* Add location? */}
-      <Typography> 
-      {dataRow.age} 
-       {dataRow.name} 
-        </Typography>
+        <CardActions disableSpacing>
+          <IconButton aria-label="heart" sx={{marginRight: "0.3rem", marginTop: "-0.2rem"}}>
+            <FavoriteIcon sx={{ fontSize: 30}} />
+          </IconButton> 
+          </CardActions>
+          <CardContent disableSpacing>  
+          <Typography>  
+            {<img src="https://img.icons8.com/dusk/15/000000/teddy-bear.png"/>} {dataRow.age} 
+          </Typography>
+        
         <Typography>
           {dataRow.gender === "Male" ? <MaleIcon /> : <FemaleIcon />}
           {dataRow.gender} 
           {dataRow.size}
         </Typography>
       </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="like">
-          <RiHeart3Fill />
-        </IconButton>
-        <IconButton aria-label="rescue">
-          <RiHomeHeartLine />
-        </IconButton>
-      </CardActions>
+
     </Card>;
 }

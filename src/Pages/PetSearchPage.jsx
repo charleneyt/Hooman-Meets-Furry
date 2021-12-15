@@ -106,7 +106,6 @@ export default function PetSearchPage() {
   return (
     <div>
       {/* Pagination things */}
-      
       <PetSearchBar type={type} setType={setType} location={location} setLocation={setLocation} setPageSize={setPageSize} pageSize={pageSize}/>
       <div className={styles.cardContainerStyle}>      
         {
