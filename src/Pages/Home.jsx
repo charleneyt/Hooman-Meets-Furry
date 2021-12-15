@@ -12,7 +12,7 @@ import rockyPic from "../assets/rocky.jpg";
 import tubbyPic from "../assets/tubby.jpg"
 
 const catCards = [
-  {name: "Hoki", img: yokiPic, catBtn: "https://img.icons8.com/color/30/000000/like--v1.png"},
+  {name: "Yoki", img: yokiPic, catBtn: "https://img.icons8.com/color/30/000000/like--v1.png"},
   {name: "Hotpot", img: hotpotPic, catBtn: "https://img.icons8.com/external-konkapp-flat-konkapp/30/000000/external-pot-kitchen-konkapp-flat-konkapp-2.png"},
   {name: "Wotan", img: yellowCatPic, catBtn: "https://img.icons8.com/color/30/000000/fat-cat.png"},
   {name: "Tibbles", img: moiaCat, catBtn: "https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/30/000000/external-cupcake-mother-day-vitaliy-gorbachev-flat-vitaly-gorbachev.png"},
@@ -27,7 +27,7 @@ export default function HomePage() {
   return <div id="home-page">
     <header class="bg-image">
   <div class="container">
-    <h1>Meet a New Friend</h1>
+    <h1>Meet Your Purr-fect Friend</h1>
     <h2>Find | Match | Get Recommended</h2>
   </div>
 </header>
