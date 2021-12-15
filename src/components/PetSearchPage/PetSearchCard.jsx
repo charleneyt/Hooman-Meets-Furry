@@ -56,22 +56,25 @@ export default function PetSearchCard(props) {
           </IconButton> 
         </CardActions>
       <CardContent disableSpacing sx={{ paddingTop: 0}}>  
+      <Typography display="block">  
+          {dataRow.gender === "Male" ? <img src="https://img.icons8.com/color/20/000000/male.png"/> : <img src="https://img.icons8.com/color/20/000000/female.png"/>}
+          {dataRow.gender} 
+        </Typography>
         <Typography display="block">  
           {<img src="https://img.icons8.com/color/20/000000/baby-bottle.png"/>} 
           {dataRow.age} 
+        </Typography>
+        
+        <Typography display="block">  
+          {<img src="https://img.icons8.com/color/20/000000/paint-palette.png"/>} 
+          {dataRow.color} 
         </Typography>
         <Typography display="block">  
           {dataRow.type === "Dog"? <img src="https://img.icons8.com/color/20/000000/dog.png"/> :<img src="https://img.icons8.com/color/20/000000/cat.png"/> }
           {dataRow.breed}
         </Typography>
-        <Typography display="block">  
-          {dataRow.gender === "Male" ? <img src="https://img.icons8.com/color/20/000000/male.png"/> : <img src="https://img.icons8.com/color/20/000000/female.png"/>}
-          {dataRow.gender} 
-        </Typography>
-        <Typography display="block">  
-          {<img src="https://img.icons8.com/color/20/000000/paint-palette.png"/>} 
-          {dataRow.color} 
-        </Typography>
+
+
       </CardContent>
 
     </Card>;
