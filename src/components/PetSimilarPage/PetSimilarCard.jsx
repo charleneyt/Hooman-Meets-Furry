@@ -7,7 +7,8 @@ import { Button, CardActionArea, CardActions, Grid } from '@mui/material';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import { Box } from '@mui/system';
-
+import { HiOutlineLocationMarker } from "react-icons/hi";
+import { IconButton } from "@mui/material";
 
 
 
@@ -47,10 +48,21 @@ export default function PetSimilarCard(props) {
         />
         <CardActionArea disableSpacing style={{maxHeight: 130}}>
         <CardContent >
-          <Typography gutterBottom component="div" >
+          <Grid container spacing={1}>
+            <Grid item xs="auto">
+          <Typography gutterBottom component="div" sx={{ fontFamily: "Dongle", fontSize: 23 }}>
             {dataRow.name} 
             {dataRow.gender === "Male" ? <img src="https://img.icons8.com/color/20/000000/male.png"/> : <img src="https://img.icons8.com/color/20/000000/female.png"/>}
           </Typography>
+          </Grid>
+          <Grid item xs>
+          <Typography style={{fontSize: 20, fontFamily: "Dongle", color: "gray", textAlign:"right"}}>
+          <IconButton aria-label="more" sx={{marginLeft: "auto"}}>
+            <HiOutlineLocationMarker />
+          </IconButton>
+          {dataRow.location}
+        </Typography></Grid>
+        </Grid>
           <Box spacing={1} >
             <Chip label={dataRow.age}  style={{backgroundColor:"#E0F2F1"}}/>
             <Chip label={dataRow.breed}  style={{backgroundColor:"#FAD4E0"}}/>
