@@ -8,8 +8,8 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import PaginationSlider from "../components/utils/PaginationSlider"
 import Pagination from '@mui/material/Pagination';
+import PaginationButton from "../components/utils/PaginationButton";
 
 const features = {
   general_health: "General health",
@@ -78,11 +78,14 @@ export default function RecommendationsPage() {
   return (
     <div>
       <Box sx={{float:"right"}}>
-      <PaginationSlider setPageSize={setPageSize}/>
       </Box>
       {/* TODO: icon bigger, add colors, or even change the icon */}
       <div className="select-type">
         <CatDogSwitch type={type} setType={setType}/>
+      </div>
+      {/* TODO: rerender */}
+      <div>
+        <PaginationButton pageSize={pageSize} setPageSize={setPageSize}/>
       </div>
       <div>
       {/* Select Bar */}
