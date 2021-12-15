@@ -6,21 +6,18 @@ import Box from "@mui/material/Box";
 import {FaCat, FaDog} from "react-icons/fa";
 import InputAdornment from "@mui/material/InputAdornment";
 import {HiOutlineLocationMarker} from "react-icons/hi";
-import SearchIcon from "@mui/icons-material/Search";
-import InputBase from "@mui/material/InputBase";
 import Divider from "@mui/material/Divider";
+import PaginationButton from "../utils/PaginationButton";
 
 
-
-// Search bar theme
-const Search = styled("div")(({theme}) => ({
+const PaginationButtonStyle = styled("div")(({theme}) => ({
   position: "relative",
-  borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha("#00bcd4", 0.15),
+
   "&:hover": {
     backgroundColor: alpha("#00bcd4", 0.25),
   },
-  marginLeft: 0,
+  marginLeft: "10%",
   width: "100%",
   [theme.breakpoints.up("sm")]: {
     marginLeft: theme.spacing(1),
@@ -28,48 +25,22 @@ const Search = styled("div")(({theme}) => ({
   },
 }));
 
-const SearchIconWrapper = styled("div")(({theme}) => ({
-  color: "#000",
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-
-const StyledInputBase = styled(InputBase)(({theme}) => ({
-  // TODO: Input test color
-  color: "#000",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      width: "12ch",
-      "&:focus": {
-        width: "20ch",
-      },
-    },
-  },
-}));
-
-
 
 export default function PetSearchBar(props) {
-  const {type, setType, setLocation} = props; 
+  const {type, setType, setLocation, pageSize, setPageSize} = props; 
   const [value, setValue] = React.useState("");
   
 
+  // TODO: fix location change
   const handleLocationChange = (event) => {
     //  location search by pressing the enter key
     if (event.keyCode === 13) {
       setLocation(event.target.value);
+      console.log(event.target.value);
     }
     setValue(event.target.value)
+    console.log(event.target.value);
+
   }
 
 
@@ -110,16 +81,9 @@ export default function PetSearchBar(props) {
             />
             
           </Box>
-          {/* TODO: Search for pet name? */}
-          <Search style={{marginLeft: "auto"}}>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search Pet..."
-              inputProps={{"aria-label": "search"}}
-            />
-          </Search>
+           <PaginationButtonStyle style={{marginLeft: "auto"}}>
+           <PaginationButton pageSize={pageSize} setPageSize={setPageSize} type={type}/>
+          </PaginationButtonStyle> 
         </Toolbar>
       </AppBar>
     </Box>
