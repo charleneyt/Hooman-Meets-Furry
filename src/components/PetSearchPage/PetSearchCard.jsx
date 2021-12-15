@@ -19,7 +19,8 @@ import AllPetInfoPage from "../../Pages/AllPetInfoPage";
 
 export default function PetSearchCard(props) {
   const dataRow = props.data;
-  const[petId, setPetId] = React.useState("");
+  // TODO: kill defult useState?
+  const[petId, setPetId] = React.useState(0);
   const[openModal, setOpenModal] = React.useState(false);
 
   const handleClose = () => {
