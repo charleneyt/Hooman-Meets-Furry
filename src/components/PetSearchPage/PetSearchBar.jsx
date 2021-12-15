@@ -12,11 +12,6 @@ import PaginationButton from "../utils/PaginationButton";
 
 const PaginationButtonStyle = styled("div")(({theme}) => ({
   position: "relative",
-  backgroundColor: alpha("#00bcd4", 0.15),
-
-  "&:hover": {
-    backgroundColor: alpha("#00bcd4", 0.25),
-  },
   marginLeft: "10%",
   width: "100%",
   [theme.breakpoints.up("sm")]: {
