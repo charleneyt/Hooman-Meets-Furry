@@ -369,7 +369,7 @@ async function get_similar(req, res) {
             JOIN Liked_pet LP on P.type = LP.type
             WHERE P.color LIKE LP.color
             AND O.city = LP.location
-            AND P.id <> LP.id;
+            AND P.id <> LP.id
             LIMIT ${start}, ${rowNum};`;
 
     connection.query(q, (error, results, fields) => {
@@ -550,8 +550,6 @@ async function delete_favorite(req, res) {
   });
 }
 
-
-
 module.exports = {
   pet_search,
   rescues,
@@ -566,5 +564,5 @@ module.exports = {
   get_all_info,
   mark_favorite,
   get_all_pets_liked_by_user,
-  delete_favorite
+  delete_favorite,
 };

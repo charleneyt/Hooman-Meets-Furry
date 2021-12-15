@@ -7,41 +7,20 @@ import {Button, CardActionArea, CardActions, Grid} from "@mui/material";
 import Chip from "@mui/material/Chip";
 import {Box} from "@mui/system";
 import {HiOutlineLocationMarker} from "react-icons/hi";
-import {IconButton} from "@mui/material";
 
 export default function PetSimilarCard(props) {
   const dataRow = props.dataRow;
-  const styles = {
-    media: {
-      height: 0,
-      paddingTop: "56.25%", // 16:9,
-      marginTop: "30",
-    },
-    card: {
-      boxShadow: 1,
-      // Spaces between cards
-      display: "flex",
-      flexDirection: "column",
-    },
-    grid: {
-      display: "flex",
-      justifyContent: "space-between",
-      flexDirection: "column",
-      height: "100%",
-    },
-  };
   return (
     <>
-      <Grid item className={styles.grid} sx={{m: 1}} style={{height: 350}}>
-        <Card className={styles.card} raised style={{height: 350, width: 250}}>
+      <Grid item sx={{m: 1}} style={{height: 350}}>
+        <Card raised style={{height: 350, width: 250}}>
           <CardMedia
-            className={styles.media}
             component="img"
             height="160"
             image={dataRow.photo}
             alt={dataRow.name}
           />
-          <CardActionArea disableSpacing style={{maxHeight: 130}}>
+          <CardActionArea style={{maxHeight: 130}}>
             <CardContent>
               <Grid container spacing={1}>
                 <Grid item xs="auto">
@@ -73,9 +52,8 @@ export default function PetSimilarCard(props) {
                       textAlign: "right",
                     }}
                   >
-                    <IconButton aria-label="more" sx={{marginLeft: "auto"}}>
-                      <HiOutlineLocationMarker />
-                    </IconButton>
+                    <HiOutlineLocationMarker />
+
                     {dataRow.location}
                   </Typography>
                 </Grid>

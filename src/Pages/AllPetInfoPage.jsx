@@ -3,7 +3,6 @@ import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import CloseIcon from "@mui/icons-material/Close";
-import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import PropTypes from "prop-types";
 import {getAllInfo} from "../fetcher";
@@ -151,6 +150,7 @@ export default function AllPetInfoPage(props) {
                       />
                     );
                   }
+                  return null;
                 })}
               </div>
             </DialogContent>
