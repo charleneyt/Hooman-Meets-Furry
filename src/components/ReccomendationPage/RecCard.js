@@ -1,9 +1,17 @@
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+import {
+  CardHeader,
+  CardMedia,
+  CardContent,
+  CardActions,
+  Typography,
+  IconButton,
+  Button,
+} from "@mui/material";
+import MaleIcon from "@mui/icons-material/Male";
+import FemaleIcon from "@mui/icons-material/Female";
+import { HiOutlineLocationMarker } from "react-icons/hi";
+import { IoPawSharp } from "react-icons/io5";
 
 // SELECT P.organization_id, type, breed, color, age, gender, P.name, P.photo, O.city AS location
 
@@ -13,7 +21,10 @@ export default function RecCard(props) {
     // TODO: Add what kind of element we want in the card
     <Card variant="outlined" sx={{minWidth: 275}}>
       <CardContent>
-        <Typography sx={{fontSize: 20, fontFamily: "Dongle"}} color="text.secondary" gutterBottom>
+        <Typography sx={{fontSize: 25, fontFamily: "Dongle"}} color="#8dbdc7" gutterBottom>
+          <IconButton aria-label="more" sx={{marginLeft: "auto", color: "#8dbdc7"}}>
+            <IoPawSharp />
+          </IconButton>
           {dataRow.name}
         </Typography>
         {/* TODO: fix the height let it the smae  */}
@@ -28,10 +39,20 @@ export default function RecCard(props) {
           {/* {dataRow.type}  */}
           {dataRow.breed}
         </Typography>
+        <Typography style={{fontSize: 25, fontFamily: "Dongle"}}>
+          {dataRow.gender === "Male" ? <MaleIcon /> : <FemaleIcon />}
+          {dataRow.gender} 
+        </Typography>
         <Typography style={{fontSize: 25, fontFamily: "Dongle"}} variant="body2">
           {dataRow.color}
           <br />
           {dataRow.age}
+        </Typography>
+        <Typography style={{fontSize: 25, fontFamily: "Dongle"}}>
+          <IconButton aria-label="more" sx={{marginLeft: "auto"}}>
+            <HiOutlineLocationMarker />
+          </IconButton>
+          {dataRow.location}
         </Typography>
       </CardContent>
       <CardActions>
