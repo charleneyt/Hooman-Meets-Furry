@@ -87,7 +87,7 @@ export default function RecommendationsPage() {
       <div>
       {/* Select Bar */}
       <FormControl variant="standard" sx={{marginBottom: 5, minWidth: 300}}>
-        <InputLabel id="label">Feature</InputLabel>
+        <InputLabel style={{fontSize: 25, fontFamily: "Dongle"}} id="label">Feature</InputLabel>
         <Select
           labelId="select-label"
           id="rater-select-bar"
@@ -97,11 +97,12 @@ export default function RecommendationsPage() {
           value={feature}
           label="Feature"
           onChange={handleChangeFeature}
+          sx={{ fontSize: 25, fontFamily: "Dongle" }}
           // setFeature={setFeature}
           // onClick={handleChangeFeature}
         >
           {Object.keys(features).map((key) => (
-            <MenuItem key={key} value={key}>{features[key]}</MenuItem>
+            <MenuItem style={{fontSize: 25, fontFamily: "Dongle"}} key={key} value={key}>{features[key]}</MenuItem>
           ))}
         </Select>
       </FormControl>
