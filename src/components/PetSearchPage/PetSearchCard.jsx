@@ -20,8 +20,10 @@ export default function PetSearchCard(props) {
   const dataRow = props.data;
   return <Card sx={{margin: 1, width: 280}}>
       <CardHeader
+        titleTypographyProps={{fontFamily: "Dongle", fontSize: 25}}
         title={dataRow.name}
         // Breed?
+        subheaderTypographyProps={{fontFamily: "Dongle", fontSize: 25}}
         subheader={dataRow.breed}
         // TODO: add img?
         avatar={
@@ -48,11 +50,11 @@ export default function PetSearchCard(props) {
       <CardContent>
         {/* TODO: fix css */}
         {/* Add location? */}
-      <Typography> 
+      <Typography style={{fontSize: 25, fontFamily: "Dongle"}}> 
       {dataRow.age} 
        {dataRow.name} 
         </Typography>
-        <Typography>
+        <Typography style={{fontSize: 25, fontFamily: "Dongle"}}>
           {dataRow.gender === "Male" ? <MaleIcon /> : <FemaleIcon />}
           {dataRow.gender} 
           {dataRow.size}
