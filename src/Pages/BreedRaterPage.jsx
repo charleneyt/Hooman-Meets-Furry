@@ -27,7 +27,7 @@ export default function BreedRaterPage() {
 
   return (
     <div className="container">
-      <h1 style={{textAlign: "center", color: "lightblue"}}>Breed Rater</h1>
+      <h1 style={{ textAlign: "center", color: "#8dbdc7", fontSize: 50 }}>Breed Rater</h1>
       <div
         style={{
           minWidth: 750,

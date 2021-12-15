@@ -28,9 +28,18 @@ async function pet_search(req, res) {
     }
   }
 
+  // We want to separately process gender since there's an edge case
+  function checkIfSame(fieldName, queryField) {
+    if (queryField && queryField !== "undefined") {
+      const fields = queryField.split(",");
+      const queries = fields.map((field) => `${fieldName} = '${field}'`);
+      params.push(`(${queries.join(" OR ")})`);
+    }
+  }
+
+  checkIfSame("gender", req.query.gender);
   pushIfDefined("type", req.query.type);
   pushIfDefined("age", req.query.age);
-  pushIfDefined("gender", req.query.gender);
   pushIfDefined("coat", req.query.coat);
   pushIfDefined("size", req.query.size);
   pushIfDefined("color", req.query.color);

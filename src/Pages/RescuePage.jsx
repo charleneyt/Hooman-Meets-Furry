@@ -116,8 +116,8 @@ function RescuePageSelector(props) {
 
   return (
     <div>
-      <h1 style={{ textAlign: "center", color: "lightblue", fontSize: 50 }}>Enter your location to find rescues</h1>
-      <Form style={{ width: "80vw", margin: "0 auto", marginTop: "5vh", color: "grey" }}>
+      <h1 style={{ textAlign: "center", color: "#8dbdc7", fontSize: 50 }}>Enter your location to find rescues</h1>
+      <Form style={{ width: "80vw", margin: "0 auto", marginTop: "5vh" }}>
       <Grid container spacing={16}>
         <Grid item> 
         <ButtonBase sx={{ width: 300, height: 300 }}>
@@ -128,11 +128,12 @@ function RescuePageSelector(props) {
         <Grid item>
         <Row>
           <Col flex={2}> 
-            <FormGroup style={{ width: "20vw", margin: "0 auto", color: "grey" }}>
+            <FormGroup style={{ width: "20vw", margin: "0 auto" }}>
               <label>City</label>
               <FormInput 
                 value={cityQuery}
                 onChange={handleCityQueryChange}
+                style={{ background: "#eeecee", border: "gray 1px solid"  }}
               />
                <label>State</label>
               <Select
@@ -141,7 +142,7 @@ function RescuePageSelector(props) {
                 sx={{ height: 30, fontSize: 23, fontFamily: "Dongle" }}
               >
                 {Object.keys(menuItems_state).map((key) => (
-                  <MenuItem style={{fontSize: 23, fontFamily: "Dongle", color: "grey"}} key={key} value={key}>{menuItems_state[key]}</MenuItem>
+                  <MenuItem style={{fontSize: 23, fontFamily: "Dongle"}} key={key} value={key}>{menuItems_state[key]}</MenuItem>
                 ))}
               </Select>
               <label>Pet Type</label>
@@ -151,7 +152,7 @@ function RescuePageSelector(props) {
                 sx={{ height: 30, fontSize: 23, fontFamily: "Dongle" }}
               >
                 {Object.keys(menuItems_type).map((key) => (
-                  <MenuItem style={{fontSize: 23, fontFamily: "Dongle", color: "grey"}} key={key} value={key}>{menuItems_type[key]}</MenuItem>
+                  <MenuItem style={{fontSize: 23, fontFamily: "Dongle"}} key={key} value={key}>{menuItems_type[key]}</MenuItem>
                 ))}
               </Select>
             </FormGroup>
@@ -160,7 +161,6 @@ function RescuePageSelector(props) {
             <FormGroup style={{ width: "10vw", margin: "0 auto", marginTop: "4vh" }}>
             <ThemeProvider theme={theme}>
               <Button variant="contained" color="lightblue" startIcon={<BiSearchAlt/>} onClick={updateSearchResults}>
-              {/* <IconButton aria-label="BiSearchAlt"/> */}
                 Search
               </Button>
               </ThemeProvider>
@@ -198,7 +198,6 @@ export default function RescuePage() {
       <RescuePageSelector
         setRescueResults={setRescueResults} city={city} setCity={setCity} state={state} setState={setState} type={type} setType={setType}
       />
-      {/* <CatDogSwitch type={type} setType={setType}/> */}
       <div
         style={{
           minWidth: 750,

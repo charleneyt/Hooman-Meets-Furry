@@ -49,7 +49,7 @@ export default function PetSearchPage() {
   const [type, setType] = React.useState("Cat");
   const [location, setLocation] = React.useState("");
   const [selectOptions, setSelectOptions] = React.useState({});
-  // TODO: add pagination tool
+  
   // Pagination
   const [page, setPage] = React.useState(1);
   const [pageSize, setPageSize] = React.useState(25);

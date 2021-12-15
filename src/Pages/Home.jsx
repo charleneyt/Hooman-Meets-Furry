@@ -12,7 +12,7 @@ import rockyPic from "../assets/rocky.jpg";
 import tubbyPic from "../assets/tubby.jpg"
 
 const catCards = [
-  {name: "Hoki", img: yokiPic, catBtn: "https://img.icons8.com/color/30/000000/like--v1.png"},
+  {name: "Yoki", img: yokiPic, catBtn: "https://img.icons8.com/color/30/000000/like--v1.png"},
   {name: "Hotpot", img: hotpotPic, catBtn: "https://img.icons8.com/external-konkapp-flat-konkapp/30/000000/external-pot-kitchen-konkapp-flat-konkapp-2.png"},
   {name: "Wotan", img: yellowCatPic, catBtn: "https://img.icons8.com/color/30/000000/fat-cat.png"},
   {name: "Tibbles", img: moiaCat, catBtn: "https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/30/000000/external-cupcake-mother-day-vitaliy-gorbachev-flat-vitaly-gorbachev.png"},
@@ -27,7 +27,7 @@ export default function HomePage() {
   return <div id="home-page">
     <header class="bg-image">
   <div class="container">
-    <h1>Meet a New Friend</h1>
+    <h1>Meet Your Purr-fect Friend</h1>
     <h2>Find | Match | Get Recommended</h2>
   </div>
 </header>
@@ -61,19 +61,19 @@ export default function HomePage() {
     <div class="col-3 features">
       <i class="fa fa-paw"></i>
       <p>
-        "Say cool stuff here"
+        Provide a hand for a paw.
       </p>
     </div>
     <div class="col-3 features">
       <i class="fa fa-home"></i>
       <p>
-       This is why it's great.  Here's the one thing you should know about this product.
+       Make your house a home, adopt a pet.
       </p>
     </div>
     <div class="col-3 features">
       <i class="fa fa-heart"></i>
       <p>
-       Still curious?  Find out more by clicking on the link.
+       They deserve the love.
       </p>
     </div>
   </div>
@@ -81,8 +81,8 @@ export default function HomePage() {
 
 <section class="section--primary--alt">
   <div class="container">
-    <h3>Remember this brand.</h3>
-    <p>Use this template for business, portfolio, ecommerce, blogs.Simple setup, add content, link to more content -- modern and beautiful!</p>
+    <h3>Give pets a home.</h3>
+    <p>Saving one creature wont change the world yet it will change the world for that one creature.</p>
   </div>
 </section>
 
