@@ -53,6 +53,7 @@ async function pet_search(req, res) {
         : 10;
     pageLimitString = `LIMIT ${(page - 1) * pageSize},${pageSize}`;
   }
+  // console.log(finalWhereQuery);
 
   connection.query(
     `SELECT P.id, P.organization_id, type, breed, color, age, gender, P.name, P.photo, O.city AS location
@@ -468,6 +469,47 @@ async function get_all_colors(req, res) {
   });
 }
 
+// ********************************************
+// GET ALL Information by PetId
+// ********************************************
+async function get_all_info(req, res) {
+  const id = req.query.type;
+
+  const q = `SELECT *
+  FROM Pet P JOIN Organization O on P.organization_id = O.id
+  WHERE P.id = '${id}';
+  `;
+  connection.query(q, (error, results, fields) => {
+    if (error) {
+      console.log(error);
+      res.json({error});
+    } else if (results) {
+      res.json({results});
+    }
+  });
+}
+
+// ********************************************
+// POST request for adding favorite pet
+// ********************************************
+async function mark_favorite(req, res) {
+  // console.log("this is body!!!!!!!!"+ req.body);
+  const user = req.body.user;
+  const id = req.body.id;
+
+  const q = `INSERT INTO Liked_by (username, pet_id) VALUES ('${user}', '${id}');
+  `;
+  connection.query(q, (error, results, fields) => {
+    if (error) {
+      console.log(error);
+      res.json({error});
+    } else if (results) {
+      res.json({results});
+      console.log(res);
+    }
+  });
+}
+
 module.exports = {
   pet_search,
   rescues,
@@ -479,4 +521,6 @@ module.exports = {
   user_login,
   get_all_breeds,
   get_all_colors,
+  get_all_info,
+  mark_favorite
 };

@@ -1,5 +1,6 @@
 const express = require("express");
 // const mysql = require("mysql");
+// const bodyParser = require("body-parser");
 
 const cors = require("cors");
 const routes = require("./routes");
@@ -11,6 +12,10 @@ app.use(
     origin: "*",
   })
 );
+
+// app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.json());
+app.use(express.json());
 
 // Route a - register as GET
 app.get("/petsearch", routes.pet_search);
@@ -41,6 +46,12 @@ app.get("/get_all_breeds", routes.get_all_breeds);
 
 // to get a list of distinct colors, parameter for dog/cat
 app.get("/get_all_colors", routes.get_all_colors);
+
+// to get all info (pet and organization related) for a given pet
+app.get("/get_all_info", routes.get_all_info);
+
+// to insert a tuple of (username, pet_id) into Liked_by
+app.post("/mark_favorite", routes.mark_favorite);
 
 app.get("/", (req, res) => {
   // res.send("Server status OK", 404);
