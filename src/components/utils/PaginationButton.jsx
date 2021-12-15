@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';

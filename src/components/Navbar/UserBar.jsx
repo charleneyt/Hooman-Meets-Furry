@@ -113,7 +113,7 @@ const UserLoginBar = (props) => {
           </Typography>
           {/* When the screen get's larger */}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-          <Typography sx={{ fontFamily: "Dongle", fontSize: 25}}> Welcome {username}!
+          <Typography sx={{ fontFamily: "Dongle", fontSize: 25}}> Welcome {auth ? username : "guest"}!
           </Typography>
           </Box>
           {/* If logged in render the logged in part */}

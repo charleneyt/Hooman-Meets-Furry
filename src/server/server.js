@@ -48,7 +48,7 @@ app.get("/get_all_breeds", routes.get_all_breeds);
 app.get("/get_all_colors", routes.get_all_colors);
 
 // to get all info (pet and organization related) for a given pet
-app.get("/get_all_info", routes.get_all_info);
+app.get("/get_all_info/:id", routes.get_all_info);
 
 // to insert a tuple of (username, pet_id) into Liked_by
 app.post("/mark_favorite", routes.mark_favorite);

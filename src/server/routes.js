@@ -482,7 +482,7 @@ async function get_all_colors(req, res) {
 // GET ALL Information by PetId
 // ********************************************
 async function get_all_info(req, res) {
-  const id = req.query.type;
+  const id = req.params.id;
 
   const q = `SELECT *
   FROM Pet P JOIN Organization O on P.organization_id = O.id
@@ -505,7 +505,6 @@ async function mark_favorite(req, res) {
   // console.log("this is body!!!!!!!!"+ req.body);
   const user = req.body.user;
   const id = req.body.id;
-
   const q = `INSERT INTO Liked_by (username, pet_id) VALUES ('${user}', '${id}');
   `;
   connection.query(q, (error, results, fields) => {
@@ -531,5 +530,5 @@ module.exports = {
   get_all_breeds,
   get_all_colors,
   get_all_info,
-  mark_favorite
+  mark_favorite,
 };

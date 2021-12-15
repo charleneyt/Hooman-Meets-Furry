@@ -73,15 +73,6 @@ const checkBoxConfigs = {
   }
 }
 
-const useStyles = makeStyles({
-  customTextField: {
-    "& input::placeholder": {
-      fontFamily:"Dongle",
-      fontSize: "25px"
-    }
-  }
-})
-
 export default function PetSearchEngine(props) {
   const {checkBoxOptions, setCheckBoxOptions, type, selectOptions, setSelectOptions } = props;
   const [breedOptions, setBreedOptions] = React.useState([]);
