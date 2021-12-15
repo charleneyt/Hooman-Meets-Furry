@@ -48,6 +48,8 @@ const StyledInputBase = styled(InputBase)(({theme}) => ({
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
+    fontFamily: "Dongle",
+    fontSize: 25,
     [theme.breakpoints.up("sm")]: {
       width: "12ch",
       "&:focus": {
@@ -99,8 +101,10 @@ export default function PetSearchBar(props) {
               // TODO: Cursor pointer
               placeholder="User's Location"
               variant="standard"
+              fontFamily="Dongle"
               InputProps={{
                 disableUnderline: true,
+                style: {fontFamily: "Dongle", fontSize: 25},
                 startAdornment: (
                   <InputAdornment position="start">
                     <HiOutlineLocationMarker />
