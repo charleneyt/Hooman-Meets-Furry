@@ -110,3 +110,10 @@ export const getUserLogin = (email, password) => {
     {method: "GET"}
   );
 };
+
+export const getAllInfo = (id) => {
+  return fetch(
+    `http://${config.server_host}:${config.server_port}/get_all_info/${id}`,
+    {method: "GET"}
+  );
+};

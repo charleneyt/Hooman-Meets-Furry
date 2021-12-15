@@ -482,7 +482,7 @@ async function get_all_colors(req, res) {
 // GET ALL Information by PetId
 // ********************************************
 async function get_all_info(req, res) {
-  const id = req.query.type;
+  const id = req.params.id;
 
   const q = `SELECT *
   FROM Pet P JOIN Organization O on P.organization_id = O.id
@@ -531,5 +531,5 @@ module.exports = {
   get_all_breeds,
   get_all_colors,
   get_all_info,
-  mark_favorite
+  mark_favorite,
 };

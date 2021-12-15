@@ -71,10 +71,6 @@ export default function RecommendationsPage() {
     })
   }, [type, feature, page, pageSize]);
 
-
-
-
-
   return (
     <div>
       <Box sx={{float:"right"}}>

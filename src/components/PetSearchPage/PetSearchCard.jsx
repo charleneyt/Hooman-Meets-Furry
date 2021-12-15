@@ -1,3 +1,4 @@
+import React from "react";
 import Card from "@mui/material/Card";
 import {
   CardHeader,
@@ -13,16 +14,27 @@ import {TiLocation} from "react-icons/ti";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import MoreIcon from '@mui/icons-material/More';
 import {RiHomeHeartLine} from "react-icons/ri";
+import AllPetInfoPage from "../../Pages/AllPetInfoPage";
 
 
 export default function PetSearchCard(props) {
   const dataRow = props.data;
+  const[petId, setPetId] = React.useState("");
+  const[openModal, setOpenModal] = React.useState(false);
+
+  const handleClose = () => {
+    setOpenModal(false);
+  };
+
+  const handleMoreBttn = (event) => {
+    setPetId(event.currentTarget.value);
+    setOpenModal(true);
+  };
 
   return <Card sx={{margin: 1, width: 280}}>
       <CardHeader
         titleTypographyProps={{fontFamily: "Dongle", fontSize: 25}}
         title={dataRow.name}
-
         titleTypographyProps={{fontSize: 22, fontWeight: 700}}
         subheader={<Typography> <TiLocation />{dataRow.location}</Typography>} 
         subheaderTypographyProps={{fontSize: 15, fontWeight: 500, fontFamily: "Dongle"}}
@@ -38,8 +50,8 @@ export default function PetSearchCard(props) {
           </Avatar>
         }
         action={
-          <IconButton aria-label="rescue" sx={{marginLeft: "auto", marginTop: "0.5rem", marginRight: "0.5rem", fontSize: 25}}>
-            <RiHomeHeartLine />
+          <IconButton aria-label="rescue" onClick={()=>{console.log("clicked heart");}} sx={{marginLeft: "auto", marginTop: "0.5rem", marginRight: "0.5rem"}}>
+            <RiHomeHeartLine style={{fontSize: 30}}/>
           </IconButton>
         }
       />
@@ -51,35 +63,34 @@ export default function PetSearchCard(props) {
         alt={dataRow.name}
       />
 
-        <CardActions disableSpacing sx={{ paddingTop: 0.5}}>
+        <CardActions sx={{ paddingTop: 0.5}}>
           <IconButton aria-label="heart" sx={{marginRight: "0.3rem"}}>
             <FavoriteIcon sx={{ fontSize: 25}} />
           </IconButton> 
-          <IconButton aria-label="more" sx={{marginRight: "0.1rem"}} >
+          <IconButton aria-label="more" value={dataRow.id} onClick={handleMoreBttn} sx={{marginRight: "0.1rem"}} >
             <MoreIcon sx={{ fontSize: 25}} />
           </IconButton> 
+          {/* Modal */}
+          <AllPetInfoPage openModal={openModal} handleClose={handleClose} petId={petId}/>
         </CardActions>
       <CardContent disableSpacing sx={{ paddingTop: 0}}>  
       <Typography display="block">  
-          {dataRow.gender === "Male" ? <img src="https://img.icons8.com/color/20/000000/male.png"/> : <img src="https://img.icons8.com/color/20/000000/female.png"/>}
+          {dataRow.gender === "Male" ? <img src="https://img.icons8.com/color/20/000000/male.png" alt="Male"/> : <img src="https://img.icons8.com/color/20/000000/female.png" alt="Female"/>}
           {dataRow.gender} 
         </Typography>
         <Typography display="block">  
-          {<img src="https://img.icons8.com/color/20/000000/baby-bottle.png"/>} 
+          {<img src="https://img.icons8.com/color/20/000000/baby-bottle.png" alt="Age"/>} 
           {dataRow.age} 
         </Typography>
         
         <Typography display="block">  
-          {<img src="https://img.icons8.com/color/20/000000/paint-palette.png"/>} 
+          {<img src="https://img.icons8.com/color/20/000000/paint-palette.png" alt="Color"/>} 
           {dataRow.color} 
         </Typography>
         <Typography display="block">  
-          {dataRow.type === "Dog"? <img src="https://img.icons8.com/color/20/000000/dog.png"/> :<img src="https://img.icons8.com/color/20/000000/cat.png"/> }
+          {dataRow.type === "Dog"? <img src="https://img.icons8.com/color/20/000000/dog.png" alt="Dog"/> :<img src="https://img.icons8.com/color/20/000000/cat.png" alt="Cat"/> }
           {dataRow.breed}
         </Typography>
-
-
       </CardContent>
-
     </Card>;
 }
