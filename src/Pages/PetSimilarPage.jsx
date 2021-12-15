@@ -3,6 +3,9 @@ import { getSimilar } from "../fetcher";
 import PetSimilarCard from "../components/PetSimilarPage/PetSimilarCard";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import { Box } from '@mui/material';
+import CatDogSwitch from "../components/utils/CatDogSwitch";
+
 
 const responsive = {
   superLargeDesktop: {
@@ -36,6 +39,8 @@ export default function PetSimilarPage(props) {
   const[page, setPage] = React.useState(1);
   const[pageSize, setPageSize] = React.useState(10);
 
+  
+
   React.useEffect(() => {
     getSimilar(username, type, page, pageSize).then(resp => resp.json()).then(resp => {
       setData(resp.results);
@@ -43,7 +48,9 @@ export default function PetSimilarPage(props) {
   }, [username, type, page, pageSize])
   return (
   <div>
+    <CatDogSwitch type={type} setType={setType}/>
     {/* TODO: do we need to show dots? draggable? */}
+    <Box style={{ marginTop: 20, Width: 800}}>
     <Carousel 
         responsive={responsive}
         centerMode={true}
@@ -55,7 +62,8 @@ export default function PetSimilarPage(props) {
         <PetSimilarCard dataRow={dataRow}/>
         </div>
       )}
-    </Carousel>;
+    </Carousel>
+    </Box>
   </div>
     )
 }
