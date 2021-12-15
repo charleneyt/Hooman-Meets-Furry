@@ -13,6 +13,8 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import {createTable} from "../utils/table";
 import {getComparator, stableSort} from "../utils/comparators";
+import {Typography} from "@mui/material";
+import makeStyles from "@material-ui/core/styles/makeStyles";
 
 
 const headCells = [
@@ -85,6 +87,23 @@ function EnhancedTableHead(props) {
   );
 }
 
+const useStyles = makeStyles({
+  caption: {
+      fontSize: 25,
+      fontFamily: "Dongle"
+  },
+  toolbar: {
+    "& > p:nth-of-type(2)": {
+      fontSize: 25,
+      fontFamily: "Dongle"
+    }
+  },
+  menuItem: {
+      fontSize: 25,
+      fontFamily: "Dongle"
+  }
+});
+
 const RescueTable = createTable(
   (
     rows,
@@ -98,12 +117,13 @@ const RescueTable = createTable(
     handleChangePage,
     handleChangeRowsPerPage,
     handleChangeDense,
-  ) => (
-    <Box sx={{width: "100%"}}>
+  ) => {
+    const classes = useStyles();
+    return <Box sx={{width: "100%"}}>
       <Paper sx={{width: "100%", mb: 2, rounded: true}}>
         <TableContainer>
           <Table
-            sx={{minWidth: 750}}
+            sx={{minWidth: 850}}
             aria-labelledby="tableTitle"
             size={dense ? "small" : "medium"}
           >
@@ -119,12 +139,12 @@ const RescueTable = createTable(
                 .map((row) => {
                   return (
                     <TableRow role="checkbox" tabIndex={-1} key={row.id}>
-                      <TableCell align="center">{row.name}</TableCell>
-                      <TableCell align="center">{row.address ? row.address : "Not available"}</TableCell>
-                      <TableCell align="center">{row.city}</TableCell>
-                      <TableCell align="center">{row.email}</TableCell>
-                      <TableCell align="center">{row.type}</TableCell>
-                      <TableCell align="center">{row.num}</TableCell>
+                      <TableCell style={{fontSize: 23, fontFamily: "Dongle", textAlign: "center"}}>{row.name}</TableCell>
+                      <TableCell style={{fontSize: 23, fontFamily: "Dongle", textAlign: "center"}}>{row.address ? row.address : "Not available"}</TableCell>
+                      <TableCell style={{fontSize: 23, fontFamily: "Dongle", textAlign: "center"}}>{row.city}</TableCell>
+                      <TableCell style={{fontSize: 23, fontFamily: "Dongle", textAlign: "center"}}>{row.email}</TableCell>
+                      <TableCell style={{fontSize: 23, fontFamily: "Dongle", textAlign: "center"}}>{row.type}</TableCell>
+                      <TableCell style={{fontSize: 23, fontFamily: "Dongle", textAlign: "center"}}>{row.num}</TableCell>
                     </TableRow>
                   );
                 })}
@@ -148,14 +168,25 @@ const RescueTable = createTable(
           page={page}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
+          SelectProps={{
+            style:{
+              fontSize: 25,
+              fontFamily: "Dongle"
+            }
+          }}
+          classes={{
+            selectdLabel: classes.selectdLabel,
+            toolbar: classes.toolbar,
+            menuItem: classes.menuItem
+          }}
         />
       </Paper>
       <FormControlLabel
         control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
+        label={<Typography sx={{ fontSize: 25, fontFamily: "Dongle" }}>Dense padding</Typography>}
       />
     </Box>
-  ),
+  }
 );
 
 export default RescueTable;
