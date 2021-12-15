@@ -62,7 +62,7 @@ async function pet_search(req, res) {
         : 10;
     pageLimitString = `LIMIT ${(page - 1) * pageSize},${pageSize}`;
   }
-  // console.log(finalWhereQuery);
+  console.log(finalWhereQuery);
 
   connection.query(
     `SELECT P.id, P.organization_id, type, breed, color, age, gender, P.name, P.photo, O.city AS location
@@ -510,6 +510,48 @@ async function mark_favorite(req, res) {
   });
 }
 
+// ********************************************
+// GET All distinct pets liked by a user
+// ********************************************
+async function get_all_pets_liked_by_user(req, res) {
+  const username = req.query.username;
+
+  const q = `SELECT DISTINCT pet_id
+  FROM Liked_by
+  WHERE username = '${username}';
+  `;
+  connection.query(q, (error, results, fields) => {
+    if (error) {
+      console.log(error);
+      res.json({error});
+    } else if (results) {
+      res.json({results});
+    }
+  });
+}
+
+// ********************************************
+// POST request for deleting a favorite pet
+// ********************************************
+async function delete_favorite(req, res) {
+  // console.log("this is body!!!!!!!!"+ req.body);
+  const user = req.body.user;
+  const id = req.body.id;
+  const q = `DELETE FROM Liked_by WHERE username = '${user}' AND pet_id = '${id}';
+  `;
+  connection.query(q, (error, results, fields) => {
+    if (error) {
+      console.log(error);
+      res.json({error});
+    } else if (results) {
+      res.json({results});
+      console.log(res);
+    }
+  });
+}
+
+
+
 module.exports = {
   pet_search,
   rescues,
@@ -523,4 +565,6 @@ module.exports = {
   get_all_colors,
   get_all_info,
   mark_favorite,
+  get_all_pets_liked_by_user,
+  delete_favorite
 };
