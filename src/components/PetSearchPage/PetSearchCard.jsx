@@ -18,6 +18,7 @@ import AllPetInfoPage from "../../Pages/AllPetInfoPage";
 
 
 export default function PetSearchCard(props) {
+  const username = props.username;
   const dataRow = props.data;
   // TODO: kill defult useState?
   const[petId, setPetId] = React.useState(0);
@@ -30,6 +31,11 @@ export default function PetSearchCard(props) {
   const handleMoreBttn = (event) => {
     setPetId(event.currentTarget.value);
     setOpenModal(true);
+  };
+
+  const handleLikeBtn = (event) => {
+    console.log(event.currentTarget.value);
+    console.log(username);
   };
 
   return <Card sx={{margin: 1, width: 280}}>
@@ -65,7 +71,7 @@ export default function PetSearchCard(props) {
       />
 
         <CardActions sx={{ paddingTop: 0.5}}>
-          <IconButton aria-label="heart" sx={{marginRight: "0.3rem"}}>
+          <IconButton aria-label="like" value={dataRow.id} onClick={handleLikeBtn} sx={{marginRight: "0.3rem"}} >
             <FavoriteIcon sx={{ fontSize: 25}} />
           </IconButton> 
           <IconButton aria-label="more" value={dataRow.id} onClick={handleMoreBttn} sx={{marginRight: "0.1rem"}} >
@@ -74,7 +80,7 @@ export default function PetSearchCard(props) {
           {/* Modal */}
           <AllPetInfoPage openModal={openModal} handleClose={handleClose} petId={petId}/>
         </CardActions>
-      <CardContent disableSpacing sx={{ paddingTop: 0}}>  
+      <CardContent sx={{ paddingTop: 0}}>  
       <Typography display="block">  
           {dataRow.gender === "Male" ? <img src="https://img.icons8.com/color/20/000000/male.png" alt="Male"/> : <img src="https://img.icons8.com/color/20/000000/female.png" alt="Female"/>}
           {dataRow.gender} 

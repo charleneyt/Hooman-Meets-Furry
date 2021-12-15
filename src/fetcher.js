@@ -117,3 +117,10 @@ export const getAllInfo = (id) => {
     {method: "GET"}
   );
 };
+
+export const sendLike = (user, id) => {
+  return fetch(
+    `http://${config.server_host}:${config.server_port}/mark_favorite?id=${id}&user=${user}`,
+    {method: "POST", body: JSON.stringify({user: `${user}`, id: `${id}`})}
+  );
+};

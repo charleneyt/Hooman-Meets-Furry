@@ -42,8 +42,8 @@ const useStyles = makeStyles({
   }
 });
 
-export default function PetSearchPage() {
-
+export default function PetSearchPage(props) {
+  const username = props.username;
   // Fetch data and set data hooks
   const [checkBoxOptions, setCheckBoxOptions] = React.useState({});
   const [type, setType] = React.useState("Cat");
@@ -110,7 +110,7 @@ export default function PetSearchPage() {
       <div className={styles.cardContainerStyle}>      
         {
         data.map(row => 
-          <PetSearchCard key={row.id} data={row}/>)
+          <PetSearchCard key={row.id} data={row} username={username}/>)
         }
       </div>
       <div className={styles.root}>

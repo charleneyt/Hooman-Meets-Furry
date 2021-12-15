@@ -31,7 +31,7 @@ function App() {
           <div id="content">
             <Routes>
               <Route path="/" element={<HomePage />} />
-              <Route path="search" element={<PetSearchPage />} />
+              <Route path="search" element={<PetSearchPage username={username}/>} />
               <Route path="recommendations" element={<RecommendationsPage />} />
               <Route path="rescue_search" element={<RescuePage />} />
               <Route path="breed_rater" element={<BreedRaterPage />} />

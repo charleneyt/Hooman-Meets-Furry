@@ -59,7 +59,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("*", (req, res) => {
-  res.send("404 Server Error", 404);
+  res.status(404).send("404 Server Error");
 });
 
 app.listen(config.server_port, () => {
