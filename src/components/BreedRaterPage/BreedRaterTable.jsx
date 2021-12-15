@@ -129,7 +129,7 @@ const BreedRaterTable = createTable((rows, dense, order, orderBy, page, rowsPerP
                       {/* TODO: Image height weight */}
                       {/* TODO: Make a placeholder if row.pic not exist */}
                       {/* added width but it distorts some of the pics */}
-                      <img src={row.photo} alt={row.breed_name} height="200" width="150"/>
+                      <img src={row.photo} alt={row.breed_name} height="auto" width="150"/>
                     </ImageTableCell>
                     <TableCell style={{fontSize: 25, fontFamily: "Dongle", textAlign: "left"}}>{row.breed_name}</TableCell>
                     <TableCell style={{fontSize: 25, fontFamily: "Dongle", textAlign: "left"}}>
