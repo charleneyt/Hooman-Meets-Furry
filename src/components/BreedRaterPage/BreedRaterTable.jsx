@@ -18,6 +18,8 @@ import { styled } from "@mui/material/styles";
 import PetRating from "./PetRating";
 import { getComparator, stableSort } from "../utils/comparators";
 import { createTable } from "../utils/table";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import {Typography} from "@mui/material";
 
 const headCells = [
   {
@@ -82,7 +84,25 @@ const ImageTableCell = styled(TableCell)`
   padding-left: 16px;
 `;
 
+const useStyles = makeStyles({
+  caption: {
+      fontSize: 25,
+      fontFamily: "Dongle"
+  },
+  toolbar: {
+    "& > p:nth-of-type(2)": {
+      fontSize: 25,
+      fontFamily: "Dongle"
+    }
+  },
+  menuItem: {
+      fontSize: 25,
+      fontFamily: "Dongle"
+  }
+});
+
 const BreedRaterTable = createTable((rows, dense, order, orderBy, page, rowsPerPage, emptyRows, handleRequestSort, handleChangePage, handleChangeRowsPerPage, handleChangeDense) => {
+  const classes = useStyles();
   return <Box sx={{ width: "100%" }}>
     <Paper sx={{ width: "100%", mb: 2, rounded: true }}>
       <TableContainer>
@@ -104,15 +124,15 @@ const BreedRaterTable = createTable((rows, dense, order, orderBy, page, rowsPerP
                 const labelId = `enhanced-table-checkbox-${index}`;
                 return (
                   <TableRow role="checkbox" tabIndex={-1} key={row.name}>
-                    <TableCell>{row.rank}</TableCell>
+                    <TableCell style={{fontSize: 25, fontFamily: "Dongle", textAlign: "left"}}>{row.rank}</TableCell>
                     <ImageTableCell id={labelId} scope="row" padding="none">
                       {/* TODO: Image height weight */}
                       {/* TODO: Make a placeholder if row.pic not exist */}
                       {/* added width but it distorts some of the pics */}
                       <img src={row.photo} alt={row.breed_name} height="200" width="150"/>
                     </ImageTableCell>
-                    <TableCell align="left">{row.breed_name}</TableCell>
-                    <TableCell align="left">
+                    <TableCell style={{fontSize: 25, fontFamily: "Dongle", textAlign: "left"}}>{row.breed_name}</TableCell>
+                    <TableCell style={{fontSize: 25, fontFamily: "Dongle", textAlign: "left"}}>
                       {row.rate}
                       <PetRating value={row.feature_rating} />
                     </TableCell>
@@ -137,13 +157,24 @@ const BreedRaterTable = createTable((rows, dense, order, orderBy, page, rowsPerP
         count={rows.length}
         rowsPerPage={rowsPerPage}
         page={page}
+        SelectProps={{
+          style: {
+            fontFamily: "Dongle",
+            fontSize: 25
+          }
+        }}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
+        classes={{
+          caption: classes.caption,
+          toolbar: classes.toolbar,
+          menuItem: classes.menuItem
+        }}
       />
     </Paper>
     <FormControlLabel
       control={<Switch checked={dense} onChange={handleChangeDense} />}
-      label="Dense padding"
+      label={<Typography sx={{ fontSize: 25, fontFamily: "Dongle" }}>Dense padding</Typography>}
     />
   </Box>
 });

@@ -1,11 +1,16 @@
 /* eslint-disable jsx-a11y/label-has-associated-control, jsx-a11y/label-has-for */
 import React from "react";
 import { FormGroup } from "@mui/material";
-import { Form, FormInput, Button } from "shards-react";
+import { Form, FormInput } from "shards-react";
 import { Row, Col } from "antd";
 import { getSearchRescues } from "../fetcher";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
+import Grid from '@mui/material/Grid';
+import ButtonBase from '@mui/material/ButtonBase';
+import Button from '@mui/material/Button';
+import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
+import {BiSearchAlt} from "react-icons/bi";
 
 import RescueTable from "../components/RescuePage/RescueTable";
 
@@ -70,6 +75,22 @@ const menuItems_type = {
   Dog: "Dog"
 };
 
+const Img = styled('img')({
+  margin: 'auto',
+  display: 'block',
+  maxWidth: '100%',
+  maxHeight: '100%',
+});
+
+const theme = createTheme({
+  palette: {
+    lightblue: {
+      main: '#8ac6d1',
+      contrastText: '#fff'
+    },
+  },
+});
+
 function RescuePageSelector(props) {
   const { setRescueResults } = props;
   const { state: stateQuery, setState: setStateQuery, city: cityQuery, setCity: setCityQuery, type: typeQuery, setType: setTypeQuery } = props;
@@ -95,53 +116,66 @@ function RescuePageSelector(props) {
 
   return (
     <div>
-      <h1 style={{ textAlign: "center" }}>Enter your location to find rescues</h1>
-      <Form style={{ width: "80vw", margin: "0 auto", marginTop: "5vh" }}>
+      <h1 style={{ textAlign: "center", color: "lightblue", fontSize: 50 }}>Enter your location to find rescues</h1>
+      <Form style={{ width: "80vw", margin: "0 auto", marginTop: "5vh", color: "grey" }}>
+      <Grid container spacing={16}>
+        <Grid item> 
+        <ButtonBase sx={{ width: 300, height: 300 }}>
+            <Img alt="complex" src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/domestic-cat-lies-in-a-basket-with-a-knitted-royalty-free-image-1592337336.jpg?crop=0.668xw:1.00xh;0.247xw,0&resize=768:*"
+     alt="cat picture" />
+          </ButtonBase>
+        </Grid>
+        <Grid item>
         <Row>
-          <Col flex={2}>
-            <FormGroup style={{ width: "20vw", margin: "0 auto" }}>
+          <Col flex={2}> 
+            <FormGroup style={{ width: "20vw", margin: "0 auto", color: "grey" }}>
               <label>City</label>
-              <FormInput
+              <FormInput 
                 value={cityQuery}
                 onChange={handleCityQueryChange}
               />
-            </FormGroup>
-          </Col>
-          <Col flex={2}>
-            <FormGroup style={{ width: "20vw", margin: "0 auto" }}>
-              {/* TODO: change the style of select bar */}
-              <label>State</label>
+               <label>State</label>
               <Select
                 value={stateQuery}
                 onChange={handleStateQueryChange}
-                /*LL - updated*/
-                sx={{ height: 20 }}
+                sx={{ height: 30, fontSize: 23, fontFamily: "Dongle" }}
               >
                 {Object.keys(menuItems_state).map((key) => (
-                  <MenuItem key={key} value={key}>{menuItems_state[key]}</MenuItem>
+                  <MenuItem style={{fontSize: 23, fontFamily: "Dongle", color: "grey"}} key={key} value={key}>{menuItems_state[key]}</MenuItem>
                 ))}
               </Select>
-              <label>Type</label>
+              <label>Pet Type</label>
               <Select
                 value={typeQuery}
                 onChange={handleTypeQueryChange}
-                /*LL - updated*/
-                sx={{ height: 20 }}
+                sx={{ height: 30, fontSize: 23, fontFamily: "Dongle" }}
               >
                 {Object.keys(menuItems_type).map((key) => (
-                  <MenuItem key={key} value={key}>{menuItems_type[key]}</MenuItem>
+                  <MenuItem style={{fontSize: 23, fontFamily: "Dongle", color: "grey"}} key={key} value={key}>{menuItems_type[key]}</MenuItem>
                 ))}
               </Select>
             </FormGroup>
           </Col>
-          <Col flex={2}>
-            <FormGroup style={{ width: "10vw", margin: "0 auto" }}>
-              <Button style={{ marginTop: "4vh" }} onClick={updateSearchResults}>
+          <Col flex={2}> 
+            <FormGroup style={{ width: "10vw", margin: "0 auto", marginTop: "4vh" }}>
+            <ThemeProvider theme={theme}>
+              <Button variant="contained" color="lightblue" startIcon={<BiSearchAlt/>} onClick={updateSearchResults}>
+              {/* <IconButton aria-label="BiSearchAlt"/> */}
                 Search
               </Button>
+              </ThemeProvider>
             </FormGroup>
           </Col>
         </Row>
+        </Grid>
+        <Grid item> 
+        <ButtonBase sx={{ width: 300, height: 300 }}>
+            <Img alt="complex" src=
+"https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/golden-retriever-royalty-free-image-506756303-1560962726.jpg?crop=0.672xw:1.00xh;0.166xw,0&resize=640:*"
+     alt="dog picture" />
+          </ButtonBase>
+        </Grid>
+        </Grid>
       </Form>
     </div>
   );

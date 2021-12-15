@@ -36,8 +36,8 @@ export default function BreedRateSelectBar(props) {
   return (
     <>
       <FormControl variant="standard" sx={{marginBottom: 5, minWidth: 300}}>
-        <InputLabel id="label">Feature</InputLabel>
-        <Select
+        <InputLabel style={{fontSize: 25, fontFamily: "Dongle"}} id="label">Feature</InputLabel>
+        <Select style={{fontSize: 20, fontFamily: "Dongle", textAlign: "center"}}
           labelId="select-label"
           id="rater-select-bar"
           open={open}
@@ -48,7 +48,7 @@ export default function BreedRateSelectBar(props) {
           onChange={handleChangeFeature}
         >
           {Object.keys(menuItems).map((key) => (
-            <MenuItem key={key} value={key}>{menuItems[key]}</MenuItem>
+            <MenuItem style={{fontSize: 20, fontFamily: "Dongle"}} key={key} value={key}>{menuItems[key]}</MenuItem>
           ))}
         </Select>
       </FormControl>

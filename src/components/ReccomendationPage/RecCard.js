@@ -13,7 +13,7 @@ export default function RecCard(props) {
     // TODO: Add what kind of element we want in the card
     <Card variant="outlined" sx={{minWidth: 275}}>
       <CardContent>
-        <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
+        <Typography sx={{fontSize: 20, fontFamily: "Dongle"}} color="text.secondary" gutterBottom>
           {dataRow.name}
         </Typography>
         {/* TODO: fix the height let it the smae  */}
@@ -23,19 +23,19 @@ export default function RecCard(props) {
           image={dataRow.photo}
           alt={dataRow.name}
         />
-        <Typography sx={{mb: 1.5}} color="text.secondary">
+        <Typography sx={{mb: 1.5, fontFamily: "Dongle"}} color="text.secondary">
           {/* TODO: add icons for this  */}
           {/* {dataRow.type}  */}
           {dataRow.breed}
         </Typography>
-        <Typography variant="body2">
+        <Typography style={{fontSize: 25, fontFamily: "Dongle"}} variant="body2">
           {dataRow.color}
           <br />
           {dataRow.age}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Learn More</Button>
+        <Button style={{fontSize: 20, fontFamily: "Dongle", textAlign: "center"}}>Learn More</Button>
       </CardActions>
     </Card>
   );

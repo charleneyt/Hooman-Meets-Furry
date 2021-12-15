@@ -20,11 +20,14 @@ export default function PetSearchCard(props) {
 
   return <Card sx={{margin: 1, width: 280}}>
       <CardHeader
+        titleTypographyProps={{fontFamily: "Dongle", fontSize: 25}}
         title={dataRow.name}
+
         titleTypographyProps={{fontSize: 22, fontWeight: 700}}
         subheader={<Typography> <TiLocation />{dataRow.location}</Typography>} 
-        subheaderTypographyProps={{fontSize: 15, fontWeight: 500}}
+        subheaderTypographyProps={{fontSize: 15, fontWeight: 500, fontFamily: "Dongle"}}
         sx={{ paddingBottom: 1}}
+
         avatar={
           <Avatar
             alt={dataRow.type === "Cat" ? "Cat" : "Dog"}
@@ -47,6 +50,7 @@ export default function PetSearchCard(props) {
         image={dataRow.photo}
         alt={dataRow.name}
       />
+
         <CardActions disableSpacing sx={{ paddingTop: 0.5}}>
           <IconButton aria-label="heart" sx={{marginRight: "0.3rem"}}>
             <FavoriteIcon sx={{ fontSize: 25}} />

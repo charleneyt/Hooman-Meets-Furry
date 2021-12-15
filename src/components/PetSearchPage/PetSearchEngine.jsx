@@ -7,6 +7,7 @@ import {FormControlLabel, FormGroup, Typography} from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import {produce} from "immer";
 import { getAllBreeds, getAllColors } from "../../fetcher";
+import makeStyles from "@material-ui/core/styles/makeStyles";
 
 const catCoatLengthOptions = ["Hairless", "Short", "Medium", "Long"];
 const dogCoatLengthOptions = ["Hairless", "Short", "Medium", "Long", "Wire", "Curly"]
@@ -72,6 +73,15 @@ const checkBoxConfigs = {
   }
 }
 
+const useStyles = makeStyles({
+  customTextField: {
+    "& input::placeholder": {
+      fontFamily:"Dongle",
+      fontSize: "25px"
+    }
+  }
+})
+
 export default function PetSearchEngine(props) {
   const {checkBoxOptions, setCheckBoxOptions, type, selectOptions, setSelectOptions } = props;
   const [breedOptions, setBreedOptions] = React.useState([]);
@@ -134,7 +144,7 @@ export default function PetSearchEngine(props) {
         inputProps={{ 'aria-label': 'controlled' }}
         />
       }
-      label={label}
+      label={<Typography sx={{ fontSize: 25, fontFamily: "Dongle" }}>{label}</Typography>}
     />
     });
   };
@@ -158,6 +168,7 @@ export default function PetSearchEngine(props) {
                 variant="standard"
                 label="Select Breed"
                 placeholder="Breeds"
+                InputLabelProps={{ style: {fontFamily: "Dongle", fontSize: 25} }}
               />
             )
           }
@@ -168,7 +179,7 @@ export default function PetSearchEngine(props) {
         <Box sx={{margin: 1, marginBottom: 0}}>
           {/* TODO: if the user select dog/cat => label should be pupply/kitten */}
           {/* TODO: change font size */}
-          <Typography> Age:</Typography>
+          <Typography sx={{fontFamily: "Dongle", fontSize: 25}}> Age:</Typography>
           <FormGroup sx={{flexDirection: "row", alignItems: "center"}}>
             {generateCheckboxes('age')}
           </FormGroup>
@@ -189,6 +200,7 @@ export default function PetSearchEngine(props) {
                 variant="standard"
                 label="Select Colors"
                 placeholder="Colors"
+                InputLabelProps={{ style: {fontFamily: "Dongle", fontSize: 25} }}
               />
             )}
           />
@@ -196,13 +208,13 @@ export default function PetSearchEngine(props) {
         {/* Gender */}
         <Box sx={{margin: 1, marginTop: 0, marginBottom: 0}}>
           <FormGroup sx={{flexDirection: "row", alignItems: "center"}}>
-            <Typography> Gender: &nbsp;</Typography>
+            <Typography sx={{fontFamily: "Dongle", fontSize: 25}}> Gender: &nbsp;</Typography>
             {generateCheckboxes('gender')}
           </FormGroup>
         </Box>
         {/* Size */}
         <Box sx={{margin: 1, marginTop: 0, marginBottom: 0}}>
-          <Typography> Size: </Typography>
+          <Typography sx={{fontFamily: "Dongle", fontSize: 25}}> Size: </Typography>
           <FormGroup sx={{flexDirection: "row", alignItems: "center"}}>
           {generateCheckboxes('size')}
           </FormGroup>
@@ -226,7 +238,7 @@ export default function PetSearchEngine(props) {
                 variant="standard"
                 label="Select Coat Length"
                 placeholder="Coat length"
-                
+                InputLabelProps={{ style: {fontFamily: "Dongle", fontSize: 25} }}
               />
             )}
           />

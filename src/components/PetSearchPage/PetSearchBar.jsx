@@ -20,7 +20,6 @@ const PaginationButtonStyle = styled("div")(({theme}) => ({
   },
 }));
 
-
 export default function PetSearchBar(props) {
   const {type, setType, setLocation, pageSize, setPageSize} = props; 
   const [value, setValue] = React.useState("");
@@ -65,8 +64,10 @@ export default function PetSearchBar(props) {
               // TODO: Cursor pointer
               placeholder="User's Location"
               variant="standard"
+              fontFamily="Dongle"
               InputProps={{
                 disableUnderline: true,
+                style: {fontFamily: "Dongle", fontSize: 25},
                 startAdornment: (
                   <InputAdornment position="start">
                     <HiOutlineLocationMarker />
