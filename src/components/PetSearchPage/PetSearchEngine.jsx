@@ -92,14 +92,10 @@ export default function PetSearchEngine(props) {
     getAllBreeds(type).then(resp => resp.json()).then(resp => {
       setBreedOptions(resp.results);
     })
-  }, [type])
-
-  React.useEffect(() => {
     getAllColors(type).then(resp => resp.json()).then(resp => {
       setColorOptions(resp.results);
     })
   }, [type])
-
 
   // Check box
   const setCheckBoxState = (settingName, attributeName) => (event) => {

@@ -8,35 +8,38 @@ import {
   IconButton,
 } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import {RiHeart3Fill, RiHomeHeartLine} from "react-icons/ri";
 import {GiCat, GiSittingDog} from "react-icons/gi";
-import MaleIcon from "@mui/icons-material/Male";
-import FemaleIcon from "@mui/icons-material/Female";
-
+import {TiLocation} from "react-icons/ti";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import MoreIcon from '@mui/icons-material/More';
+import {RiHomeHeartLine} from "react-icons/ri";
 
 
 export default function PetSearchCard(props) {
   const dataRow = props.data;
+
   return <Card sx={{margin: 1, width: 280}}>
       <CardHeader
         titleTypographyProps={{fontFamily: "Dongle", fontSize: 25}}
         title={dataRow.name}
-        // Breed?
-        subheaderTypographyProps={{fontFamily: "Dongle", fontSize: 25}}
-        subheader={dataRow.breed}
-        // TODO: add img?
+
+        titleTypographyProps={{fontSize: 22, fontWeight: 700}}
+        subheader={<Typography> <TiLocation />{dataRow.location}</Typography>} 
+        subheaderTypographyProps={{fontSize: 15, fontWeight: 500, fontFamily: "Dongle"}}
+        sx={{ paddingBottom: 1}}
+
         avatar={
           <Avatar
             alt={dataRow.type === "Cat" ? "Cat" : "Dog"}
             sx={{bgcolor: "#ef6694"}}
+            src={dataRow.photo}
           >
             {dataRow.type === "Cat" ? <GiCat /> : <GiSittingDog />}
           </Avatar>
         }
         action={
-          <IconButton aria-label="more" sx={{marginLeft: "auto"}}>
-            <MoreVertIcon />
+          <IconButton aria-label="rescue" sx={{marginLeft: "auto", marginTop: "0.5rem", marginRight: "0.5rem", fontSize: 25}}>
+            <RiHomeHeartLine />
           </IconButton>
         }
       />
@@ -47,26 +50,36 @@ export default function PetSearchCard(props) {
         image={dataRow.photo}
         alt={dataRow.name}
       />
-      <CardContent>
-        {/* TODO: fix css */}
-        {/* Add location? */}
-      <Typography style={{fontSize: 25, fontFamily: "Dongle"}}> 
-      {dataRow.age} 
-       {dataRow.name} 
-        </Typography>
-        <Typography style={{fontSize: 25, fontFamily: "Dongle"}}>
-          {dataRow.gender === "Male" ? <MaleIcon /> : <FemaleIcon />}
+
+        <CardActions disableSpacing sx={{ paddingTop: 0.5}}>
+          <IconButton aria-label="heart" sx={{marginRight: "0.3rem"}}>
+            <FavoriteIcon sx={{ fontSize: 25}} />
+          </IconButton> 
+          <IconButton aria-label="more" sx={{marginRight: "0.1rem"}} >
+            <MoreIcon sx={{ fontSize: 25}} />
+          </IconButton> 
+        </CardActions>
+      <CardContent disableSpacing sx={{ paddingTop: 0}}>  
+      <Typography display="block">  
+          {dataRow.gender === "Male" ? <img src="https://img.icons8.com/color/20/000000/male.png"/> : <img src="https://img.icons8.com/color/20/000000/female.png"/>}
           {dataRow.gender} 
-          {dataRow.size}
         </Typography>
+        <Typography display="block">  
+          {<img src="https://img.icons8.com/color/20/000000/baby-bottle.png"/>} 
+          {dataRow.age} 
+        </Typography>
+        
+        <Typography display="block">  
+          {<img src="https://img.icons8.com/color/20/000000/paint-palette.png"/>} 
+          {dataRow.color} 
+        </Typography>
+        <Typography display="block">  
+          {dataRow.type === "Dog"? <img src="https://img.icons8.com/color/20/000000/dog.png"/> :<img src="https://img.icons8.com/color/20/000000/cat.png"/> }
+          {dataRow.breed}
+        </Typography>
+
+
       </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="like">
-          <RiHeart3Fill />
-        </IconButton>
-        <IconButton aria-label="rescue">
-          <RiHomeHeartLine />
-        </IconButton>
-      </CardActions>
+
     </Card>;
 }

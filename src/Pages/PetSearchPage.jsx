@@ -49,20 +49,18 @@ export default function PetSearchPage() {
   const [type, setType] = React.useState("Cat");
   const [location, setLocation] = React.useState("");
   const [selectOptions, setSelectOptions] = React.useState({});
-
   // TODO: add pagination tool
   // Pagination
-
   const [page, setPage] = React.useState(1);
   const [pageSize, setPageSize] = React.useState(25);
   const [pageCount, setPageCount] = React.useState(10);
   const handlePageChange = (event, value) => {
     setPage(value);
   }
-
   // Store data
   const [data, setData] = React.useState([]);
 
+  
   const styles = useStyles();
   
   React.useEffect(() => {
@@ -108,8 +106,7 @@ export default function PetSearchPage() {
   return (
     <div>
       {/* Pagination things */}
-      
-      <PetSearchBar type={type} setType={setType} location={location} setLocation={setLocation}/>
+      <PetSearchBar type={type} setType={setType} location={location} setLocation={setLocation} setPageSize={setPageSize} pageSize={pageSize}/>
       <div className={styles.cardContainerStyle}>      
         {
         data.map(row => 
@@ -139,8 +136,7 @@ export default function PetSearchPage() {
       <div className="pet-search-pagination">
         <Stack spacing={2}>
           <Typography>Page: {page}</Typography>
-          {/* TODO: Add count for pages */}
-                {/* Pagination */}
+          {/* Pagination */}
           <Pagination page={page} onChange={handlePageChange} count={totalPages(pageCount, pageSize)}/>
         </Stack>
       </div>
