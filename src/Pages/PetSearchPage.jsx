@@ -10,7 +10,7 @@ import {GrSearchAdvanced} from "react-icons/gr";
 import PetSearchBar from "../components/PetSearchPage/PetSearchBar";
 import PetSearchEngine from "../components/PetSearchPage/PetSearchEngine";
 import PetSearchCard from "../components/PetSearchPage/PetSearchCard";
-import { getPetSearch } from "../fetcher";
+import {getPetSearch} from "../fetcher";
 
 const useStyles = makeStyles({
   root: {
@@ -34,12 +34,12 @@ const useStyles = makeStyles({
   },
   fabStyle: {
     margin: 0,
-    top: 'auto',
+    top: "auto",
     right: 20,
     bottom: 20,
-    left: 'auto',
-    position: 'fixed',
-  }
+    left: "auto",
+    position: "fixed",
+  },
 });
 
 export default function PetSearchPage(props) {
@@ -49,46 +49,48 @@ export default function PetSearchPage(props) {
   const [type, setType] = React.useState("Cat");
   const [location, setLocation] = React.useState("");
   const [selectOptions, setSelectOptions] = React.useState({});
-  
+
   // Pagination
   const [page, setPage] = React.useState(1);
   const [pageSize, setPageSize] = React.useState(25);
   const [pageCount, setPageCount] = React.useState(10);
   const handlePageChange = (event, value) => {
     setPage(value);
-  }
+  };
   // Store data
   const [data, setData] = React.useState([]);
 
-  
   const styles = useStyles();
-  
+
   React.useEffect(() => {
     const params = {};
 
     Object.entries(checkBoxOptions).forEach(([key, entry]) => {
-      params[key] = [...entry]
-    })
+      params[key] = [...entry];
+    });
 
     Object.entries(selectOptions).forEach(([key, entry]) => {
-      params[key] = [...entry]
-    })
+      params[key] = [...entry];
+    });
     params["type"] = type;
     params["location"] = location;
 
-    getPetSearch(params).then(resp => resp.json()).then(resp => {
-      setPageCount(resp.results.length);
-    })
+    getPetSearch(params)
+      .then((resp) => resp.json())
+      .then((resp) => {
+        setPageCount(resp.results.length);
+      });
 
-    getPetSearch(params, page, pageSize).then(resp => resp.json()).then(resp => {
-      setData(resp.results);
-    })
+    getPetSearch(params, page, pageSize)
+      .then((resp) => resp.json())
+      .then((resp) => {
+        setData(resp.results);
+      });
   }, [checkBoxOptions, type, page, pageSize, location, selectOptions]);
 
-    
-    const totalPages = (pageCount, pageSize) => {
-      return Math.ceil(pageCount/pageSize);
-    }
+  const totalPages = (pageCount, pageSize) => {
+    return Math.ceil(pageCount / pageSize);
+  };
 
   // Drawer
   const [state, setState] = React.useState({Menu: false});
@@ -106,16 +108,26 @@ export default function PetSearchPage(props) {
   return (
     <div>
       {/* Pagination things */}
-      <PetSearchBar type={type} setType={setType} location={location} setLocation={setLocation} setPageSize={setPageSize} pageSize={pageSize}/>
-      <div className={styles.cardContainerStyle}>      
-        {
-        data.map(row => 
-          <PetSearchCard key={row.id} data={row} username={username}/>)
-        }
+      <PetSearchBar
+        type={type}
+        setType={setType}
+        location={location}
+        setLocation={setLocation}
+        setPageSize={setPageSize}
+        pageSize={pageSize}
+      />
+      <div className={styles.cardContainerStyle}>
+        {data.map((row) => (
+          <PetSearchCard key={row.id} data={row} username={username} />
+        ))}
       </div>
       <div className={styles.root}>
         <Box className={styles.fabStyle}>
-          <Fab className={styles.fabStyle} aria-label="Menu" onClick={toggleDrawer("Menu", true)}>
+          <Fab
+            className={styles.fabStyle}
+            aria-label="Menu"
+            onClick={toggleDrawer("Menu", true)}
+          >
             <GrSearchAdvanced />
           </Fab>
           <Drawer
@@ -128,7 +140,13 @@ export default function PetSearchPage(props) {
             }}
           >
             <List>
-              <PetSearchEngine type={type} checkBoxOptions={checkBoxOptions} setCheckBoxOptions={setCheckBoxOptions} selectOptions={selectOptions} setSelectOptions={setSelectOptions} />
+              <PetSearchEngine
+                type={type}
+                checkBoxOptions={checkBoxOptions}
+                setCheckBoxOptions={setCheckBoxOptions}
+                selectOptions={selectOptions}
+                setSelectOptions={setSelectOptions}
+              />
             </List>
           </Drawer>
         </Box>
@@ -137,7 +155,11 @@ export default function PetSearchPage(props) {
         <Stack spacing={2}>
           <Typography>Page: {page}</Typography>
           {/* Pagination */}
-          <Pagination page={page} onChange={handlePageChange} count={totalPages(pageCount, pageSize)}/>
+          <Pagination
+            page={page}
+            onChange={handlePageChange}
+            count={totalPages(pageCount, pageSize)}
+          />
         </Stack>
       </div>
     </div>

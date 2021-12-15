@@ -1,6 +1,5 @@
 import Card from "@mui/material/Card";
 import {
-  CardHeader,
   CardMedia,
   CardContent,
   CardActions,
@@ -10,8 +9,8 @@ import {
 } from "@mui/material";
 import MaleIcon from "@mui/icons-material/Male";
 import FemaleIcon from "@mui/icons-material/Female";
-import { HiOutlineLocationMarker } from "react-icons/hi";
-import { IoPawSharp } from "react-icons/io5";
+import {HiOutlineLocationMarker} from "react-icons/hi";
+import {IoPawSharp} from "react-icons/io5";
 
 // SELECT P.organization_id, type, breed, color, age, gender, P.name, P.photo, O.city AS location
 
@@ -21,8 +20,15 @@ export default function RecCard(props) {
     // TODO: Add what kind of element we want in the card
     <Card variant="outlined" sx={{minWidth: 275}}>
       <CardContent>
-        <Typography sx={{fontSize: 25, fontFamily: "Dongle"}} color="#8dbdc7" gutterBottom>
-          <IconButton aria-label="more" sx={{marginLeft: "auto", color: "#8dbdc7"}}>
+        <Typography
+          sx={{fontSize: 25, fontFamily: "Dongle"}}
+          color="#8dbdc7"
+          gutterBottom
+        >
+          <IconButton
+            aria-label="more"
+            sx={{marginLeft: "auto", color: "#8dbdc7"}}
+          >
             <IoPawSharp />
           </IconButton>
           {dataRow.name}
@@ -41,9 +47,12 @@ export default function RecCard(props) {
         </Typography>
         <Typography style={{fontSize: 25, fontFamily: "Dongle"}}>
           {dataRow.gender === "Male" ? <MaleIcon /> : <FemaleIcon />}
-          {dataRow.gender} 
+          {dataRow.gender}
         </Typography>
-        <Typography style={{fontSize: 25, fontFamily: "Dongle"}} variant="body2">
+        <Typography
+          style={{fontSize: 25, fontFamily: "Dongle"}}
+          variant="body2"
+        >
           {dataRow.color}
           <br />
           {dataRow.age}
@@ -56,7 +65,11 @@ export default function RecCard(props) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button style={{fontSize: 20, fontFamily: "Dongle", textAlign: "center"}}>Learn More</Button>
+        <Button
+          style={{fontSize: 20, fontFamily: "Dongle", textAlign: "center"}}
+        >
+          Learn More
+        </Button>
       </CardActions>
     </Card>
   );

@@ -480,6 +480,7 @@ async function get_all_info(req, res) {
   FROM Pet P JOIN Organization O on P.organization_id = O.id
   WHERE P.id = '${id}';
   `;
+  console.log(q, id);
   connection.query(q, (error, results, fields) => {
     if (error) {
       console.log(error);
