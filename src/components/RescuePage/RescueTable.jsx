@@ -139,12 +139,12 @@ const RescueTable = createTable(
                 .map((row) => {
                   return (
                     <TableRow role="checkbox" tabIndex={-1} key={row.id}>
-                      <TableCell style={{fontSize: 23, fontFamily: "Dongle", textAlign: "center"}}>{row.name}</TableCell>
-                      <TableCell style={{fontSize: 23, fontFamily: "Dongle", textAlign: "center"}}>{row.address ? row.address : "Not available"}</TableCell>
-                      <TableCell style={{fontSize: 23, fontFamily: "Dongle", textAlign: "center"}}>{row.city}</TableCell>
-                      <TableCell style={{fontSize: 23, fontFamily: "Dongle", textAlign: "center"}}>{row.email}</TableCell>
-                      <TableCell style={{fontSize: 23, fontFamily: "Dongle", textAlign: "center"}}>{row.type}</TableCell>
-                      <TableCell style={{fontSize: 23, fontFamily: "Dongle", textAlign: "center"}}>{row.num}</TableCell>
+                      <TableCell style={{fontSize: 23, fontFamily: "Dongle", textAlign: "left"}}>{row.name}</TableCell>
+                      <TableCell style={{fontSize: 23, fontFamily: "Dongle", textAlign: "left"}}>{row.address ? row.address : "Not available"}</TableCell>
+                      <TableCell style={{fontSize: 23, fontFamily: "Dongle", textAlign: "left"}}>{row.city}</TableCell>
+                      <TableCell style={{fontSize: 23, fontFamily: "Dongle", textAlign: "left"}}>{row.email}</TableCell>
+                      <TableCell style={{fontSize: 23, fontFamily: "Dongle", textAlign: "left"}}>{row.type}</TableCell>
+                      <TableCell style={{fontSize: 23, fontFamily: "Dongle", textAlign: "left"}}>{row.num}</TableCell>
                     </TableRow>
                   );
                 })}
