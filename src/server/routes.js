@@ -545,7 +545,6 @@ async function delete_favorite(req, res) {
       res.json({error});
     } else if (results) {
       res.json({results});
-      console.log(res);
     }
   });
 }

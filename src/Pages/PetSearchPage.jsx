@@ -10,7 +10,7 @@ import {GrSearchAdvanced} from "react-icons/gr";
 import PetSearchBar from "../components/PetSearchPage/PetSearchBar";
 import PetSearchEngine from "../components/PetSearchPage/PetSearchEngine";
 import PetSearchCard from "../components/PetSearchPage/PetSearchCard";
-import {getPetSearch} from "../fetcher";
+import {getPetSearch, getLiked} from "../fetcher";
 
 const useStyles = makeStyles({
   root: {
@@ -50,6 +50,10 @@ export default function PetSearchPage(props) {
   const [location, setLocation] = React.useState("");
   const [selectOptions, setSelectOptions] = React.useState({});
 
+  const [userLiked, setUserLiked] = React.useState(new Set());
+
+  const [forceUpdate, setForceUpdate] = React.useState(0);
+
   // Pagination
   const [page, setPage] = React.useState(1);
   const [pageSize, setPageSize] = React.useState(25);
@@ -57,6 +61,15 @@ export default function PetSearchPage(props) {
   const handlePageChange = (event, value) => {
     setPage(value);
   };
+
+  React.useEffect(() => {
+    getLiked(username)
+      .then((resp) => resp.json())
+      .then((resp) => {
+        setUserLiked(new Set(resp.results.map((item) => item.pet_id)));
+      });
+  }, [username, forceUpdate, page, pageSize]);
+
   // Store data
   const [data, setData] = React.useState([]);
 
@@ -118,7 +131,16 @@ export default function PetSearchPage(props) {
       />
       <div className={styles.cardContainerStyle}>
         {data.map((row) => (
-          <PetSearchCard key={row.id} data={row} username={username} />
+          <PetSearchCard
+            key={row.id}
+            data={row}
+            username={username}
+            liked={userLiked.has(row.id)}
+            addLike={(newId) => {
+              setUserLiked(new Set([...userLiked, newId]));
+            }}
+            setForceUpdate={() => setForceUpdate(forceUpdate + (1 % 100))}
+          />
         ))}
       </div>
       <div className={styles.root}>

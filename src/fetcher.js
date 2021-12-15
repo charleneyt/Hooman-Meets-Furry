@@ -111,6 +111,13 @@ export const getUserLogin = (email, password) => {
   );
 };
 
+export const getLiked = (username) => {
+  return fetch(
+    `http://${config.server_host}:${config.server_port}/get_all_pets_liked_by_user?username=${username}`,
+    {method: "GET"}
+  );
+};
+
 export const getAllInfo = (id) => {
   return fetch(
     `http://${config.server_host}:${config.server_port}/get_all_info/${id}`,
@@ -119,17 +126,45 @@ export const getAllInfo = (id) => {
 };
 
 export const sendLike = async (user, id) => {
-  return fetch(
-    `http://${config.server_host}:${config.server_port}/mark_favorite?user=${user}&id=${id}`,
-    {
-      method: "POST",
-      mode: "cors",
-      credentials: "same-origin",
-      cache: "no-cache",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({user: `${user}`, id: `${id}`}),
-    }
-  );
+  getLiked(user)
+    .then((resp) => resp.json())
+    .then((resp) => {
+      let likedEntries = new Set();
+      if (resp.results) {
+        likedEntries = new Set([
+          ...resp.results.map((item) => "" + item.pet_id),
+        ]);
+      }
+
+      if (likedEntries.has(id)) {
+        // send delete instead
+        return fetch(
+          `http://${config.server_host}:${config.server_port}/delete_favorite?user=${user}&id=${id}`,
+          {
+            method: "POST",
+            mode: "cors",
+            credentials: "same-origin",
+            cache: "no-cache",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({user: `${user}`, id: `${id}`}),
+          }
+        );
+      } else {
+        return fetch(
+          `http://${config.server_host}:${config.server_port}/mark_favorite?user=${user}&id=${id}`,
+          {
+            method: "POST",
+            mode: "cors",
+            credentials: "same-origin",
+            cache: "no-cache",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({user: `${user}`, id: `${id}`}),
+          }
+        );
+      }
+    });
 };

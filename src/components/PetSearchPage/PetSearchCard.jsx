@@ -15,9 +15,10 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import AllPetInfoPage from "../../Pages/AllPetInfoPage";
 import {sendLike} from "../../fetcher";
 import InfoRoundedIcon from "@mui/icons-material/InfoRounded";
+import {AddLinkRounded} from "@mui/icons-material";
 
 export default function PetSearchCard(props) {
-  const username = props.username;
+  const {liked, setForceUpdate, username, addLike} = props;
   const dataRow = props.data;
   // TODO: kill defult useState?
   const [openModal, setOpenModal] = React.useState(false);
@@ -32,9 +33,10 @@ export default function PetSearchCard(props) {
   };
 
   const handleLikeBtn = (event) => {
-    console.log(event.currentTarget.value);
-    console.log(username);
     sendLike(username, event.currentTarget.value);
+    addLike(event.currentTarget.value);
+    // Sync with server
+    setTimeout(() => setForceUpdate(), 100);
   };
 
   return (
@@ -68,19 +70,6 @@ export default function PetSearchCard(props) {
             {dataRow.type === "Cat" ? <GiCat /> : <GiSittingDog />}
           </Avatar>
         }
-        action={
-          <IconButton
-            aria-label="rescue"
-            onClick={() => {
-              console.log("clicked heart");
-            }}
-            sx={{
-              marginLeft: "auto",
-              marginTop: "0.5rem",
-              marginRight: "0.5rem",
-            }}
-          ></IconButton>
-        }
       />
       {/* Pet Pictures */}
       <CardMedia
@@ -92,6 +81,7 @@ export default function PetSearchCard(props) {
 
       <CardActions sx={{paddingTop: 0.5}}>
         <IconButton
+          color={liked ? "error" : undefined}
           aria-label="like"
           value={dataRow.id}
           onClick={handleLikeBtn}
