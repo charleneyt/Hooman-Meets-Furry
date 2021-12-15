@@ -6,6 +6,7 @@ import MenuItem from '@mui/material/MenuItem';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import PetsIcon from '@mui/icons-material/Pets';
 
+
 const StyledMenu = styled((props) => (
   <Menu
     elevation={0}
@@ -47,6 +48,19 @@ const StyledMenu = styled((props) => (
   },
 }));
 
+const ColorButton = styled(Button)(({ theme }) => ({
+  // button txt color
+  color: "#fff",
+  backgroundColor: "#F7ADCF",
+  borderRadius: "10px",
+  padding: "10px 10px",
+  fontWeight: "600",
+  "&:hover": {
+    backgroundColor: "#F48BA9"
+    
+  }
+}));
+
 export default function PaginationButton(props) {
   const {pageSize, setPageSize} = props;
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -61,7 +75,7 @@ export default function PaginationButton(props) {
 
   return (
     <div>
-      <Button
+      <ColorButton
         id="page-size-button"
         aria-controls="page-size-button"
         aria-haspopup="true"
@@ -71,8 +85,8 @@ export default function PaginationButton(props) {
         onClick={handleClick}
         endIcon={<KeyboardArrowDownIcon />}
       >
-        {pageSize}<PetsIcon sx={{ fontSize: 18, marginLeft: "0.5rem" }}/>
-      </Button>
+        {" "} {pageSize} {" "} <PetsIcon sx={{ fontSize: 18, marginLeft: "0.5rem" }}/>
+      </ColorButton>
 
       <StyledMenu
         id="page-size-menu"
