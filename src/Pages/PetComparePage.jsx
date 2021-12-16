@@ -18,7 +18,7 @@ export default function PetCompare(props) {
   return (
     <div>
       <h1 style={{textAlign: "center", color: "#8dbdc7", fontSize: 50}}>
-        Compare you liked pets
+        Compare You Liked pets
       </h1>
       <Box maxWidth={800} margin="auto">
         <CompareTable data={data} />

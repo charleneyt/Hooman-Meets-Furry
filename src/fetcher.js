@@ -57,7 +57,7 @@ export const getAllColors = (type) => {
   );
 };
 
-export const getRecommend = async (feature, type, page, pagesize) => {
+export const getRecommend = (feature, type, page, pagesize) => {
   return fetch(
     `http://${config.server_host}:${config.server_port}/recommend?input_feature=${feature}&type=${type}&page=${page}&pagesize=${pagesize}`,
     {

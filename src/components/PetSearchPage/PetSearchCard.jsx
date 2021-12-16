@@ -19,7 +19,6 @@ import InfoRoundedIcon from "@mui/icons-material/InfoRounded";
 export default function PetSearchCard(props) {
   const {liked, setForceUpdate, username, addLike} = props;
   const dataRow = props.data;
-  // TODO: kill defult useState?
   const [openModal, setOpenModal] = React.useState(false);
   const petId = dataRow.id;
 

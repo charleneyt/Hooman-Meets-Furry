@@ -1,3 +1,4 @@
+import React from "react";
 import Card from "@mui/material/Card";
 import {
   CardMedia,
@@ -11,11 +12,20 @@ import MaleIcon from "@mui/icons-material/Male";
 import FemaleIcon from "@mui/icons-material/Female";
 import {HiOutlineLocationMarker} from "react-icons/hi";
 import {IoPawSharp} from "react-icons/io5";
+import AllPetInfoPage from "../../Pages/AllPetInfoPage";
 
 // SELECT P.organization_id, type, breed, color, age, gender, P.name, P.photo, O.city AS location
 
 export default function RecCard(props) {
+  const [openModal, setOpenModal] = React.useState(false);
   const dataRow = props.data;
+  const petId = dataRow.id;
+  const handleClose = () => {
+    setOpenModal(false);
+  };
+  const onButtonClick = (event) => {
+    setOpenModal(true);
+  };
   return (
     // TODO: Add what kind of element we want in the card
     <Card variant="outlined" sx={{minWidth: 275}}>
@@ -66,10 +76,18 @@ export default function RecCard(props) {
       </CardContent>
       <CardActions>
         <Button
+          variant="outlined"
+          value={dataRow.id}
+          onClick={onButtonClick}
           style={{fontSize: 20, fontFamily: "Dongle", textAlign: "center"}}
         >
           Learn More
         </Button>
+        <AllPetInfoPage
+          openModal={openModal}
+          handleClose={handleClose}
+          petId={petId}
+        />
       </CardActions>
     </Card>
   );

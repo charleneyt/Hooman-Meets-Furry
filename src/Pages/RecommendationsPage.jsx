@@ -37,7 +37,6 @@ export default function RecommendationsPage() {
   // for select
   const [feature, setFeature] = React.useState("general_health");
   const [open, setOpen] = React.useState(false);
-  // TODO: do pagination
   // page and pagesize
   const [page, setPage] = React.useState(1);
   const [pageSize, setPageSize] = React.useState(20);
@@ -86,6 +85,10 @@ export default function RecommendationsPage() {
 
   return (
     <div className={styles.selectBox}>
+      <h1 style={{textAlign: "center", color: "#8dbdc7", fontSize: 50}}>
+        Recommended Just For You
+      </h1>
+
       <Box sx={{float: "right"}}></Box>
       {/* TODO: icon bigger, add colors, or even change the icon */}
       <div className="select-type">
@@ -126,13 +129,11 @@ export default function RecommendationsPage() {
           </Select>
         </FormControl>
       </div>
-
       {/* Recommending cards */}
-
       <div>
         <Grid container spacing={2}>
           {data.map((row) => (
-            <Grid key={row.id} item xs={12} sm={6} md={4}>
+            <Grid key={row.id} item xs={12} sm={6} md={2.4}>
               <RecCard key={row.id} data={row} />
             </Grid>
           ))}
