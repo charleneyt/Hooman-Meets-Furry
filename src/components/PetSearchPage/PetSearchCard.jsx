@@ -11,10 +11,10 @@ import {
 import Avatar from "@mui/material/Avatar";
 import {GiCat, GiSittingDog} from "react-icons/gi";
 import {TiLocation} from "react-icons/ti";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import AllPetInfoPage from "../../Pages/AllPetInfoPage";
 import {sendLike} from "../../fetcher";
 import InfoRoundedIcon from "@mui/icons-material/InfoRounded";
+import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 
 export default function PetSearchCard(props) {
   const {liked, setForceUpdate, username, addLike} = props;
@@ -84,7 +84,7 @@ export default function PetSearchCard(props) {
           value={dataRow.id}
           onClick={handleLikeBtn}
         >
-          <FavoriteIcon sx={{fontSize: 25}} />
+          <FavoriteRoundedIcon sx={{fontSize: 25}} />
         </IconButton>
         <IconButton
           aria-label="more"

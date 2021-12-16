@@ -10,6 +10,8 @@ import CardContent from "@mui/material/CardContent";
 import Stack from "@mui/material/Stack";
 import rockyPic from "../assets/rocky.jpg";
 import tubbyPic from "../assets/tubby.jpg";
+import React from "react";
+import LoginPage from "./LoginPage";
 
 const catCards = [
   {
@@ -46,7 +48,18 @@ const catCards = [
   },
 ];
 
-export default function HomePage() {
+export default function HomePage(props) {
+  const {setAuth, setUsername} = props;
+  const [open, setOpen] = React.useState(false);
+
+  const handleSignUpClicked = () => {
+    setOpen(true);
+  };
+
+  const handleSignUpClose = () => {
+    setOpen(false);
+  };
+
   return (
     <div id="home-page">
       <header class="bg-image">
@@ -135,6 +148,7 @@ export default function HomePage() {
           <Button
             variant="contained"
             size="big"
+            onClick={handleSignUpClicked}
             style={{
               boxShadow: "none",
               backgroundImage:
@@ -143,6 +157,13 @@ export default function HomePage() {
           >
             Sign Up Now
           </Button>
+          <LoginPage
+            open={open}
+            setOpen={setOpen}
+            setAuth={setAuth}
+            onClose={handleSignUpClose}
+            setUsername={setUsername}
+          />
         </div>
       </section>
     </div>
