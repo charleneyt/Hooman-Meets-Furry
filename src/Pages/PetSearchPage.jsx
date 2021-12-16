@@ -2,7 +2,7 @@ import React from "react";
 import {makeStyles} from "@mui/styles";
 import Drawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
-import {List, Typography} from "@mui/material";
+import {List} from "@mui/material";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import Fab from "@mui/material/Fab";
@@ -49,9 +49,7 @@ export default function PetSearchPage(props) {
   const [type, setType] = React.useState("Cat");
   const [location, setLocation] = React.useState("");
   const [selectOptions, setSelectOptions] = React.useState({});
-
   const [userLiked, setUserLiked] = React.useState(new Set());
-
   const [forceUpdate, setForceUpdate] = React.useState(0);
 
   // Pagination
@@ -76,12 +74,15 @@ export default function PetSearchPage(props) {
   const styles = useStyles();
 
   React.useEffect(() => {
-    const params = {};
+    setCheckBoxOptions({});
+    setSelectOptions({});
+  }, [type]);
 
+  React.useEffect(() => {
+    const params = {};
     Object.entries(checkBoxOptions).forEach(([key, entry]) => {
       params[key] = [...entry];
     });
-
     Object.entries(selectOptions).forEach(([key, entry]) => {
       params[key] = [...entry];
     });
@@ -177,8 +178,12 @@ export default function PetSearchPage(props) {
         </Box>
       </div>
       <div className="pet-search-pagination">
-        <Stack spacing={2}>
-          <Typography>Page: {page}</Typography>
+        <Stack
+          spacing={2}
+          justifyContent="center"
+          alignItems="center"
+          style={{marginTop: 10, marginBottom: 10}}
+        >
           {/* Pagination */}
           <Pagination
             page={page}

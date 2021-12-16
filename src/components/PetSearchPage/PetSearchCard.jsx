@@ -42,7 +42,7 @@ export default function PetSearchCard(props) {
       <CardHeader
         titleTypographyProps={{
           fontFamily: "Dongle",
-          fontSize: 22,
+          fontSize: 30,
           fontWeight: 700,
         }}
         title={dataRow.name}
@@ -56,7 +56,6 @@ export default function PetSearchCard(props) {
         subheaderTypographyProps={{
           fontSize: 15,
           fontWeight: 500,
-          fontFamily: "Dongle",
         }}
         sx={{paddingBottom: 1}}
         avatar={

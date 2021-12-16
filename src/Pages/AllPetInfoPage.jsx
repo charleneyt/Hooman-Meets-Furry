@@ -157,7 +157,6 @@ export default function AllPetInfoPage(props) {
             <DialogContent dividers>
               {/* Rescue */}
 
-              {data.org_name}
               {data.org_photo === null ? (
                 ""
               ) : (
@@ -165,8 +164,10 @@ export default function AllPetInfoPage(props) {
                   className={styles.orgPhoto}
                   src={data.org_photo}
                   alt={data.org_name}
+                  height="100"
                 />
               )}
+              <p>{data.org_name}</p>
               {addIfNotNull("Email", data.email)}
               {addIfNotNull("Phone", data.phone)}
               {addIfNotNull("Address", data.address)}

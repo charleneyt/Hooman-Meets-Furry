@@ -121,7 +121,7 @@ export default function HomePage(props) {
 
       <section class="section--primary--alt bg-image bg-image-2">
         <div class="container text--center">
-          <h3>Reasons to buy this product:</h3>
+          <h3>Reasons to adopt this pet:</h3>
           <div class="col-5 text--left">
             <ul>
               <li>Its the best</li>
