@@ -27,7 +27,6 @@ export default function RecCard(props) {
     setOpenModal(true);
   };
   return (
-    // TODO: Add what kind of element we want in the card
     <Card variant="outlined" sx={{minWidth: 275}}>
       <CardContent>
         <Typography

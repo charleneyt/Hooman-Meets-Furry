@@ -6,7 +6,6 @@ const addIfExists = (paramName, params, paramsList) => {
   }
 };
 
-// 35702
 export function getPetSearch(params, page, pagesize) {
   const paramsList = {};
   [

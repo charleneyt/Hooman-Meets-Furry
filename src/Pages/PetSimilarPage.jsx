@@ -32,7 +32,7 @@ const responsive = {
 
 export default function PetSimilarPage(props) {
   const {username} = props;
-  const [type, setType] = React.useState("Cat");
+  const [type, setType] = React.useState("Dog");
   const [data, setData] = React.useState([]);
   // Pagination
   const [page, setPage] = React.useState(1);
@@ -44,6 +44,8 @@ export default function PetSimilarPage(props) {
         setData(resp.results);
       });
   }, [username, type, page]);
+
+  let totalPages = Math.ceil(data.length / 20);
 
   return (
     <div>
@@ -75,15 +77,15 @@ export default function PetSimilarPage(props) {
         ))}
 
         <IconButton
-          aria-label="delete"
+          aria-label="next"
           size="small"
+          disabled={totalPages === 1 ? true : false}
           onClick={() => setPage(page + 1)}
         >
           <ArrowForwardIosIcon />
         </IconButton>
       </Stack>
       <CatDogSwitch type={type} setType={setType} />
-      {/* TODO: do we need to show dots? draggable? */}
       <Box style={{marginTop: 20}}>
         <Carousel
           responsive={responsive}
