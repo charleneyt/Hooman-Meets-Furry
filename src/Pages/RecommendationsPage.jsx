@@ -41,11 +41,12 @@ export default function RecommendationsPage() {
   const [pageSize, setPageSize] = React.useState(20);
   // data and setData
   const [data, setData] = React.useState([]);
-  const [pageCount, setPageCount] = React.useState(10);
+  const [itemCount, setItemCount] = React.useState(1);
 
   const handlePageChange = (event, value) => {
     setPage(value);
   };
+
   const handleChangeFeature = (event) => {
     setFeature(event.target.value);
   };
@@ -65,13 +66,9 @@ export default function RecommendationsPage() {
     getRecommend(feature, type)
       .then((resp) => resp.json())
       .then((resp) => {
-        setPageCount(resp.results.length);
+        setItemCount(resp.results.length);
       });
   }, [feature, type]);
-
-  const totalPages = (pageCount, pageSize) => {
-    return Math.ceil(pageCount / pageSize);
-  };
 
   // Query
   React.useEffect(() => {
@@ -126,8 +123,6 @@ export default function RecommendationsPage() {
         </FormControl>
         <PaginationButton pageSize={pageSize} setPageSize={setPageSize} />
       </Stack>
-
-      <div></div>
       {/* Recommending cards */}
       <div>
         <Grid container spacing={2}>
@@ -139,13 +134,18 @@ export default function RecommendationsPage() {
         </Grid>
       </div>
       {/* Pagination */}
-      <Box>
+      <Stack
+        spacing={2}
+        justifyContent="center"
+        alignItems="center"
+        style={{marginTop: 10, marginBottom: 10}}
+      >
         <Pagination
           page={page}
           onChange={handlePageChange}
-          count={totalPages(pageCount, pageSize)}
+          count={Math.ceil(itemCount / pageSize)}
         />
-      </Box>
+      </Stack>
     </div>
   );
 }

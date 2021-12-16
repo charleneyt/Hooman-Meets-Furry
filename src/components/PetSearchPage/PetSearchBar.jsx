@@ -30,8 +30,8 @@ export default function PetSearchBar(props) {
       setLocation(event.target.value);
       console.log(event.target.value);
     }
-    setValue(event.target.value);
     console.log(event.target.value);
+    setValue(event.target.value);
   };
 
   return (

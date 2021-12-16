@@ -135,7 +135,6 @@ export default function PetSearchEngine(props) {
 
   const onColorClickChange = (event, values) => {
     const colorArr = values.map((element) => element.color);
-    console.log(colorArr);
     setSelectOptions({...selectOptions, color: colorArr});
   };
 
