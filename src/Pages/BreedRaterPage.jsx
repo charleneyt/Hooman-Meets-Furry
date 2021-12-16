@@ -3,6 +3,7 @@ import BreedRaterTable from "../components/BreedRaterPage/BreedRaterTable";
 import BreedRateSelectBar from "../components/BreedRaterPage/BreedRaterSelectBar";
 import CatDogSwitch from "../components/utils/CatDogSwitch"
 import { getTopTen } from "../fetcher";
+import Stack from "@mui/material/Stack";
 
 
 export default function BreedRaterPage() {
@@ -36,8 +37,16 @@ export default function BreedRaterPage() {
           textAlign: "left"
         }}
       >
+        <Stack
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        spacing={2}
+        sx={{marginBottom: 5}}
+        >
+        <CatDogSwitch textAlign="center" type={type} setType={setType}/>
         <BreedRateSelectBar feature={feature} setFeature={setFeature}/>
-        <CatDogSwitch type={type} setType={setType}/>
+        </Stack>
         <BreedRaterTable data={data}/>
         
       </div>
