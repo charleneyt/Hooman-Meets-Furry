@@ -149,6 +149,9 @@ export default function PetSearchPage(props) {
             className={styles.fabStyle}
             aria-label="Menu"
             onClick={toggleDrawer("Menu", true)}
+            style={{
+              backgroundColor: "#FDE4E4",
+            }}
           >
             <GrSearchAdvanced />
           </Fab>

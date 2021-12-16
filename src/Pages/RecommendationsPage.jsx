@@ -8,6 +8,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
 import Pagination from "@mui/material/Pagination";
 import PaginationButton from "../components/utils/PaginationButton";
 import makeStyles from "@material-ui/core/styles/makeStyles";
@@ -23,8 +24,6 @@ const features = {
   potential_for_playfulness: "Potential for playfulness",
 };
 
-// TODO: add a just for you on top
-
 const useStyles = makeStyles({
   selectBox: {
     marginLeft: 10,
@@ -37,7 +36,6 @@ export default function RecommendationsPage() {
   // for select
   const [feature, setFeature] = React.useState("general_health");
   const [open, setOpen] = React.useState(false);
-  // TODO: do pagination
   // page and pagesize
   const [page, setPage] = React.useState(1);
   const [pageSize, setPageSize] = React.useState(20);
@@ -86,18 +84,19 @@ export default function RecommendationsPage() {
 
   return (
     <div className={styles.selectBox}>
-      <Box sx={{float: "right"}}></Box>
-      {/* TODO: icon bigger, add colors, or even change the icon */}
-      <div className="select-type">
+      <h1 style={{textAlign: "center", color: "#8dbdc7", fontSize: 50}}>
+        Recommended Just For You
+      </h1>
+      <Stack
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        spacing={2}
+        sx={{marginBottom: 5}}
+      >
         <CatDogSwitch type={type} setType={setType} />
-      </div>
-      {/* TODO: rerender */}
-      <div>
-        <PaginationButton pageSize={pageSize} setPageSize={setPageSize} />
-      </div>
-      <div>
         {/* Select Bar */}
-        <FormControl variant="standard" sx={{marginBottom: 5, minWidth: 300}}>
+        <FormControl variant="standard" sx={{minWidth: 225}}>
           <InputLabel style={{fontSize: 25, fontFamily: "Dongle"}} id="label">
             Feature
           </InputLabel>
@@ -125,14 +124,15 @@ export default function RecommendationsPage() {
             ))}
           </Select>
         </FormControl>
-      </div>
+        <PaginationButton pageSize={pageSize} setPageSize={setPageSize} />
+      </Stack>
 
+      <div></div>
       {/* Recommending cards */}
-
       <div>
         <Grid container spacing={2}>
           {data.map((row) => (
-            <Grid key={row.id} item xs={12} sm={6} md={4}>
+            <Grid key={row.id} item xs={12} sm={6} md={2.4}>
               <RecCard key={row.id} data={row} />
             </Grid>
           ))}

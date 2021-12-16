@@ -32,7 +32,7 @@ const responsive = {
 
 export default function PetSimilarPage(props) {
   const {username} = props;
-  const [type, setType] = React.useState("Cat");
+  const [type, setType] = React.useState("Dog");
   const [data, setData] = React.useState([]);
   // Pagination
   const [page, setPage] = React.useState(1);
@@ -45,13 +45,15 @@ export default function PetSimilarPage(props) {
       });
   }, [username, type, page]);
 
+  let totalPages = Math.ceil(data.length / 20);
+
   return (
     <div>
       <h1 style={{textAlign: "center", color: "#8dbdc7", fontSize: 50}}>
         Meet more similar pets...
       </h1>
       {/* Find next 100 */}
-      <Stack direction="row">
+      <Stack direction="row" justifyContent="center">
         <IconButton
           aria-label="delete"
           size="small"
@@ -75,22 +77,23 @@ export default function PetSimilarPage(props) {
         ))}
 
         <IconButton
-          aria-label="delete"
+          aria-label="next"
           size="small"
+          disabled={totalPages === 1 ? true : false}
           onClick={() => setPage(page + 1)}
         >
           <ArrowForwardIosIcon />
         </IconButton>
+        <CatDogSwitch type={type} setType={setType} />
       </Stack>
-      <CatDogSwitch type={type} setType={setType} />
-      {/* TODO: do we need to show dots? draggable? */}
+
       <Box style={{marginTop: 20}}>
         <Carousel
           responsive={responsive}
           centerMode={true}
           draggable={true}
           autoPlay={props.deviceType !== "mobile" ? true : false}
-          autoPlaySpeed={1200}
+          autoPlaySpeed={1800}
           deviceType={props.deviceType}
           infinite={true}
         >

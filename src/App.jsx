@@ -1,5 +1,5 @@
 import React from "react";
-import UserLoginBar from "./components/Navbar/UserBar"
+import UserLoginBar from "./components/Navbar/UserBar";
 import "./App.css";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import {createTheme, ThemeProvider} from "@mui/material/styles";
@@ -19,24 +19,42 @@ const theme = createTheme({
 });
 
 function App() {
-  const[auth, setAuth] = React.useState(false);
-  const[username, setUsername] = React.useState("testuser");
+  const [auth, setAuth] = React.useState(false);
+  const [username, setUsername] = React.useState("testuser");
   return (
     <>
       <ThemeProvider theme={theme}>
         <BrowserRouter>
-        
-          <UserLoginBar auth={auth} setAuth={setAuth} username={username} setUsername={setUsername}/>
+          <UserLoginBar
+            auth={auth}
+            setAuth={setAuth}
+            username={username}
+            setUsername={setUsername}
+          />
           <Navbar />
           <div id="content">
             <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="search" element={<PetSearchPage username={username}/>} />
+              <Route
+                path="/"
+                element={
+                  <HomePage setAuth={setAuth} setUsername={setUsername} />
+                }
+              />
+              <Route
+                path="search"
+                element={<PetSearchPage username={username} />}
+              />
               <Route path="recommendations" element={<RecommendationsPage />} />
               <Route path="rescue_search" element={<RescuePage />} />
               <Route path="breed_rater" element={<BreedRaterPage />} />
-              <Route path="compare" element={<PetComparePage username={username}/>} />
-              <Route path="similar" element={<PetSimilarPage username={username}/>} />
+              <Route
+                path="compare"
+                element={<PetComparePage username={username} />}
+              />
+              <Route
+                path="similar"
+                element={<PetSimilarPage username={username} />}
+              />
             </Routes>
           </div>
         </BrowserRouter>

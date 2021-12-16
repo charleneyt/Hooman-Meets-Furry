@@ -5,9 +5,9 @@ import TableBody from "@mui/material/TableBody";
 import TableCell, {tableCellClasses} from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import Button from "@mui/material/Button";
-// import TableHead from '@mui/material/TableHead';
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import AllPetInfoPage from "../../Pages/AllPetInfoPage";
 
 const StyledTableCell = styled(TableCell)(({theme}) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -38,9 +38,14 @@ const StyledTableRow = styled(TableRow)(({theme}) => ({
 
 export default function CompareTable(props) {
   const {data} = props;
-  const [petId, setPetId] = React.useState(0);
+  const [openModal, setOpenModal] = React.useState(false);
+  const [petId, setPetId] = React.useState("");
+  const handleClose = () => {
+    setOpenModal(false);
+  };
   const onButtonClick = (event) => {
     setPetId(event.currentTarget.value);
+    setOpenModal(true);
   };
   return (
     <TableContainer component={Paper}>
@@ -123,6 +128,11 @@ export default function CompareTable(props) {
                 }
               </StyledTableCell>
             ))}
+            <AllPetInfoPage
+              openModal={openModal}
+              handleClose={handleClose}
+              petId={petId}
+            />
           </TableRow>
         </TableBody>
       </Table>
