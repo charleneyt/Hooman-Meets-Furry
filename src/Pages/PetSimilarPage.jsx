@@ -53,7 +53,7 @@ export default function PetSimilarPage(props) {
         Meet more similar pets...
       </h1>
       {/* Find next 100 */}
-      <Stack direction="row">
+      <Stack direction="row" justifyContent="center">
         <IconButton
           aria-label="delete"
           size="small"
@@ -84,15 +84,16 @@ export default function PetSimilarPage(props) {
         >
           <ArrowForwardIosIcon />
         </IconButton>
+        <CatDogSwitch type={type} setType={setType} />
       </Stack>
-      <CatDogSwitch type={type} setType={setType} />
+
       <Box style={{marginTop: 20}}>
         <Carousel
           responsive={responsive}
           centerMode={true}
           draggable={true}
           autoPlay={props.deviceType !== "mobile" ? true : false}
-          autoPlaySpeed={1200}
+          autoPlaySpeed={1800}
           deviceType={props.deviceType}
           infinite={true}
         >
