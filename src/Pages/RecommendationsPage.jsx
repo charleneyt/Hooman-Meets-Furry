@@ -8,6 +8,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
 import Pagination from "@mui/material/Pagination";
 import PaginationButton from "../components/utils/PaginationButton";
 import makeStyles from "@material-ui/core/styles/makeStyles";
@@ -22,8 +23,6 @@ const features = {
   pet_friendly: "Pet friendly",
   potential_for_playfulness: "Potential for playfulness",
 };
-
-// TODO: add a just for you on top
 
 const useStyles = makeStyles({
   selectBox: {
@@ -88,19 +87,16 @@ export default function RecommendationsPage() {
       <h1 style={{textAlign: "center", color: "#8dbdc7", fontSize: 50}}>
         Recommended Just For You
       </h1>
-
-      <Box sx={{float: "right"}}></Box>
-      {/* TODO: icon bigger, add colors, or even change the icon */}
-      <div className="select-type">
+      <Stack
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        spacing={2}
+        sx={{marginBottom: 5}}
+      >
         <CatDogSwitch type={type} setType={setType} />
-      </div>
-      {/* TODO: rerender */}
-      <div>
-        <PaginationButton pageSize={pageSize} setPageSize={setPageSize} />
-      </div>
-      <div>
         {/* Select Bar */}
-        <FormControl variant="standard" sx={{marginBottom: 5, minWidth: 300}}>
+        <FormControl variant="standard" sx={{minWidth: 225}}>
           <InputLabel style={{fontSize: 25, fontFamily: "Dongle"}} id="label">
             Feature
           </InputLabel>
@@ -128,7 +124,10 @@ export default function RecommendationsPage() {
             ))}
           </Select>
         </FormControl>
-      </div>
+        <PaginationButton pageSize={pageSize} setPageSize={setPageSize} />
+      </Stack>
+
+      <div></div>
       {/* Recommending cards */}
       <div>
         <Grid container spacing={2}>
