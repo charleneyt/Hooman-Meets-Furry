@@ -7,9 +7,18 @@ import {Button, CardActionArea, CardActions, Grid} from "@mui/material";
 import Chip from "@mui/material/Chip";
 import {Box} from "@mui/system";
 import {HiOutlineLocationMarker} from "react-icons/hi";
+import AllPetInfoPage from "../../Pages/AllPetInfoPage";
 
 export default function PetSimilarCard(props) {
+  const [openModal, setOpenModal] = React.useState(false);
   const dataRow = props.dataRow;
+  const petId = dataRow.id;
+  const handleClose = () => {
+    setOpenModal(false);
+  };
+  const onButtonClick = (event) => {
+    setOpenModal(true);
+  };
   return (
     <>
       <Grid item sx={{m: 1}} style={{height: 350}}>
@@ -78,6 +87,8 @@ export default function PetSimilarCard(props) {
             <Button
               variant="contained"
               size="small"
+              value={dataRow.id}
+              onClick={onButtonClick}
               style={{
                 marginBottom: "auto",
                 marginLeft: "auto",
@@ -86,6 +97,11 @@ export default function PetSimilarCard(props) {
             >
               Adopt
             </Button>
+            <AllPetInfoPage
+              openModal={openModal}
+              handleClose={handleClose}
+              petId={petId}
+            />
           </CardActions>
         </Card>
       </Grid>
