@@ -78,7 +78,28 @@ export default function PetSearchPage(props) {
     setSelectOptions({});
   }, [type]);
 
+  // Drawer
+  const [state, setState] = React.useState({Menu: false});
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    // we want to set the drawer to open
+    setState({...state, [anchor]: open});
+  };
+
+  const [rendered, setIsRendered] = React.useState(false);
+
   React.useEffect(() => {
+    // Don't update the results unless drawer is closed
+    // if (state?.Menu && rendered) return;
+    // if (!rendered) {
+    //   setIsRendered(true);
+    // }
+
     const params = {};
     Object.entries(checkBoxOptions).forEach(([key, entry]) => {
       params[key] = [...entry];
@@ -100,23 +121,19 @@ export default function PetSearchPage(props) {
       .then((resp) => {
         setData(resp.results);
       });
-  }, [checkBoxOptions, type, page, pageSize, location, selectOptions]);
+  }, [
+    checkBoxOptions,
+    type,
+    page,
+    pageSize,
+    location,
+    selectOptions,
+    state,
+    rendered,
+  ]);
 
   const totalPages = (pageCount, pageSize) => {
     return Math.ceil(pageCount / pageSize);
-  };
-
-  // Drawer
-  const [state, setState] = React.useState({Menu: false});
-  const toggleDrawer = (anchor, open) => (event) => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-    // we want to set the drawer to open
-    setState({...state, [anchor]: open});
   };
 
   return (
@@ -157,6 +174,9 @@ export default function PetSearchPage(props) {
             <GrSearchAdvanced />
           </Fab>
           <Drawer
+            ModalProps={{
+              keepMounted: true,
+            }}
             anchor="left"
             open={state.Menu}
             onClose={toggleDrawer("Menu", false)}

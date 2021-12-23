@@ -225,7 +225,7 @@ export default function RescuePage() {
       .then((resp) => {
         setRescueResults(resp.results);
       });
-  }, []);
+  }, [city, state, type]);
 
   return (
     <div>

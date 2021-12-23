@@ -13,6 +13,7 @@ import FemaleIcon from "@mui/icons-material/Female";
 import {HiOutlineLocationMarker} from "react-icons/hi";
 import {IoPawSharp} from "react-icons/io5";
 import AllPetInfoPage from "../../Pages/AllPetInfoPage";
+import {pink, blue} from "@mui/material/colors";
 
 // SELECT P.organization_id, type, breed, color, age, gender, P.name, P.photo, O.city AS location
 
@@ -55,7 +56,11 @@ export default function RecCard(props) {
           {dataRow.breed}
         </Typography>
         <Typography style={{fontSize: 25, fontFamily: "Dongle"}}>
-          {dataRow.gender === "Male" ? <MaleIcon /> : <FemaleIcon />}
+          {dataRow.gender === "Male" ? (
+            <MaleIcon sx={{color: blue[500], fontSize: 20}} />
+          ) : (
+            <FemaleIcon sx={{color: pink[500], fontSize: 20}} />
+          )}
           {dataRow.gender}
         </Typography>
         <Typography

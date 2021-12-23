@@ -43,7 +43,7 @@ const UserLoginBar = (props) => {
     <Box>
       <Button
         variant="contained"
-        size="small"
+        size="medium"
         onClick={handleSignUpClicked}
         startIcon={<FiUserPlus />}
         style={{
@@ -51,6 +51,7 @@ const UserLoginBar = (props) => {
           backgroundImage:
             "linear-gradient(to right, #fbc2eb 0%, #a6c1ee 51%, #fbc2eb 100%)",
           borderRadius: "8px",
+          fontFamily: "Dongle",
         }}
       >
         Sign Up / Login
@@ -158,7 +159,7 @@ const UserLoginBar = (props) => {
           {/* When the screen get's larger */}
           <Box sx={{flexGrow: 1, display: {xs: "none", md: "flex"}}}>
             <Typography sx={{fontFamily: "Dongle", fontSize: 25}}>
-              {" "}
+              {"          "}
               Welcome {auth ? username : "guest"}!
             </Typography>
           </Box>

@@ -20,37 +20,37 @@ const headCells = [
   {
     id: "name",
     numeric: false,
-    disablePadding: true,
+    disablePadding: false,
     label: "Organization Name",
   },
   {
     id: "address",
     numeric: false,
-    disablePadding: true,
+    disablePadding: false,
     label: "Address",
   },
   {
     id: "location",
     numeric: false,
-    disablePadding: true,
+    disablePadding: false,
     label: "City",
   },
   {
     id: "email",
     numeric: false,
-    disablePadding: true,
+    disablePadding: false,
     label: "Email",
   },
   {
     id: "type",
     numeric: false,
-    disablePadding: true,
+    disablePadding: false,
     label: "Animal Type",
   },
   {
     id: "num",
     numeric: true,
-    disablePadding: true,
+    disablePadding: false,
     label: "Number",
   },
 ];
@@ -66,7 +66,7 @@ function EnhancedTableHead(props) {
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            align={headCell.numeric ? "right" : "left"}
+            align={headCell.numeric ? "center" : "left"}
             padding={headCell.disablePadding ? "none" : "normal"}
             sortDirection={orderBy === headCell.id ? order : false}
           >
@@ -175,7 +175,7 @@ const RescueTable = createTable(
                             textAlign: "left",
                           }}
                         >
-                          {row.email}
+                          {row.email ? row.email : "Not available"}
                         </TableCell>
                         <TableCell
                           style={{
@@ -190,7 +190,7 @@ const RescueTable = createTable(
                           style={{
                             fontSize: 23,
                             fontFamily: "Dongle",
-                            textAlign: "left",
+                            textAlign: "center",
                           }}
                         >
                           {row.num}

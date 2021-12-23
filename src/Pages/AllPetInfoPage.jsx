@@ -78,11 +78,16 @@ export default function AllPetInfoPage(props) {
   const {openModal, handleClose, petId} = props;
   const [data, setData] = React.useState({});
   React.useEffect(() => {
+    let isSubscribed = true;
     getAllInfo(petId)
       .then((resp) => resp.json())
       .then((resp) => {
-        setData(resp.results[0]);
+        if (isSubscribed) {
+          setData(resp.results[0]);
+        }
       });
+
+    return () => (isSubscribed = false);
   }, [petId]);
 
   const styles = useStyles();

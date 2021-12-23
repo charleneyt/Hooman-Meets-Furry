@@ -26,12 +26,14 @@ export default function PetSearchBar(props) {
   // TODO: fix location change
   const handleLocationChange = (event) => {
     //  location search by pressing the enter key
-    if (event.keyCode === 13) {
-      setLocation(event.target.value);
-      console.log(event.target.value);
-    }
-    console.log(event.target.value);
+    // if (event.keyCode === 13) {
+    //   setValue(event.target.value);
+    //   setLocation(event.target.value);
+    //   console.log(event.target.value);
+    // }
+
     setValue(event.target.value);
+    setLocation(event.target.value);
   };
 
   return (
