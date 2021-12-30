@@ -9,10 +9,6 @@
 | `yarn start:backend`  | Start the backend server           |
 | `yarn start:frontend` | Start the frontend                 |
 
-## Networking
-
-List of network requests by screen
-
 # API Endpoints
 
 - Base URL

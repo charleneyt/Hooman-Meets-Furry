@@ -42,7 +42,7 @@
   "scripts": {
     "start:backend": "nodemon src/server/server.js",
     "start:frontend": "react-scripts start",
-    "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
+    "start": "concurrently \"yarn start:frontend\" \"yarn start:backend\"",
     "build": "react-scripts build",
     "test:frontend": "react-scripts test",
     "eject": "react-scripts eject",
