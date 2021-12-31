@@ -14,7 +14,8 @@ Hooman Meets Furry aims to help users to discover and find the animal that will 
 ## Features :dog2: 
 
 ### 1. Login
-<img src="demo/login.gif" alt="Login" height="150">
+<img src="demo/login.gif" alt="Login" height="200">
+* Allow user to login and use the login features(Pet similar, Pet Compare and Like Page)
 
 ### 2. Landing 
 <img src="demo/home.PNG" alt="Home" height="200">
@@ -23,6 +24,7 @@ Hooman Meets Furry aims to help users to discover and find the animal that will 
 <img src="demo/info_page.gif" alt="info" height="200">
 
 <img src="demo/advanced_search.PNG" alt="advanced Search"  height="200">
+
 <img src="demo/pet_info.PNG" alt="PetInfo" height="200">
 <img src="demo/search_page.gif" alt="SearchPage" height="200">
 
@@ -32,9 +34,11 @@ Hooman Meets Furry aims to help users to discover and find the animal that will 
 
 ### 5. Rescue Search
 <img src="demo/rescue_search.PNG" alt="Rescue Search" height="200">
+* Allow user to search for pet rescue according to location.
 
 ### 6. Pet Recommendation 
 <img src="demo/recommend.PNG" alt="Recommend" height="200">
+* Allow user to select 
 
 ### 7. Pet Compare
 <img src="demo/home.PNG" alt="Pet Compare" height="200">
@@ -76,5 +80,6 @@ Hooman Meets Furry aims to help users to discover and find the animal that will 
 
 
 ## Schema
+<!-- TODO -->
 
 ###### tags: `PetFinder`
